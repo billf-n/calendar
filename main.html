@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Calendar</title>
+    <script src="moment.js"></script>
+</head>
+<body>
+    <div class="calendar">
+        <div class="topbar">
+            <div class="currentDate">
+                <h2 id="month"></h2>
+                <p id="todayDate"></p>
+                <script>
+                    document.getElementById("month").innerHTML = moment().format('MMMM');
+                    document.getElementById("todayDate").innerHTML = moment().format('DD-MMM-YYYY')
+                </script>
+            </div>
+        </div>
+        <div class="dates">
+            
+        </div>
+    </div>
+</body>
+</html>
