@@ -1,0 +1,39 @@
+.calendar{
+    margin: auto;
+    background-color: rgb(194, 200, 202);
+}
+
+#days{
+    display: flex; 
+    /* ^^ maybe change this later */
+}
+
+.weekdays{
+    flex: 5%;
+}
+
+#dates{
+    align-self: center;
+    display: inline-grid;
+    grid-template-columns: 35px 35px 35px 35px 35px 35px 35px;
+    grid-gap: 3px;
+}
+
+.date-numbers{
+    height: 35px;
+    width: 35px;
+    border-radius: 25%;
+    background-color: rgb(206, 206, 206);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-month-dates{
+    color: rgb(0, 0, 0);
+}
+
+.prev-month-dates{
+    
+}
