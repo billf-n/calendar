@@ -1,4 +1,4 @@
-let currentDate = new Date();
+currentDate = new Date("2024-2-2");
 const options = {
     weekday: "short",
     year: "numeric",
@@ -10,23 +10,24 @@ const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 document.getElementById("month").innerHTML = months[currentDate.getMonth()];
 document.getElementById("year").innerHTML = currentDate.getFullYear();
 document.getElementById("todayDate").innerHTML = currentDate.toLocaleDateString("en-AU", options);
-let firstOfMonth = currentDate;
+firstOfMonth = currentDate;
 firstOfMonth.setDate((1));
-let firstWeekday = firstOfMonth.getDay();
-let lastOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0);
-let daysInMonth = lastOfMonth.getDate();
-let eachDate="";
+firstWeekday = firstOfMonth.getDay();
+lastOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0);
+daysInMonth = lastOfMonth.getDate();
+eachDate="";
 
 // previous month's dates
 let lastMonthDate = 6-firstWeekday;
-let lastOfLastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
-
-for (let i=lastMonthDate; i<=lastOfLastMonth.getDate(); i--) {
+var lastOfLastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+let lastDateLM = lastOfLastMonth.getDate()-firstWeekday+2;
+console.log(lastMonthDate, lastDateLM);
+for (i=lastDateLM; i<=lastOfLastMonth.getDate(); i++) {
     eachDate += `<div class="date-numbers"><p class="last-month-dates">${i}</p></div>`;
 }
 
 // current month's dates
-for (let i=1; i<=daysInMonth; i++) {
+for (i=1; i<=daysInMonth; i++) {
     eachDate += `<div class="date-numbers"><p class="current-month-dates">${i}</p></div>`;
 }
 document.getElementById("dates").innerHTML = eachDate;
