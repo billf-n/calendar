@@ -18,12 +18,16 @@ let daysInMonth = lastOfMonth.getDate();
 let eachDate="";
 
 // previous month's dates
-//6-firstWeekday
-//for (let i=6-firstWeekday; i>=)
+let lastMonthDate = 6-firstWeekday;
+let lastOfLastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+
+for (let i=lastMonthDate; i<=lastOfLastMonth.getDate(); i--) {
+    eachDate += `<div class="date-numbers"><p class="last-month-dates">${i}</p></div>`;
+}
 
 // current month's dates
 for (let i=1; i<=daysInMonth; i++) {
     eachDate += `<div class="date-numbers"><p class="current-month-dates">${i}</p></div>`;
 }
 document.getElementById("dates").innerHTML = eachDate;
-document.getElementById("test").innerHTML = daysInMonth;
+document.getElementById("test").innerHTML = "";
