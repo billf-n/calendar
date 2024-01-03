@@ -6,28 +6,32 @@
     <title>Calendar</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap" rel="stylesheet">
+    <body>
     <p id="test"></p>
-    <div class="calendar">
-        <div class="topbar">
-            <div class="currentDate">
-                <p id="month"></p>
-                <p id="year"></p>
-                <p id="todayDate"></p>
+    <div class="wrapper">
+        <div class="calendar">
+            <div class="topbar">
+                <div class="currentDate">
+                    <p id="year"></p>
+                    <p id="month"></p>
+                    <p id="todayDate"></p>
+                </div>
+                <div id="days">
+                    <div class="weekdays">Mon</div>
+                    <div class="weekdays">Tue</div>
+                    <div class="weekdays">Wed</div>
+                    <div class="weekdays">Thu</div>
+                    <div class="weekdays">Fri</div>
+                    <div class="weekdays">Sat</div>
+                    <div class="weekdays">Sun</div>
+                </div>
             </div>
-            <div id="days">
-                <div class="weekdays">Mon</div>
-                <div class="weekdays">Tue</div>
-                <div class="weekdays">Wed</div>
-                <div class="weekdays">Thu</div>
-                <div class="weekdays">Fri</div>
-                <div class="weekdays">Sat</div>
-                <div class="weekdays">Sun</div>
+            <div id="dates">
+
             </div>
-        </div>
-        <div id="dates">
-            
         </div>
     </div>
     <script src="loadDates.js"></script>

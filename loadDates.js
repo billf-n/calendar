@@ -1,4 +1,5 @@
-currentDate = new Date("2024-2-2");
+currentDate = new Date();
+calendarDate = currentDate;
 const options = {
     weekday: "short",
     year: "numeric",
@@ -22,13 +23,21 @@ let lastMonthDate = 6-firstWeekday;
 var lastOfLastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
 let lastDateLM = lastOfLastMonth.getDate()-firstWeekday+2;
 console.log(lastMonthDate, lastDateLM);
+var totalDays = 0;
 for (i=lastDateLM; i<=lastOfLastMonth.getDate(); i++) {
-    eachDate += `<div class="date-numbers"><p class="last-month-dates">${i}</p></div>`;
+    eachDate += `<div class="last-date-numbers"><p class="last-month-dates">${i}</p></div>`;
+    totalDays++;
 }
 
 // current month's dates
 for (i=1; i<=daysInMonth; i++) {
     eachDate += `<div class="date-numbers"><p class="current-month-dates">${i}</p></div>`;
+    totalDays++;
+}
+
+// next month's dates
+for (i=1; i<=42-totalDays; i++) {
+    eachDate += `<div class="next-date-numbers"><p class="next-month-dates">${i}</p></div>`;
 }
 document.getElementById("dates").innerHTML = eachDate;
 document.getElementById("test").innerHTML = "";
