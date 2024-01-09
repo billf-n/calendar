@@ -1,6 +1,19 @@
 body{
     font-family: 'Nunito', sans-serif;
 }
+
+select{
+    font-family: 'Nunito', sans-serif;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+
 .wrapper{
     display: flex;
     align-items: center;
@@ -12,6 +25,7 @@ body{
 .calendar{
     margin-left: auto;
     margin-right: auto;
+    align-items: center;
     margin: 2px;
     background-color: rgb(194, 200, 202);
 }
@@ -27,11 +41,53 @@ body{
 
 .topbar{
     margin: 20px;
+    margin-bottom: 5px;
     text-align: center;
+    align-items: center;
+    justify-content: center;
 }
+
+#month-year{
+    display: flex;
+    gap: 10px;
+    width: 100px;
+    text-align: center;
+    justify-content: center;
+}
+
+.dropdown{
+    display: block;
+    margin-bottom: -20;
+    background-color: transparent;
+    border: 0;
+    font-size: 1rem;
+    height: 2rem;
+    text-align: left;
+    justify-content: baseline;
+}
+
+.change-month{
+    flex: 1;
+    text-align: center;
+    align-items: center;
+}
+
+.current-date{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
 
 #dates{
     margin: 20px;
+    margin-top: 5px;
     align-self: center;
     display: inline-grid;
     grid-template-columns: repeat(7, 1fr);
