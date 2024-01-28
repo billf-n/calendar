@@ -6,6 +6,12 @@ select{
     font-family: 'Nunito', sans-serif;
 }
 
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
 .material-symbols-outlined {
     font-variation-settings:
     'FILL' 0,
@@ -15,31 +21,27 @@ select{
   }
 
 .wrapper{
+    margin-left: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 2rem;
-    
 }
 
 .calendar{
-    margin-left: auto;
-    margin-right: auto;
     align-items: center;
+    min-width: 50%;
     margin: 2px;
     background-color: rgb(194, 200, 202);
 }
 
 #days{
-    display: flex; 
+    display: flex;
+    grid-template-columns: repeat(7, 1fr);
     /* ^^ maybe change this later */
 }
 
-.weekdays{
-    flex: 5%;
-}
-
-.topbar{
+.top-section{
     margin: 20px;
     margin-bottom: 5px;
     text-align: center;
@@ -53,11 +55,14 @@ select{
     width: 100px;
     text-align: center;
     justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
 }
 
 .dropdown{
     display: block;
-    margin-bottom: -20;
     background-color: transparent;
     border: 0;
     font-size: 1rem;
@@ -70,20 +75,30 @@ select{
     flex: 1;
     text-align: center;
     align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-.current-date{
+/* to highlight the date in the calendar */
+#today{
+    background-color: rgb(137, 166, 190);
+    color: rgb(255, 255, 255);
+}
+
+/* to display the month/year at the top */
+.topbar{
     display: flex;
     align-items: center;
     text-align: center;
     gap: 20px;
 }
 
-.prevent-select {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-  }
+
+
+#bottom-calendar {
+    display: grid;
+    text-align: center;
+}
 
 #dates{
     margin: 20px;
@@ -91,7 +106,7 @@ select{
     align-self: center;
     display: inline-grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-gap: 4px;
+    grid-gap: 7px;
 }
 
 .last-date-numbers{

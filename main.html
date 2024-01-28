@@ -13,48 +13,42 @@
     <p id="test"></p>
     <div class="wrapper">
         <div class="calendar">
-            <div class="topbar">
-                <p id="todayDate"></p>
-                <div class="current-date">
+            <div class="top-section">
+                <p id="date-display"></p>
+                <div class="topbar">
                     <span class="material-symbols-outlined prevent-select change-month" onclick="lastMonth()">
                         chevron_left
                     </span>
                     <div id="month-year">
                         <!-- <p id="month"></p> -->
-                        <select id="month" class="dropdown">
-                            <option>January</option>
-                            <option>February</option>
-                            <option>March</option>
-                            <option>April</option>
-                            <option>May</option>
-                            <option>June</option>
-                            <option>July</option>
-                            <option>August</option>
-                            <option>September</option>
-                            <option>October</option>
-                            <option>November</option>
-                            <option>December</option>
+                        <select id="month-drop" class="dropdown">
+                            <option class="month-drop-btn">January</option>
+                            <option class="month-drop-btn">February</option>
+                            <option class="month-drop-btn">March</option>
+                            <option class="month-drop-btn">April</option>
+                            <option class="month-drop-btn">May</option>
+                            <option class="month-drop-btn">June</option>
+                            <option class="month-drop-btn">July</option>
+                            <option class="month-drop-btn">August</option>
+                            <option class="month-drop-btn">September</option>
+                            <option class="month-drop-btn">October</option>
+                            <option class="month-drop-btn">November</option>
+                            <option class="month-drop-btn">December</option>
                         </select>
-                        <select id="year" class="dropdown">
-                            <option>2024</option>
+                        <select id="year-drop" class="dropdown">
+                            <option class="year-drop-btn">2024</option>
                         </select>
                     </div>
                     <span class="material-symbols-outlined prevent-select change-month" onclick="nextMonth()">
                         chevron_right
                     </span>
                 </div>
-                <div id="days">
-                    <div class="weekdays">Mon</div>
-                    <div class="weekdays">Tue</div>
-                    <div class="weekdays">Wed</div>
-                    <div class="weekdays">Thu</div>
-                    <div class="weekdays">Fri</div>
-                    <div class="weekdays">Sat</div>
-                    <div class="weekdays">Sun</div>
-                </div>
-            </div>
-            <div id="dates">
+                <div id="bottom-calendar">
+                    
+                    <div id="dates">
 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
