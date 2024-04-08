@@ -1,19 +1,23 @@
 currentDate = new Date();
 calendarDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+};
+const monthDropdown = document.querySelector("#month-drop");
+const yearDropdown = document.querySelector("#year-drop");
 
 function loadDates() {
-    const options = {
-        weekday: "short",
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-    };
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
     // document.getElementById("month").innerHTML = months[calendarDate.getMonth()];
     // document.getElementById("year").innerHTML = calendarDate.getFullYear();
     document.getElementById("date-display").innerHTML = currentDate.toLocaleDateString("en-AU", options);
-    firstOfMonth = calendarDate;
+    firstOfMonth = new Date();
+    firstOfMonth.setTime(calendarDate.getTime());
     firstOfMonth.setDate((1));
     firstWeekday = firstOfMonth.getDay();
     lastOfMonth = new Date(calendarDate.getFullYear(), calendarDate.getMonth()+1, 0);
@@ -31,27 +35,31 @@ function loadDates() {
     let lastDateLM = lastOfLastMonth.getDate()-firstWeekday+2;
     var totalDays = 0;
     for (i=lastDateLM; i<=lastOfLastMonth.getDate(); i++) {
-        eachDate += `<div class="last-date-numbers" onclick=""><p class="last-month-dates prevent-select">${i}</p></div>`;
+        eachDate += `<button class="last-date-numbers" onclick="changeDate(${i})"><p class="last-month-dates prevent-select">${i}</p></div>`;
         totalDays++;
     }
 
     // current month's dates
     for (i=1; i<=daysInMonth; i++) {
-        console.log(calendarDate, currentDate, i);
-        if (calendarDate.getFullYear() == currentDate.getFullYear() 
-            && calendarDate.getMonth() == currentDate.getMonth() 
-            && i==currentDate.getDate()) {
-            eachDate += `<div class="date-numbers" id="today"><p class="current-month-dates prevent-select" id="today">${i}</p></div>`;
+        if (calendarDate.getDate() == i) {
+            if (1) {
+            eachDate += `<button type="button" class="date-numbers" id="selected" onclick="changeDate(${i})">${i}</button>`;
+            }
+        }
+        else if ((calendarDate.getFullYear() == currentDate.getFullYear())
+            && (calendarDate.getMonth() == currentDate.getMonth())
+            && (i==currentDate.getDate())) {
+            eachDate += `<button type="button" class="date-numbers" id="today" onclick="changeDate(${i})">${i}</button>`;
         }
         else {
-            eachDate += `<div class="date-numbers"><p class="current-month-dates prevent-select">${i}</p></div>`;
+            eachDate += `<button type="button" class="date-numbers" onclick="changeDate(${i})">${i}</button>`;
         }
         totalDays++;
     }
 
     // next month's dates
     for (i=1; i<=42-totalDays; i++) {
-        eachDate += `<div class="next-date-numbers"><p class="next-month-dates prevent-select">${i}</p></div>`;
+        eachDate += `<button type="button" onclick="changeDate(${i})" class="next-date-numbers">${i}</button>`;
     }
 
     years = "";
@@ -69,13 +77,11 @@ function loadDates() {
 
 loadDates();
 
-const monthButtons = document.querySelector(".month-drop-btn");
-const monthDropdown = document.querySelector("#month-drop");
 
-monthButtons.onclick = (event) => {
-    event.preventDefault();
-    console.log(monthDropdown.selectedIndex);
-    calendarDate = new Date(calendarDate.getFullYear(), monthDropdown.selectedIndex, calendarDate.getDate());
+function changeDate(date = calendarDate.getDate()) {
+    console.log(date)
+    calendarDate = new Date(parseInt(yearDropdown.options[yearDropdown.selectedIndex].text), 
+    monthDropdown.selectedIndex, date);
     loadDates();
 }
 
@@ -83,6 +89,7 @@ function lastMonth() {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 0);
     loadDates();
 }
+
 function nextMonth() {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth()+2, 0);
     loadDates();

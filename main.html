@@ -21,7 +21,7 @@
                     </span>
                     <div id="month-year">
                         <!-- <p id="month"></p> -->
-                        <select id="month-drop" class="dropdown">
+                        <select id="month-drop" class="dropdown" onchange="changeDate()">
                             <option class="month-drop-btn">January</option>
                             <option class="month-drop-btn">February</option>
                             <option class="month-drop-btn">March</option>
@@ -35,7 +35,7 @@
                             <option class="month-drop-btn">November</option>
                             <option class="month-drop-btn">December</option>
                         </select>
-                        <select id="year-drop" class="dropdown">
+                        <select id="year-drop" class="dropdown" onchange="changeDate()">
                             <option class="year-drop-btn">2024</option>
                         </select>
                     </div>
@@ -44,7 +44,6 @@
                     </span>
                 </div>
                 <div id="bottom-calendar">
-                    
                     <div id="dates">
 
                     </div>

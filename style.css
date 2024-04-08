@@ -22,7 +22,7 @@ select{
 
 .wrapper{
     margin-left: 70px;
-    display: flex;
+    display: grid;  /* grid makes it a constant size*/
     align-items: center;
     justify-content: center;
     margin-top: 2rem;
@@ -36,7 +36,7 @@ select{
 }
 
 #days{
-    display: flex;
+    display: grid;
     grid-template-columns: repeat(7, 1fr);
     /* ^^ maybe change this later */
 }
@@ -85,6 +85,11 @@ select{
     color: rgb(255, 255, 255);
 }
 
+#selected{
+    background-color: rgb(190, 137, 137);
+    color: rgb(255, 255, 255);
+}
+
 /* to display the month/year at the top */
 .topbar{
     display: flex;
@@ -110,33 +115,39 @@ select{
 }
 
 .last-date-numbers{
+    border: none;
     height: 35px;
     width: 35px;
     border-radius: 25%;
     background-color: rgb(150, 150, 150);
     text-align: center;
+    color:rgb(56, 56, 56);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .date-numbers{
+    border: none;
     height: 35px;
     width: 35px;
     border-radius: 25%;
     background-color: rgb(180, 180, 180);
     text-align: center;
+    color: rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .next-date-numbers{
+    border: none;
     height: 35px;
     width: 35px;
     border-radius: 25%;
     background-color: rgb(150, 150, 150);
     text-align: center;
+    color:rgb(56, 56, 56);
     display: flex;
     justify-content: center;
     align-items: center;
