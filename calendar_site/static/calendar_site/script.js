@@ -29,7 +29,7 @@ function loadDates() {
     let lastDateLM = lastOfLastMonth.getDate()-firstWeekday+2;
     var totalDays = 0;
     for (i=lastDateLM; i<=lastOfLastMonth.getDate(); i++) {
-        eachDate += `<button class="last-date-numbers" onclick="changeDate(${i})"><p class="last-month-dates prevent-select">${i}</p></div>`;
+        eachDate += `<button class="last-date-numbers" onclick="changeDate(${i})">${i}</div>`;
         totalDays++;
     }
 
