@@ -31,12 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+    "channels",
+    "event_plans.apps.CalendarConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', 
 ]
 
 MIDDLEWARE = [
@@ -119,6 +122,10 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static/calendar_site",
+    BASE_DIR / "static/jquery-3.7.1",
+    BASE_DIR / "static/bootstrap-5.3.3-dist/css", # why is it like this
+    BASE_DIR / "static/bootstrap-5.3.3-dist/js",
+    BASE_DIR / "static/socket.io-4.7.5",
 ]
 
 STATIC_ROOT = 'static/'
@@ -127,3 +134,14 @@ STATIC_ROOT = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ASGI_APPLICATION = 'calendar_site.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 8001)],
+        },
+    },
+}

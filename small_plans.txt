@@ -1,0 +1,1 @@
+make it so you can add an event, then view an event for the date.
