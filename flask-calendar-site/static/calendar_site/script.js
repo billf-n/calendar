@@ -78,8 +78,7 @@ function loadDates() {
 
 // to do on document load
 
-//const socket = io();
-const socket = new WebSocket("ws://" + document.location.hostname + "/calendar/");
+const socket = io();
 
 const monthDropdown = document.querySelector("#month-drop");
 const yearDropdown = document.querySelector("#year-drop");
@@ -106,9 +105,10 @@ function nextMonth() {
 }
 
 function loadEvents() {
-    socket.emit("load_events", calendarDate, (res) => { // in future maybe add "user" param here
+    socket.emit("load_events", calendarDate.toLocaleDateString(), (res) => { // in future maybe add "user" param here
         // display each event for this date
         eventList = $("#event-list");
+        console.log(eventList);
         for (i = 0; i < res.length; i++) {
             // make a div and populate it with the info of res[i]
             e = document.createElement("div");
@@ -128,11 +128,12 @@ function loadEvents() {
 
             eventList.append(e); // append that div (jquery method)
         }
-    }); 
+    });
 }
 
 function createCalendarEvent() {
     console.log($("#new-event-title").val());
-    socket.send("create_event", $("#new-event-title").val(), $("#new-event-info").val(), $("#new-event-date").val(), "username");
+    console.log($("#new-event-date").val());
+    socket.emit("create_event", $("#new-event-title").val(), $("#new-event-info").val(), $("#new-event-date").val());
     // loadEvents();
 }
