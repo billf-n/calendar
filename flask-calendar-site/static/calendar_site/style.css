@@ -31,7 +31,7 @@ select{
     width: 450px;
     margin: 20px;
     padding: 20px;
-    background-color: rgb(194, 200, 202);
+    background-color: rgb(204, 209, 217);
     border-radius: 10px;
     height: min-content;
 }
@@ -42,7 +42,6 @@ select{
         align-items: center;
         justify-content: center;
     }
-
 
     #month-year{
         display: flex;
@@ -66,20 +65,15 @@ select{
     }
 
     .change-month{
-        flex: 1;
-        text-align: center;
-        align-items: center;
+        border-radius: 50%;
+        padding: 2px;
+        transition: 200ms;
+        background-color: rgb(170, 170, 170);
     }
 
-    /* to highlight the date in the calendar */
-    #today{
-        background-color: rgb(137, 166, 190);
-        color: rgb(255, 255, 255);
-    }
-
-    #selected{
-        background-color: rgb(190, 137, 137);
-        color: rgb(255, 255, 255);
+    .change-month:hover{
+        transition: 200ms;
+        background-color: rgb(150, 150, 150);
     }
 
     /* to display the month/year at the top */
@@ -87,9 +81,9 @@ select{
         display: flex;
         align-items: center;
         text-align: center;
+        justify-content: space-evenly;
         gap: 20px;
     }
-
 
     #bottom-calendar {
         display: grid;
@@ -102,16 +96,12 @@ select{
         grid-gap: 7px;
     }
 
-    #dates{
+    #date-grid{
         margin-top: 5px;
         grid-template-rows: repeat(6, 1fr);
     }
 
-    .weekdays {
-        padding-left: 3px;
-    }
-
-    #dates button{
+    .date-numbers{
         position: relative;
         border: none;
         width: 80%;
@@ -121,13 +111,35 @@ select{
         align-items: center;
         padding-top: 20%; /*these two control the height alignment of the text*/
         padding-bottom: 60%;
-    }
-
-    .date-numbers{
+        transition-duration: 200ms;
         background-color: rgb(150, 150, 150);
         color:rgb(56, 56, 56);
         font-size: 1rem;
     }
+
+    .date-numbers:hover{
+        transition-duration: 200ms;
+        background-color: rgb(177, 195, 211);
+        color: rgb(255, 255, 255);
+    }
+
+    /* to highlight the date in the calendar */
+    #today{
+        transition-duration: 200ms;
+        background-color: rgb(121, 161, 119);
+        color: rgb(255, 255, 255);
+    }
+
+    #today:hover {
+        transition-duration: 200ms;
+        background-color: rgb(122, 186, 169);
+    }
+
+    #selected{
+        background-color: rgb(137, 166, 190);
+        color: rgb(255, 255, 255);
+    }
+
     .current-month-numbers{
         background-color: rgb(180, 180, 180);
         color: rgb(0, 0, 0);
@@ -155,13 +167,23 @@ select{
         padding: 5px;
     }
 
+    #create-new-event label{
+        font-size: 1.25rem;
+    }
+
     #create-new-event input{
         float: right;
         margin-left: 20px;
+        width: 40%
     }
 
     #title-label::after{
         content: " *";
+    }
+
+    #create-event{
+        height: 2rem;
+        width: 100%;
     }
 
     .event-entry {

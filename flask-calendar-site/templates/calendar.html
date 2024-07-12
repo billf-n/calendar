@@ -20,11 +20,9 @@
                 <p id="date-display"></p>
                 <div class="topbar">
                     <span id="last-month" 
-                        class="material-symbols-outlined 
-                            prevent-select 
-                            change-month">
-                        chevron_left
-                    </span>
+                        class="prevent-select 
+                            change-month
+                            material-symbols-outlined">chevron_left</span>
                     <div id="month-year">
                         <select id="month-drop" class="dropdown" onchange="changeDate()">
                             <option class="month-drop-btn">January</option>
@@ -45,11 +43,9 @@
                         </select>
                     </div>
                     <span id="next-month" 
-                        class="material-symbols-outlined 
-                            prevent-select 
-                            change-month">
-                        chevron_right
-                    </span>
+                        class="prevent-select 
+                            change-month
+                            material-symbols-outlined">chevron_right</span>
                 </div>
             </div>
             <div id="bottom-calendar">
@@ -62,13 +58,25 @@
                     <div class="weekdays">Sat</div>
                     <div class="weekdays">Sun</div>
                 </div>
-                <div id="dates" class="calendar-grid">
+                <div id="date-grid" class="calendar-grid">
 
                 </div>
             </div>
         </div>
         <div id="event-section">
             <form id="create-new-event">
+                <div>
+                    <label 
+                        id="date-label" 
+                        for="new-event-date" 
+                        title="A date is required.">
+                        Date</label>
+                    <input 
+                        type="date" 
+                        id="new-event-date" 
+                        name="new-event-date" 
+                        required>
+                </div>
                 <div>
                     <label 
                         id="title-label" 
@@ -83,18 +91,6 @@
                 <div>
                     <label id="info-label" for="new-event-info">Extra Information</label>
                     <input id="new-event-info" name="new-event-info">
-                </div>
-                <div>
-                    <label 
-                        id="date-label" 
-                        for="new-event-date" 
-                        title="A date is required.">
-                        Date</label>
-                    <input 
-                        type="date" 
-                        id="new-event-date" 
-                        name="new-event-date" 
-                        required>
                 </div>
                 <button id="create-event" onclick="createCalendarEvent()">Create event</button>
             </form>

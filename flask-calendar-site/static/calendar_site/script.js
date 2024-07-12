@@ -20,7 +20,7 @@ function loadDates() {
     let firstofLastMonth = lastOfLastMonth.getDate()-firstWeekday+2;
     var totalDays = 0;
     for (i=firstofLastMonth; i<=lastOfLastMonth.getDate(); i++) {
-        eachDate += `<button class="date-numbers">${i}</div>`;
+        eachDate += `<button class="date-numbers last-month-numbers">${i}</div>`;
         totalDays++;
     }
 
@@ -44,19 +44,31 @@ function loadDates() {
 
     // next month's dates
     for (i=1; i<=42-totalDays; i++) {
-        eachDate += `<button type="button" class="date-numbers">${i}</button>`;
+        eachDate += `<button type="button" class="date-numbers next-month-numbers">${i}</button>`;
     }
 
     document.getElementById("year-drop").innerHTML = years;
     document.getElementById("month-drop").value = months[calendarDate.getMonth()];
     document.getElementById("year-drop").value = calendarDate.getFullYear();
-    document.getElementById("dates").innerHTML = eachDate;
+    document.getElementById("date-grid").innerHTML = eachDate;
 
     // this is probably inefficient. doesnt seem right
-    let date_buttons = $(".date-numbers");
+    let date_buttons = $(".current-month-numbers");
     for (i = 0; i < date_buttons.length; i++) {
         date_buttons[i].addEventListener("click", function(element){ 
             changeDate(element.currentTarget.textContent);
+        }, false);
+    }
+    date_buttons = $(".last-month-numbers");
+    for (i = 0; i < date_buttons.length; i++) {
+        date_buttons[i].addEventListener("click", function(element){ 
+            changeDate(element.currentTarget.textContent, calendarDate.getMonth()-1);
+        }, false);
+    }
+    date_buttons = $(".next-month-numbers");
+    for (i = 0; i < date_buttons.length; i++) {
+        date_buttons[i].addEventListener("click", function(element){ 
+            changeDate(element.currentTarget.textContent, calendarDate.getMonth()+1);
         }, false);
     }
 
@@ -81,7 +93,7 @@ const options = {
 };
 dateDisplay.innerHTML = currentDate.toLocaleDateString("en-AU", options);
 dateDisplay.addEventListener("click", function(element){
-    
+    changeDate()
 });
 
 years = "";
