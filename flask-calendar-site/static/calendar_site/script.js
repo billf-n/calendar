@@ -2,19 +2,11 @@ currentDate = new Date();
 calendarDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const options = {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-};
-
 
 function loadDates() {
 
     // document.getElementById("month").innerHTML = months[calendarDate.getMonth()];
     // document.getElementById("year").innerHTML = calendarDate.getFullYear();
-    document.getElementById("date-display").innerHTML = currentDate.toLocaleDateString("en-AU", options);
     firstOfMonth = new Date();
     firstOfMonth.setTime(calendarDate.getTime());
     firstOfMonth.setDate((1));
@@ -25,10 +17,10 @@ function loadDates() {
 
     // previous month's dates
     var lastOfLastMonth = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 0);
-    let lastDateLM = lastOfLastMonth.getDate()-firstWeekday+2;
+    let firstofLastMonth = lastOfLastMonth.getDate()-firstWeekday+2;
     var totalDays = 0;
-    for (i=lastDateLM; i<=lastOfLastMonth.getDate(); i++) {
-        eachDate += `<button class="last-date-numbers">${i}</div>`;
+    for (i=firstofLastMonth; i<=lastOfLastMonth.getDate(); i++) {
+        eachDate += `<button class="date-numbers">${i}</div>`;
         totalDays++;
     }
 
@@ -42,22 +34,17 @@ function loadDates() {
         else if ((calendarDate.getFullYear() == currentDate.getFullYear())
             && (calendarDate.getMonth() == currentDate.getMonth())
             && (i==currentDate.getDate())) {
-            eachDate += `<button type="button" class="date-numbers" id="today">${i}</button>`;
+            eachDate += `<button type="button" class="date-numbers current-month-numbers" id="today">${i}</button>`;
         }
         else {
-            eachDate += `<button type="button" class="date-numbers">${i}</button>`;
+            eachDate += `<button type="button" class="date-numbers current-month-numbers">${i}</button>`;
         }
         totalDays++;
     }
 
     // next month's dates
     for (i=1; i<=42-totalDays; i++) {
-        eachDate += `<button type="button" class="next-date-numbers">${i}</button>`;
-    }
-
-    years = "";
-    for (i=2000; i<2100; i++) {
-        years += `<option class="year-drop-btn">${i}</option>`;
+        eachDate += `<button type="button" class="date-numbers">${i}</button>`;
     }
 
     document.getElementById("year-drop").innerHTML = years;
@@ -73,6 +60,8 @@ function loadDates() {
         }, false);
     }
 
+    $("#new-event-date").val(formatDate(calendarDate));
+
 }
 
 
@@ -82,34 +71,60 @@ const socket = io();
 
 const monthDropdown = document.querySelector("#month-drop");
 const yearDropdown = document.querySelector("#year-drop");
+const dateDisplay = document.getElementById("date-display")
 
+const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+};
+dateDisplay.innerHTML = currentDate.toLocaleDateString("en-AU", options);
+dateDisplay.addEventListener("click", function(element){
+    
+});
+
+years = "";
+for (i=2024; i<2030; i++) {
+    years += `<option class="year-drop-btn">${i}</option>`;
+}
+
+document.getElementById("last-month").addEventListener("click", function(element){
+    changeDate(calendarDate.getDate(), calendarDate.getMonth()-1);
+});
+
+document.getElementById("next-month").addEventListener("click", function(element){
+    changeDate(calendarDate.getDate(), calendarDate.getMonth()+1);
+})
 
 loadDates();
+loadEvents();
 
+function changeMonth() {
 
-function changeDate(date = calendarDate.getDate()) {
-    console.log(date);
-    calendarDate = new Date(parseInt(yearDropdown.options[yearDropdown.selectedIndex].text), 
-    monthDropdown.selectedIndex, date);
-    loadDates();
 }
 
-function lastMonth() {
-    calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 0);
-    loadDates();
-}
+function changeDate(
+    date = calendarDate.getDate(),
+    month = monthDropdown.selectedIndex,
+    year = yearDropdown.options[yearDropdown.selectedIndex].text) 
+{
+    calendarDate.setFullYear(year);
+    calendarDate.setMonth(month);
+    calendarDate.setDate(date);
 
-function nextMonth() {
-    calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth()+2, 0);
     loadDates();
+    loadEvents();
 }
 
 function loadEvents() {
-    socket.emit("load_events", calendarDate.toLocaleDateString(), (res) => { // in future maybe add "user" param here
+    socket.emit("load_events", formatDate(calendarDate), (res) => { // in future maybe add "user" param here
         // display each event for this date
         eventList = $("#event-list");
-        console.log(eventList);
+        console.log(res);
+        eventList.empty();
         for (i = 0; i < res.length; i++) {
+            
             // make a div and populate it with the info of res[i]
             e = document.createElement("div");
             title = document.createElement("h2");
@@ -118,10 +133,10 @@ function loadEvents() {
             e.classList.add("event-entry");
             
             // this bit uses js while the parent is a jquery element :-)
-            result = JSON.parse(res[i]);
-            title.textContent = result["title"];
-            info.textContent = result["info"];
-            creator.textContent = result["creator"];
+            title.textContent = res[i]["title"];
+            creator.textContent = res[i]["creator"];
+            info.textContent = res[i]["info"];
+
             e.appendChild(title);
             e.appendChild(creator);
             e.appendChild(info);

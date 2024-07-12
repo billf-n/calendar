@@ -16,15 +16,16 @@ socketio = SocketIO(app)
 def index():
     return render_template("calendar.html")
 
+@app.route("/", methods=["POST"])
+def post_event(title: str, info: str, date: str):
+    return render_template("calendar.html")
 
 @socketio.on("load_events")
 def load_events(date, group=0x0):
-    print(date)
-    events_db.load_events(date)
+    return events_db.load_events(date)
 
 @socketio.on("create_event")
 def create_event(title: str, info: str, date: str):
-    print(date)
     date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
     events_db.create_event(title, info, date)
 
