@@ -17,7 +17,7 @@ def index():
     return render_template("calendar.html")
 
 @app.route("/", methods=["POST"])
-def post_event(title: str, info: str, date: str):
+def post_event(event_title: str, event_info: str, event_date: str):
     return render_template("calendar.html")
 
 @socketio.on("load_events")

@@ -72,7 +72,7 @@ function loadDates() {
         }, false);
     }
 
-    $("#new-event-date").val(formatDate(calendarDate));
+    $("#event_date").val(formatDate(calendarDate));
 
 }
 
@@ -93,7 +93,10 @@ const options = {
 };
 dateDisplay.innerHTML = currentDate.toLocaleDateString("en-AU", options);
 dateDisplay.addEventListener("click", function(element){
-    changeDate()
+    changeDate(
+        currentDate.getDate(), 
+        currentDate.getMonth(), 
+        currentDate.getFullYear());
 });
 
 years = "";

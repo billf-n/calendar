@@ -65,37 +65,44 @@
         </div>
         <div id="event-section">
             <form id="create-new-event">
-                <div>
+                <div id="date-div">
                     <label 
                         id="date-label" 
-                        for="new-event-date" 
+                        class="med-label"
+                        for="event_date" 
                         title="A date is required.">
                         Date</label>
                     <input 
                         type="date" 
-                        id="new-event-date" 
-                        name="new-event-date" 
+                        id="event_date" 
+                        name="event_date" 
                         required>
                 </div>
-                <div>
+                <div id=title-div>
                     <label 
                         id="title-label" 
-                        for="new-event-title" 
+                        class="lrg-label"
+                        for="event_title" 
                         title="A title is required.">
                     Title</label>
                     <input 
-                        id="new-event-title" 
-                        name="new-event-title" 
+                        id="event_title" 
+                        name="event_title" 
                         required>
                 </div>
-                <div>
-                    <label id="info-label" for="new-event-info">Extra Information</label>
-                    <input id="new-event-info" name="new-event-info">
+                <div id="info-div">
+                    <label 
+                        id="info-label" 
+                        class="med-label"
+                        for="event_info">
+                        Extra Information
+                    </label>
+                    <textarea id="event_info" name="event_info"></textarea>
                 </div>
                 <button id="create-event" onclick="createCalendarEvent()">Create event</button>
             </form>
             <div id="event-list">
-
+                <div class="event-entry"><h2>second event:-)</h2><h3>None</h3><p>not a lot of info here</p></div>
             </div>
         </div>
     </div>

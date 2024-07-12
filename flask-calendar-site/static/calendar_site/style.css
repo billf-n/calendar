@@ -43,13 +43,18 @@ select{
         justify-content: center;
     }
 
-    #month-year{
-        display: flex;
-        width: 100px;
-        text-align: center;
-        justify-content: center;
+    /* to display the month/year at the top */
+    .topbar{
         display: flex;
         align-items: center;
+        text-align: center;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    #month-year{
+        display: flex;
+        justify-content: center;
         text-align: center;
         gap: 25%;
     }
@@ -57,11 +62,21 @@ select{
     .dropdown{
         display: block;
         background-color: transparent;
-        border: 0;
+        border: 2px solid transparent;
+        text-align: center;
         font-size: 1rem;
         height: 2rem;
-        text-align: left;
-        justify-content: baseline;
+        padding: 0px 5px;
+    }
+
+    .dropdown:hover{
+        border: 2px solid rgb(137, 166, 190);
+        border-radius: 8px;
+    }
+
+    .dropdown:focus{
+        border: 2px solid rgb(137, 166, 190);
+        border-radius: 8px;
     }
 
     .change-month{
@@ -74,15 +89,6 @@ select{
     .change-month:hover{
         transition: 200ms;
         background-color: rgb(150, 150, 150);
-    }
-
-    /* to display the month/year at the top */
-    .topbar{
-        display: flex;
-        align-items: center;
-        text-align: center;
-        justify-content: space-evenly;
-        gap: 20px;
     }
 
     #bottom-calendar {
@@ -151,7 +157,6 @@ select{
     margin: 20px;
     padding: 20px;
     background-color: rgb(194, 200, 202);
-    justify-content: center;
     border-radius: 10px;
     flex-grow: 1;
     max-width: 40%;
@@ -167,14 +172,41 @@ select{
         padding: 5px;
     }
 
-    #create-new-event label{
+    .lrg-label{
         font-size: 1.25rem;
     }
 
-    #create-new-event input{
+    .med-label{
+        color: rgb(48, 48, 48);
+    }
+
+    #event_date{
         float: right;
         margin-left: 20px;
-        width: 40%
+        width: 30%
+    }
+
+    #title-div{
+        margin-top: 1rem;
+    }
+
+    #info-div{
+        margin-top: 0.5rem;
+    }
+
+    #event_title{
+        float: right;
+        font-size: 1.25rem;
+        margin-left: 20px;
+        width: 50%
+    }
+
+    #event_info{
+        resize: none;
+        overflow: scroll;
+        float: right;
+        margin-left: 20px;
+        width: 40.5%;
     }
 
     #title-label::after{
@@ -182,6 +214,7 @@ select{
     }
 
     #create-event{
+        margin-top: 1rem;
         height: 2rem;
         width: 100%;
     }
@@ -190,5 +223,5 @@ select{
         padding: 10px;
         margin-top: 20px;
         border-radius: 5px;
-        background-color: aliceblue;
+        background-color: rgb(137, 166, 190);
     }
