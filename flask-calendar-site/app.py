@@ -18,9 +18,10 @@ def index():
 
 
 @socketio.on("load_events")
-def load_events(date, group=0x0):
+def load_events(date, group=0):
     print(date)
-    events_db.load_events(date)
+    date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
+    return events_db.load_events(date)
 
 @socketio.on("create_event")
 def create_event(title: str, info: str, date: str):

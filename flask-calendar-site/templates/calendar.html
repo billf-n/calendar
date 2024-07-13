@@ -10,6 +10,7 @@
     <script src="/static/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
     <script src="/static/jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="/static/socket.io-4.7.5/socket.io.min.js"></script>
+    <script src="/static/calendar_site/formatDate.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap" rel="stylesheet">
@@ -18,10 +19,10 @@
     <div class="wrapper">
         <div class="calendar">
             <div class="top-section">
-                <p id="date-display"></p>
+                <h2 id="date-display"></h2>
                 <div class="topbar">
                     <span class="material-symbols-outlined prevent-select change-month" onclick="lastMonth()">
-                        chevron_left
+                        chevron_left 
                     </span>
                     <div id="month-year">
                         <!-- <p id="month"></p> -->
@@ -63,14 +64,23 @@
                 </div>
             </div>
         </div>
-        <div id="event-list">
-            <section id="create-new-event" style="padding:5px;">
-                <label for="new-event-title">Title</label><input id="new-event-title" name="new-event-title"><br>
-                <label for="new-event-info">Extra Information</label><input id="new-event-info" name="new-event-info"><br>
-                <label for="new-event-date">Date</label><input type="date" id="new-event-date" name="new-event-date"><br>
-                <button id="create-event" onclick="createCalendarEvent()">Create event</button>
+        <section id="event-area">
+            <section id="create-new-event">
+                <div class="new-event-wrap">
+                    <label for="new-event-title">Title</label><input id="new-event-title" name="new-event-title">
+                </div>
+                <div class="new-event-wrap">
+                    <label for="new-event-info">Extra Information</label><input id="new-event-info" name="new-event-info">
+                </div>
+                <div class="new-event-wrap">
+                    <label for="new-event-date">Date</label><input type="date" id="new-event-date" name="new-event-date">
+                </div>
+                    <button id="create-event" onclick="createCalendarEvent()">Create event</button>
             </section>
-        </div>
+            <div id="event-list">
+                
+            </div>
+        </section>
     </div>
     <script src="/static/calendar_site/script.js"></script>
 </body>

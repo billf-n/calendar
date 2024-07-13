@@ -1,5 +1,3 @@
-currentDate = new Date();
-calendarDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const options = {
@@ -8,12 +6,20 @@ const options = {
     month: "short",
     day: "numeric"
 };
+// to do on document load
+let currentDate = new Date();
+let calendarDate = new Date(currentDate);
 
+const socket = io();
+
+const monthDropdown = document.querySelector("#month-drop");
+const yearDropdown = document.querySelector("#year-drop");
+
+
+//loadDates() is called later (also for doing once on document loading)
 
 function loadDates() {
 
-    // document.getElementById("month").innerHTML = months[calendarDate.getMonth()];
-    // document.getElementById("year").innerHTML = calendarDate.getFullYear();
     document.getElementById("date-display").innerHTML = currentDate.toLocaleDateString("en-AU", options);
     firstOfMonth = new Date();
     firstOfMonth.setTime(calendarDate.getTime());
@@ -35,9 +41,7 @@ function loadDates() {
     // current month's dates
     for (i=1; i<=daysInMonth; i++) {
         if (calendarDate.getDate() == i) {
-            if (1) {
             eachDate += `<button type="button" class="date-numbers" id="selected">${i}</button>`;
-            }
         }
         else if ((calendarDate.getFullYear() == currentDate.getFullYear())
             && (calendarDate.getMonth() == currentDate.getMonth())
@@ -73,42 +77,34 @@ function loadDates() {
         }, false);
     }
 
+    $("#new-event-date").val(formatDate(calendarDate));
 }
 
-
-// to do on document load
-
-const socket = io();
-
-const monthDropdown = document.querySelector("#month-drop");
-const yearDropdown = document.querySelector("#year-drop");
-
-
-loadDates();
-
-
 function changeDate(date = calendarDate.getDate()) {
-    console.log(date);
-    calendarDate = new Date(parseInt(yearDropdown.options[yearDropdown.selectedIndex].text), 
-    monthDropdown.selectedIndex, date);
+    calendarDate.setFullYear(yearDropdown.options[yearDropdown.selectedIndex].text);
+    calendarDate.setMonth(monthDropdown.selectedIndex);
+    calendarDate.setDate(date);
     loadDates();
 }
 
 function lastMonth() {
-    calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 0);
+    calendarDate.setMonth(calendarDate.getMonth()-1);
     loadDates();
 }
 
 function nextMonth() {
-    calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth()+2, 0);
+    calendarDate.setMonth(calendarDate.getMonth()+1);
     loadDates();
 }
 
 function loadEvents() {
-    socket.emit("load_events", calendarDate.toLocaleDateString(), (res) => { // in future maybe add "user" param here
-        // display each event for this date
+    // display each event for this date
+
+    socket.emit("load_events", formatDate(calendarDate), (res) => { // in future maybe add "user" param here
         eventList = $("#event-list");
-        console.log(eventList);
+        $("#event-list").empty();
+        console.log(calendarDate);
+        console.log(res);
         for (i = 0; i < res.length; i++) {
             // make a div and populate it with the info of res[i]
             e = document.createElement("div");
@@ -118,10 +114,9 @@ function loadEvents() {
             e.classList.add("event-entry");
             
             // this bit uses js while the parent is a jquery element :-)
-            result = JSON.parse(res[i]);
-            title.textContent = result["title"];
-            info.textContent = result["info"];
-            creator.textContent = result["creator"];
+            title.textContent = res[i]["title"];
+            creator.textContent = "by: " + res[i]["creator"];
+            info.textContent = res[i]["info"];
             e.appendChild(title);
             e.appendChild(creator);
             e.appendChild(info);
@@ -132,8 +127,9 @@ function loadEvents() {
 }
 
 function createCalendarEvent() {
-    console.log($("#new-event-title").val());
-    console.log($("#new-event-date").val());
     socket.emit("create_event", $("#new-event-title").val(), $("#new-event-info").val(), $("#new-event-date").val());
-    // loadEvents();
+    loadEvents();
 }
+
+loadDates();
+loadEvents();
