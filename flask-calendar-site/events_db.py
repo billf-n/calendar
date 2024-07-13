@@ -14,9 +14,16 @@ class Event(Base):
     __tablename__ = "events"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String)
-    creator: Mapped[str] = mapped_column(String)
+    creator: Mapped[str] = mapped_column(String, default="None")
     info: Mapped[str] = mapped_column(String)
     date: Mapped[datetime.date] = mapped_column(Date)
+
+    def to_dict(self):
+        return {
+            "title": self.title,
+            "creator": self.creator, 
+            "info": self.info
+        }
 
     def to_dict(self):
         # for use in returning events to the client, so no ID
@@ -32,6 +39,10 @@ Base.metadata.create_all(engine)
 
 def load_events(requested_date: datetime.date):
     with Session(engine) as session:
+        result = list(session.execute(select(Event).filter_by(date=requested_date)))
+        for index, event in enumerate(result):
+            result[index] = event[0].to_dict()
+        return result
         result = list(session.execute(select(Event).filter_by(date=requested_date)))
         for index, event in enumerate(result):
             result[index] = event[0].to_dict()
