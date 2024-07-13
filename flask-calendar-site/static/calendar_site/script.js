@@ -1,5 +1,3 @@
-currentDate = new Date();
-calendarDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -27,9 +25,7 @@ function loadDates() {
     // current month's dates
     for (i=1; i<=daysInMonth; i++) {
         if (calendarDate.getDate() == i) {
-            if (1) {
             eachDate += `<button type="button" class="date-numbers" id="selected">${i}</button>`;
-            }
         }
         else if ((calendarDate.getFullYear() == currentDate.getFullYear())
             && (calendarDate.getMonth() == currentDate.getMonth())
@@ -162,8 +158,9 @@ function loadEvents() {
 }
 
 function createCalendarEvent() {
-    console.log($("#new-event-title").val());
-    console.log($("#new-event-date").val());
     socket.emit("create_event", $("#new-event-title").val(), $("#new-event-info").val(), $("#new-event-date").val());
-    // loadEvents();
+    loadEvents();
 }
+
+loadDates();
+loadEvents();
