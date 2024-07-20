@@ -16,10 +16,31 @@ socketio = SocketIO(app)
 def index():
     return render_template("calendar.html")
 
+@app.route("/home")
+def home():
+    return render_template("home.html")
+
+@app.route("/calendar")
+def calendar():
+    return render_template("calendar.html")
+
 # this one's not working
 @app.route("/", methods=["POST"])
 def post_event(event_title: str, event_info: str, event_date: str):
     return render_template("calendar.html")
+
+@app.route("/signup")
+def signup_page():
+    return render_template("signup.html", signup=1)
+
+@app.route("/login")
+def login_page():
+    return render_template("signup.html", signup=0)
+
+@app.route("/signup", methods=["POST"])
+def signup_login(username: str, password: str):
+    pass
+
 
 @socketio.on("load_events")
 def load_events(date, group=0x0):

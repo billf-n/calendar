@@ -1,36 +1,42 @@
-const switchButton = document.getElementById("switch-button");
+const switchButton = document.getElementById("switch-text");
 const title = document.getElementById("title");
-const submitButton = document.getElementById("submit-button");
-console.log(submitButton);
-let signup = true;
+const submitButton = document.getElementById("submit-text");
+let signupVar = true;
+
+function transitionElement(e, newMsg) {
+    e.classList.add("out");
+    setTimeout(function() {
+        e.classList.remove("out");
+        e.textContent = newMsg;
+        e.classList.add("fadein");
+        setTimeout(function(){
+            e.classList.remove("fadein");
+        }, 250);
+    }, 250);
+}
+
+function switchToSignup() {
+    transitionElement(title, "Sign up for a new account");
+    transitionElement(submitButton, "Sign up");
+    transitionElement(switchButton, "Already have an account?");
+
+    signupVar = true;
+    document.title = "Sign up - Events";
+}
+
+function switchToLogin() {
+    transitionElement(title, "Log in to your account");
+    transitionElement(submitButton, "Log in");
+    transitionElement(switchButton, "Don't have an account?");
+
+    signupVar = false;
+    document.title = "Log in - Events";
+}
 
 switchButton.addEventListener("click", function(e){
-    if (signup) {
-
-        title.classList.add("out");
-        setTimeout(function(){
-            title.classList.remove("out");
-            title.textContent = "Log in to your account";
-            title.classList.add("fadein");
-            setTimeout(function(){
-                title.classList.remove("fadein");
-            }, 250);
-        }, 250);
-        submitButton.textContent = "Log in";
-        switchButton.textContent = "Don't have an account?";
-        signup = false;
+    if (signupVar) {
+        switchToLogin();
     } else {
-        title.classList.add("out");
-        setTimeout(function(){
-            title.classList.remove("out");
-            title.textContent = "Sign up for a new account";
-            title.classList.add("fadein");
-            setTimeout(function(){
-                title.classList.remove("fadein");
-            }, 250);
-        }, 250);
-        submitButton.textContent = "Sign up";
-        switchButton.textContent = "Already have an account?";
-        signup = true;
+        switchToSignup();
     }
 }, false)

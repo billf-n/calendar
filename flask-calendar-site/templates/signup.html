@@ -9,17 +9,28 @@
     <title>Sign up - Events calendar</title>
 </head>
 <body>
+    <a href="{{ url_for('home') }}">Home</a>
     <div class="wrapper">
-        <h1 id="title">Sign up for a new account</h1>
+        <h1 id="title" class="out">Sign up for a new account</h1>
         <form id="signup-form">
             <label for="username">Username</label>
             <input id="username" class="input" name="username">
             <label for="password">Password</label>
             <input id="password" class="input" name="password" type="password">
-            <button type="submit" id="submit-button" class="button">Sign Up</button>
+            <button type="submit" id="submit-button" class="button"><span id="submit-text">Sign Up</span></button>
         </form>
-        <button type="button" id="switch-button" class="button">Already have an account?</button>
+        <button type="button" id="switch-button" class="button"><span id="switch-text">Already have an account?</span></button>
     </div>
     <script src="../static/calendar_site/signup.js"></script>
+    <script>
+        signupVar = {{ signup }};
+        console.log(signupVar);
+        if (!(signupVar)) {
+            switchToLogin();
+        }
+        else {
+            switchToSignup();
+        }
+    </script>
 </body>
 </html>
