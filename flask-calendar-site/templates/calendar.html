@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Calendar</title>
 
-    <link rel="stylesheet" href="../static/calendar_site/style.css">
+    <link rel="stylesheet" href="../static/calendar_site/calendar.css">
     <script src="../static/jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../static/socket.io-4.7.5/socket.io.min.js"></script>
     <script src="../static/calendar_site/formatDate.js"></script>
@@ -17,7 +17,7 @@
     <div class="wrapper">
         <div class="calendar">
             <div class="top-section">
-                <h2 id="date-display"></h2>
+                <h2 id="date-display" title="Click here to reset the date."></h2>
                 <div class="topbar">
                     <span id="last-month" 
                         class="prevent-select 
@@ -106,6 +106,6 @@
             </div>
         </div>
     </div>
-    <script src="../static/calendar_site/script.js"></script>
+    <script src="../static/calendar_site/calendar.js"></script>
 </body>
 </html>

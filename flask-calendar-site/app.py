@@ -16,6 +16,7 @@ socketio = SocketIO(app)
 def index():
     return render_template("calendar.html")
 
+# this one's not working
 @app.route("/", methods=["POST"])
 def post_event(event_title: str, event_info: str, event_date: str):
     return render_template("calendar.html")

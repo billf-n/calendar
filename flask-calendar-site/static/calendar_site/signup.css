@@ -1,0 +1,61 @@
+body{
+    font-family: 'Nunito', sans-serif;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 1;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#title{
+    text-align: center;
+}
+
+#signup-form{
+    display: flex;
+    border-radius: 10px;
+    background-color: rgb(194, 200, 202);
+    padding: 2rem;
+    flex-direction: column;
+    width: 250px;
+}
+
+.input{
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    padding: 0px 10px;
+}
+
+#submit-button{
+    margin-top: 2rem;
+}
+
+#switch-button{
+    margin-top: 1rem;;
+    width: 250px;
+    background-color: rgb(206, 206, 206);
+}
+
+#switch-button:hover{
+    transition-duration: 200ms;
+    background-color: rgb(174, 209, 200);
+}
+
+.out{
+    transition-duration: 250ms;
+    opacity: 0;
+}
+
+.fadein{
+    opacity: 1;
+    transition: all 250ms ease-in-out;
+}
+
+
