@@ -6,18 +6,21 @@
     <link rel="stylesheet" href="../static/calendar_site/main.css">
     <link rel="stylesheet" href="../static/calendar_site/signup.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="../static/jquery-3.7.1/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
     <title>Sign up - Events calendar</title>
 </head>
 <body>
     <a href="{{ url_for('home') }}">Home</a>
     <div class="wrapper">
         <h1 id="title" class="out">Sign up for a new account</h1>
-        <form id="signup-form">
+        <form id="signup-form" method="post">
             <label for="username">Username</label>
             <input id="username" class="input" name="username">
             <label for="password">Password</label>
             <input id="password" class="input" name="password" type="password">
             <button type="submit" id="submit-button" class="button"><span id="submit-text">Sign Up</span></button>
+            <span id="mode" style="height:0px; width:0px; line-height: 0px; visibility: hidden;">signup</span>
         </form>
         <button type="button" id="switch-button" class="button"><span id="switch-text">Already have an account?</span></button>
     </div>

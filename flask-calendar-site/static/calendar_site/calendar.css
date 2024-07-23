@@ -205,21 +205,36 @@ input{
         margin-top: 0.5rem;
     }
 
+    #event_date{
+        line-height: 1.5rem;
+        padding: 5px 10px;
+        border-radius: 2rem;
+    }
+
     #event_title{
+        font-family: 'Nunito', sans-serif;
+        font-size: 1rem;
+        line-height: 1.5rem;
         float: right;
-        font-size: 1.25rem;
-        margin-left: 20px;
-        width: 200px;
-        border-radius: 4px;
+        border-radius: 1rem;
+        padding: 5px 10px;
+        width: 180px;
+    }
+
+    #title-div{
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     #event_info{
+        font-family: 'Nunito', sans-serif;
         border: 0px solid transparent;
-        border-radius: 4px;
+        border-radius: 1rem;
         resize: vertical;
         float: right;
         margin-left: 20px;
-        width: 200px;
+        padding: 5px 10px;
+        width: 180px;
     }
 
     #title-label::after{
@@ -246,4 +261,17 @@ input{
         margin-top: 20px;
         border-radius: 1rem;
         background-color: rgb(137, 166, 190);
+    }
+
+    .going-button {
+        transition-duration: 200ms;
+        font-family: 'Nunito', sans-serif;
+        padding: 0.75rem;
+        border: 0px solid transparent;
+        border-radius: 2rem;
+    }
+
+    .going-button:hover {
+        transition-duration: 200ms;
+        background-color: rgb(189, 223, 209);
     }

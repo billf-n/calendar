@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session, DeclarativeBase, Mapped, mapped_column, rela
 
 import uuid
 import datetime
+import hashlib
+import secrets
 
 engine = create_engine("sqlite:///events.sqlite3")
 
@@ -27,6 +29,11 @@ class Event(Base):
             "date": self.date.strftime("%Y-%m-%d"), # using ISO format here, to return.
         }
 
+class User(Base):
+    __tablename__ = "users"
+    username: Mapped[str] = mapped_column(String, primary_key=True)
+    password: Mapped[bytes] = mapped_column()
+
 Base.metadata.create_all(engine)
 
 
@@ -44,3 +51,25 @@ def create_event(title: str, info: str, date: datetime.date, creator: str = "Non
         session.add(new_event)
         session.commit()
 
+def add_user(username: str, password: str):
+    with Session(engine) as session:
+        if session.get(User, username):
+            return False
+        else:
+            new_user = User(
+                username=username, 
+                password=hashlib.pbkdf2_hmac(
+                    "sha256", 
+                    password.encode(), 
+                    secrets.token_bytes(32), 
+                    100000
+                )
+            )
+            session.add(new_user)
+            session.commit()
+            return True
+
+def check_login(username: str, password: str):
+    with Session(engine) as session:
+        user = session.get(User, username)
+        

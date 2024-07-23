@@ -14,7 +14,7 @@ socketio = SocketIO(app)
 
 @app.route("/")
 def index():
-    return render_template("calendar.html")
+    return render_template("home.html")
 
 @app.route("/home")
 def home():
@@ -26,7 +26,7 @@ def calendar():
 
 # this one's not working
 @app.route("/", methods=["POST"])
-def post_event(event_title: str, event_info: str, event_date: str):
+def post_event():
     return render_template("calendar.html")
 
 @app.route("/signup")
@@ -38,12 +38,22 @@ def login_page():
     return render_template("signup.html", signup=0)
 
 @app.route("/signup", methods=["POST"])
-def signup_login(username: str, password: str):
-    pass
+def signup():
+    if events_db.add_user(request.form["username"], request.form["password"]):
+        return redirect("calendar")     # change this later to redirect Logged in
+    else:
+        #user already exists
+        return "User already exists."
 
+@app.route("/login", methods=["POST"])
+def login():
+    if events_db.check_login(request.form["username"], request.form["password"]):
+        return redirect("calendar") # change this later too
+    else:
+        return "Incorrect login details."
 
 @socketio.on("load_events")
-def load_events(date, group=0x0):
+def load_events(date, group=0):
     return events_db.load_events(date)
 
 @socketio.on("create_event")

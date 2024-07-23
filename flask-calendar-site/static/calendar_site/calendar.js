@@ -153,6 +153,11 @@ function loadEvents() {
             e.appendChild(title);
             e.appendChild(creator);
             e.appendChild(info);
+            going = document.createElement("button");
+            going.textContent = "Going!";
+            going.id = "going-" + i;
+            going.classList = "going-button";
+            e.appendChild(going);
 
             eventList.append(e); // append that div (jquery method)
         }
