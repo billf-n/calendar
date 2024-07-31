@@ -89,6 +89,7 @@ const options = {
     month: "short",
     day: "numeric"
 };
+
 dateDisplay.innerHTML = currentDate.toLocaleDateString("en-AU", options);
 dateDisplay.addEventListener("click", function(element){
     changeDate(
@@ -131,7 +132,7 @@ function changeDate(
 }
 
 function loadEvents() {
-    socket.emit("load_events", formatDate(calendarDate), (res) => { // in future maybe add "user" param here
+    socket.emit("load_events", formatDate(calendarDate), (res) => {
         // display each event for this date
         eventList = $("#event-list");
         console.log(res);
@@ -165,7 +166,10 @@ function loadEvents() {
 }
 
 function createCalendarEvent() {
-    socket.emit("create_event", $("#new-event-title").val(), $("#new-event-info").val(), $("#new-event-date").val());
+    socket.emit("create_event", 
+    $("#event_title").val(), 
+    $("#event_info").val(), 
+    $("#event_date").val());
     loadEvents();
 }
 

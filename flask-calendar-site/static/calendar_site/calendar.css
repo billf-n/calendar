@@ -90,8 +90,11 @@ input{
 
     .change-month{
         border-radius: 50%;
+        width: 24px;
+        height: 24px;
         padding: 2px;
         transition: 200ms;
+        text-align: center;
         background-color: rgb(170, 170, 170);
     }
 
@@ -216,7 +219,7 @@ input{
         font-size: 1rem;
         line-height: 1.5rem;
         float: right;
-        border-radius: 1rem;
+        border-radius: 1.5rem;
         padding: 5px 10px;
         width: 180px;
     }
@@ -260,7 +263,7 @@ input{
         padding: 10px;
         margin-top: 20px;
         border-radius: 1rem;
-        background-color: rgb(137, 166, 190);
+        background-color: rgb(168, 187, 202);
     }
 
     .going-button {

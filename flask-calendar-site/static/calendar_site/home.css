@@ -10,15 +10,15 @@ body{
     justify-content: space-around;
 }
 
-#title-side{
-    display: flex;
-    flex-direction: column;
-}
-
 #site-title{
     margin: 20px;
     justify-content: center;
     align-items: center;
+}
+
+#title-side{
+    display: flex;
+    flex-direction: column;
 }
 
 #site-info{

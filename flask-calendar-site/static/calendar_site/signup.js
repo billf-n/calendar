@@ -62,6 +62,8 @@ $("#signup-form").submit(function(e) {
             if ((data === "User already exists.") || 
                 (data === "Incorrect login details.")) {
                 alert(data);
+            } else {
+                window.open(data, "_self");
             }
         }
     });

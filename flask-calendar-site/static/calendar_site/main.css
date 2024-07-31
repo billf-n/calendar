@@ -1,3 +1,7 @@
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
 .button {
     transition-duration: 200ms;
     height: 2rem;
@@ -11,3 +15,6 @@
     transition-duration: 300ms;
     background-color: rgb(177, 195, 211);
 }
+
+
+

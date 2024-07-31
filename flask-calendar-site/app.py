@@ -4,12 +4,14 @@ from flask_socketio import SocketIO, send, emit
 
 import secrets
 import datetime
+import uuid
 
 import events_db
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex()
 socketio = SocketIO(app)
+
 
 
 @app.route("/")
@@ -22,12 +24,15 @@ def home():
 
 @app.route("/calendar")
 def calendar():
-    return render_template("calendar.html")
+    #check for cookie
+    if events_db.username_from_token(request.cookies.get("auth_token")):
+        return render_template("calendar.html")
+    return redirect("home.html")
 
 # this one's not working
-@app.route("/", methods=["POST"])
-def post_event():
-    return render_template("calendar.html")
+# @app.route("/", methods=["POST"])
+# def post_event():
+#     return render_template("calendar.html")
 
 @app.route("/signup")
 def signup_page():
@@ -40,7 +45,11 @@ def login_page():
 @app.route("/signup", methods=["POST"])
 def signup():
     if events_db.add_user(request.form["username"], request.form["password"]):
-        return redirect("calendar")     # change this later to redirect Logged in
+        res = make_response(url_for("calendar"))     # change this later to redirect Logged in
+        auth_token = str(uuid.uuid4())
+        events_db.add_user_token(request.form["username"], auth_token)
+        res.set_cookie(key="auth_token", value=auth_token, max_age=999999)
+        return res
     else:
         #user already exists
         return "User already exists."
@@ -48,7 +57,11 @@ def signup():
 @app.route("/login", methods=["POST"])
 def login():
     if events_db.check_login(request.form["username"], request.form["password"]):
-        return redirect("calendar") # change this later too
+        res = make_response(url_for("calendar"))
+        auth_token = str(uuid.uuid4())
+        events_db.add_user_token(request.form["username"], auth_token)
+        res.set_cookie(key="auth_token", value=auth_token, max_age=999999)
+        return res
     else:
         return "Incorrect login details."
 
@@ -60,6 +73,26 @@ def load_events(date, group=0):
 def create_event(title: str, info: str, date: str):
     date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
     events_db.create_event(title, info, date)
+
+@socketio.on("load_groups")
+def load_groups():
+    auth_token = request.cookies.get("auth_token")
+    username = events_db.username_from_token(auth_token)
+    return events_db.get_groups(username)
+
+@socketio.on("load_group_invites")
+def load_group_invites():
+    auth_token = request.cookies.get("auth_token")
+    username = events_db.username_from_token(auth_token)
+    return events_db.get_group_invites(username)
+
+@socketio.on("join_group")
+def join_group(group_id: int):
+    auth_token = request.cookies.get("auth_token")
+    username = events_db.username_from_token(auth_token)
+    events_db.join_group(username, group_id)
+
+    
 
 if __name__ == '__main__':
     socketio.run(app)
