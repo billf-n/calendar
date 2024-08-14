@@ -34,6 +34,10 @@ def calendar():
 # def post_event():
 #     return render_template("calendar.html")
 
+@app.route("/groups")
+def groups():
+    return render_template("groups.html")
+
 @app.route("/signup")
 def signup_page():
     return render_template("signup.html", signup=1)
@@ -91,8 +95,6 @@ def join_group(group_id: int):
     auth_token = request.cookies.get("auth_token")
     username = events_db.username_from_token(auth_token)
     events_db.join_group(username, group_id)
-
-    
 
 if __name__ == '__main__':
     socketio.run(app)

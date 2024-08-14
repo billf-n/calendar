@@ -178,6 +178,9 @@ def remove_group_invite(username: str, group_name: str):
 def get_groups(username: str):
     with Session(engine) as session:
         user = session.get(User, username)
-        return user.groups
+        groups = user.groups
+        for index, group in enumerate(groups):
+            groups[index] = group.to_dict()
+        return groups
 
 

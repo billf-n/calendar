@@ -135,7 +135,6 @@ function loadEvents() {
     socket.emit("load_events", formatDate(calendarDate), (res) => {
         // display each event for this date
         eventList = $("#event-list");
-        console.log(res);
         eventList.empty();
         for (i = 0; i < res.length; i++) {
             
