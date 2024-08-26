@@ -96,7 +96,7 @@ function loadGroupInvites() {
 }
 
 function createGroupPopup() {
-    let createGroupSection = document.getElementById("create-group-popup");
+    let createGroupSection = document.getElementById("create-group-popup-wrap");
     createGroupSection.innerHTML = '<div id="create-group-popup" class="hidden">\
     <h3>Create a group</h3>\
     <div id="group-name-div">\
