@@ -63,7 +63,7 @@ class User(Base):
 
 class Group(Base):
     __tablename__ = "groups"
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
     group_name: Mapped[str] = mapped_column(String)
     users: Mapped[List[User]] = relationship(
         secondary=user_group_table, 
@@ -73,7 +73,7 @@ class Group(Base):
         secondary=user_invite_table, 
         back_populates="group_invites"
     )
-    creator: Mapped[str] = mapped_column(String)
+    creator: Mapped[str] = mapped_column(ForeignKey("User.username"))
     def to_dict(self):
         return {
             "group_id": self.id,
@@ -145,6 +145,18 @@ def add_user_token(username: str, token_str: str):
         session.add(token)
         session.commit()
 
+def create_group(username: str, group_name: str):
+    with Session(engine) as session:
+        group_id = uuid.uuid4()
+        while session.get(Group, group_id) is not None:
+            print("Group id already exists. Generating another.")
+            group_id = uuid.uuid4()
+        user = session.get(User, username)
+        new_group = Group(group_id, group_name=group_name, 
+                          users=[username,], invitees=[], creator = user)
+        session.add(new_group)
+        session.commit()
+
 def join_group(username: str, group_id: int):
     with Session(engine) as session:
         user = session.get(User, username)
@@ -156,8 +168,10 @@ def join_group(username: str, group_id: int):
 def username_from_token(token: str):
     with Session(engine) as session:
         token_obj = session.get(AuthToken, token)
+        if token_obj is None:
+            return None
         return token_obj.user
-        
+    
 def get_group_invites(username: str):
     with Session(engine) as session:
         user = session.get(User, username)

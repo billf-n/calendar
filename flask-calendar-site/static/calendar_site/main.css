@@ -1,3 +1,14 @@
+:root {
+    --bgblue: rgb(168, 187, 202);
+    --bgyellow: rgb(200, 207, 185);
+    --bggrey: rgb(190, 190, 190);
+    --buttonlinkblue: rgb(186, 217, 228);
+    --buttongreen: rgb(172, 218, 187);
+    --acceptgreen: rgb(150, 214, 187);
+    --rejectred: rgb(231, 175, 175);
+    --white: #ffffff;
+}
+
 * {
     font-family: 'Nunito', sans-serif;
 }

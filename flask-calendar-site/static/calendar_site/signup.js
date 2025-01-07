@@ -61,6 +61,7 @@ $("#signup-form").submit(function(e) {
         {
             if ((data === "User already exists.") || 
                 (data === "Incorrect login details.")) {
+                // TODO: display this on the page instead.
                 alert(data);
             } else {
                 window.open(data, "_self");

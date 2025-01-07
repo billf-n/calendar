@@ -69,6 +69,16 @@ def login():
     else:
         return "Incorrect login details."
 
+@app.route("/groups", methods=["POST"])
+def create_group(group_name: str):
+    auth_token = request.cookies.get("auth_token")
+    username = events_db.username_from_token(auth_token)
+    if username is None:
+        return "Error retrieving current user info."
+    events_db.create_group(username, group_name)
+    # TODO: redirect to new group page
+
+
 @socketio.on("load_events")
 def load_events(date, group=0):
     return events_db.load_events(date)

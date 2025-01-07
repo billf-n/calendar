@@ -11,8 +11,10 @@ function viewGroup(groupName) {
     // send socket to view group
 }
 
-function createGroup(){
-    
+function createGroup(groupName){
+    socket.emit("create_group", groupName, (res) => {
+        
+    })
 }
 
 function loadGroups() {
@@ -95,36 +97,50 @@ function loadGroupInvites() {
     })
 }
 
+/* 
 function createGroupPopup() {
-    let createGroupSection = document.getElementById("create-group-popup-wrap");
-    createGroupSection.innerHTML = '<div id="create-group-popup" class="hidden">\
-    <h3>Create a group</h3>\
-    <div id="group-name-div">\
-        <label for="new-group-name" id="group-name-label">Group name</label>\
-        <input type="input" name="new-group-name" id="new-group-name">\
-    </div>\
-    <button class="small-button">Create a group</button>\
-    </div>';
-    setTimeout(function() {
-        document.getElementById("create-group-popup").classList.add("expanded");
-        document.getElementById("create-group-popup").classList.remove("hidden");
-    }, 1);
+    // let createGroupSection = document.getElementById("create-group-form-wrap");
+    // createGroupSection.innerHTML = '<form id="create-group-form" class="hidden">\
+    // <h3>Create a group</h3>\
+    // <div id="group-name-div">\
+    //     <label for="new-group-name" id="group-name-label">Group name</label>\
+    //     <input type="input" name="new-group-name" id="new-group-name">\
+    // </div>\
+    // <button id="create-group-button" class="small-button">Create group</button>\
+    // </form>';
+    document.getElementById("create-group-form").classList.add("expanded");
+    document.getElementById("create-group-form").classList.remove("hidden");
+    document.getElementById("create-group-form-wrap").classList.add("expanded");
+    document.getElementById("create-group-form-wrap").classList.remove("hidden");
 }
 
 function removeGroupPopup() {
-    let createGroupSection = document.getElementById("create-group-popup");
-    document.getElementById("create-group-popup").classList.add("hidden");
-    document.getElementById("create-group-popup").classList.remove("expanded");
-    setTimeout(function() {
-        createGroupSection.innerHTML = "";
-    }, 200);
+    document.getElementById("create-group-form").classList.add("hidden");
+    document.getElementById("create-group-form").classList.remove("expanded");
+    document.getElementById("create-group-form-wrap").classList.add("height0");
+    document.getElementById("create-group-form-wrap").classList.remove("expanded");
 }
 
+let popupDisplayed = 0;
+
+let createGroupButton = document.getElementById("create-group-menu-button");
+createGroupButton.addEventListener("click", function(e){
+    if (!popupDisplayed) {
+        createGroupPopup();
+        popupDisplayed = 1;
+    } else {
+        removeGroupPopup();
+        popupDisplayed = 0;
+    }
+});
+*/
+
 function acceptInvite(groupId) {
+    console.log(groupId);
 }
 
 function declineInvite(groupId) {
-
+    console.log(groupId);
 }
 
 for (i=0; i<viewGroups.length; i++) {
@@ -137,29 +153,45 @@ let acceptGroupInvites = document.getElementsByClassName("accept-invite");
 for (i=0; i<acceptGroupInvites.length; i++) {
     acceptGroupInvites[i].addEventListener("click", function(element){
         acceptInvite(element.value);
-        console.log("accept");
     })
 }
 
 let declineGroupInvites = document.getElementsByClassName("decline-invite");
 for (i=0; i<declineGroupInvites.length; i++) {
     declineGroupInvites[i].addEventListener("click", function(element){
-        console.log("decline");
+        declineInvite(element.value);
     })
 }
 
 loadGroups();
 
-let popupDisplayed = 0;
+document.getElementById("create-group-button").addEventListener("click", function(){
+    groupName = document.getElementById("new-group-name").value;
+    createGroup(groupName);
+});
 
-let createGroupButton = document.getElementById("create-group-button");
-console.log(createGroupButton);
-createGroupButton.addEventListener("click", function(e){
-    if (!popupDisplayed) {
-        createGroupPopup();
-        popupDisplayed = 1;
-    } else {
-        removeGroupPopup();
-        popupDisplayed = 0;
-    }
-})
+$("#create-group-form").submit(function(e) {
+    // from: 
+    // https://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    let form = $(this);
+    let actionUrl = form.attr('action');
+    
+    $.ajax({
+        type: "POST",
+        url: actionUrl,
+        data: form.serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+            if (data === "Error retrieving current user info.") {
+                // TODO: also display this on the page instead.
+                alert(data);
+            } else {
+                window.open(data, "_self");
+            }
+        }
+    });
+    
+});

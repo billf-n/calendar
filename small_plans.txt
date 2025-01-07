@@ -1,1 +1,7 @@
 make it so you can add an event, then view an event for the date.
+
+new 18/12/24:
+- make it so that a little red dot shows up on each date where 
+somebody is unavailable. 
+- finish that stuff up!
+- see if you can remove bootstrap's css typography module

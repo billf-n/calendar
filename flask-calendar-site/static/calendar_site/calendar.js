@@ -27,12 +27,12 @@ function loadDates() {
     // current month's dates
     for (i=1; i<=daysInMonth; i++) {
         if (calendarDate.getDate() == i) {
-            eachDate += `<button type="button" class="date-numbers" id="selected">${i}</button>`;
+            eachDate += `<button type="button" class="date-numbers current-month-numbers selected" id="selected">${i}</button>`;
         }
         else if ((calendarDate.getFullYear() == currentDate.getFullYear())
             && (calendarDate.getMonth() == currentDate.getMonth())
             && (i==currentDate.getDate())) {
-            eachDate += `<button type="button" class="date-numbers current-month-numbers" id="today">${i}</button>`;
+            eachDate += `<button type="button" class="date-numbers current-month-numbers today" id="today">${i}</button>`;
         }
         else {
             eachDate += `<button type="button" class="date-numbers current-month-numbers">${i}</button>`;
