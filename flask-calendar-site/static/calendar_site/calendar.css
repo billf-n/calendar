@@ -47,7 +47,7 @@ input {
 }
 
 .wrapper {
-  justify-content: center;
+  justify-content: space-evenly;
   display: flex;
   flex-wrap: wrap;
   min-width: fit-content;
@@ -190,7 +190,7 @@ input {
   background-color: rgb(194, 200, 202);
   border-radius: 10px;
   flex-grow: 1;
-  max-width: 40%;
+  max-width: 450px;
   min-width: 450px;
 }
 
@@ -208,16 +208,6 @@ input {
 
 .lrg-label {
   font-size: 1.25rem;
-}
-
-.form-input {
-  display: flex;
-  justify-content: space-between;
-  gap: 1em;
-}
-
-.form-input > label {
-  text-wrap-mode: nowrap;
 }
 
 .event-date {
@@ -272,6 +262,13 @@ input {
 .create-event-btn:hover {
   transition-duration: 300ms;
   background-color: rgb(128, 176, 190);
+}
+
+.event-list {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .event-entry {

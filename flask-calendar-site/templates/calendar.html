@@ -68,17 +68,13 @@
     </div>
     <div class="event-section">
       <form id="create-new-event" class="create-event">
-        <div class="form-input">
+        <div class="form-inputs">
           <label id="date-label" class="lrg-label date-label" for="event-date" title="A date is required.">
             Date</label>
           <input type="date" id="event-date" class="event-date" name="event-date" required>
-        </div>
-        <div class="form-input justify-items">
           <label id="title-label" class="lrg-label title-label" for="event-title" title="A title is required.">
             Title</label>
           <input id="event-title" class="event-title fill-width" name="event-title" required>
-        </div>
-        <div class="form-input justify-items">
           <label id="info-label" class="form-label" for="event-info">
             Extra Information
           </label>
@@ -86,13 +82,26 @@
         </div>
         <button id="create-event-btn" class="create-event-btn" onclick="createCalendarEvent()">Create event</button>
       </form>
-      <div id="event-list">
+      <div id="event-list" class="event-list">
         <div class="event-entry">
           <h2>Event title</h2>
           <h3>Creator</h3>
           <p>Event information</p>
           <button id="going" class="going-button">Going!</button>
         </div>
+        <div class="event-entry">
+          <h2>Event title</h2>
+          <h3>Creator</h3>
+          <p>Event information</p>
+          <button id="going" class="going-button">Going!</button>
+        </div>
+        <div class="event-entry">
+          <h2>Event title</h2>
+          <h3>Creator</h3>
+          <p>Event information</p>
+          <button id="going" class="going-button">Going!</button>
+        </div>
+        
       </div>
     </div>
   </div>
