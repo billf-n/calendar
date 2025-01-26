@@ -1,0 +1,35 @@
+:root {
+    --bgblue: rgb(168, 187, 202);
+    --bgyellow: rgb(200, 207, 185);
+    --bggrey: rgb(190, 190, 190);
+    --buttonlinkblue: rgb(186, 217, 228);
+    --buttongreen: rgb(172, 218, 187);
+    --acceptgreen: rgb(150, 214, 187);
+    --rejectred: rgb(231, 175, 175);
+    --white: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-block-start: 0;
+    margin-inline-start: 0;
+  }
+
+body, input, label, button {
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.button {
+    transition-duration: 200ms;
+    height: 2rem;
+    line-height: 2rem;
+    border: 1px solid transparent;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 1rem;
+}
+
+.button:hover{
+    transition-duration: 300ms;
+    background-color: rgb(177, 195, 211);
+}
+

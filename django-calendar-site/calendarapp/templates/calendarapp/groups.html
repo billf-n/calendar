@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <!-- <link rel="stylesheet" href="{% static '/bootstrap-5.3.3-dist/css/bootstrap.min.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'calendarapp/main.css' %}">
+  <link rel="stylesheet" href="{% static 'calendarapp/groups.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap" rel="stylesheet">
+  <!-- <script src="../static/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script> -->
+  <title>Groups - Events calendar</title>
+</head>
+
+<body>
+  <h1 id="site-title" class="display-2">Calendarapp</h1>
+  <div class="wrapper">
+    <div class="column-half">
+      <section id="joined-groups">
+        <h2 class="section-title">Joined Groups</h2>
+        <!-- consider moving the title to be within the "box"/section -->
+        <section id="joined-groups-sub" class="subsection">
+          {% for group in groups %}
+          <div class="little-box-section joined-group">
+            <h3 class="subheading">{{ group.group_name }}</h3>
+            <!-- TODO: decide to group member display? -->
+            <p>{{ group.members }}</p>
+            <a href="{% url 'calendarapp:calendar' group.id %}"><button class="small-button">View group</button></a>
+          </div>
+          {% endfor %}
+        </section>
+      </section>
+    </div>
+    <div class="column-half">
+      <section class="create-group" id="create-group">
+        <h2 class="section-title">Want to create a group?</h2>
+        <!-- <button id="create-group-menu-button" class="btn big-button" data-bs-toggle="collapse"
+          data-bs-target="#create-group-form-wrap" aria-expanded="false" aria-controls="create-group-form-wrap">Create a
+          group</button> -->
+        <form class="create-group-form" id="create-group-form" method="post">
+          {% csrf_token %}
+          <h3 class="subheading">Create a group</h3>
+          <div class="group-name-div">
+            <label for="group-name" class="group-form-label">Group name</label>
+            <input type="input" name="group-name" class="group-form-input" id="group-name">
+            <label for="username" class="group-form-label">Username</label>
+            <input type="input" name="username" class="group-form-input" id="username">
+
+          </div>
+          <button id="create-group-button" class="small-button">Create group</button>
+        </form>
+      </section>
+    </div>
+  </div>
+  <script src="{% static 'calendarapp/groups.js' %}"></script>
+</body>
+
+</html>

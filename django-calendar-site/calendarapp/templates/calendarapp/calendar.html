@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calendar</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'calendarapp/main.css' %}">
+  <link rel="stylesheet" href="{% static 'calendarapp/calendar.css' %}">
+  <script src="{% static 'calendarapp/formatDate.js' %}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'calendarapp/symbols.css' %}" />
+  <script>
+    let signedIn = {{ signed_in }};
+    let groupName = "{{ group_name }}";
+  </script>
+</head>
+
+<body>
+  <main class="wrapper">
+    <div class="calendar">
+      <div class="top-section">
+        <h2 id="date-display" title="Click here to reset the date."></h2>
+        <div class="topbar">
+          <span id="last-month" class="prevent-select 
+                            change-month 
+                            last-month 
+                            material-symbols-outlined">chevron_left</span>
+          <div id="month-year">
+            <select id="month-drop" class="dropdown" onchange="changeDate()">
+              <option class="month-drop-btn">January</option>
+              <option class="month-drop-btn">February</option>
+              <option class="month-drop-btn">March</option>
+              <option class="month-drop-btn">April</option>
+              <option class="month-drop-btn">May</option>
+              <option class="month-drop-btn">June</option>
+              <option class="month-drop-btn">July</option>
+              <option class="month-drop-btn">August</option>
+              <option class="month-drop-btn">September</option>
+              <option class="month-drop-btn">October</option>
+              <option class="month-drop-btn">November</option>
+              <option class="month-drop-btn">December</option>
+            </select>
+            <select id="year-drop" class="dropdown" onchange="changeDate()">
+              <option class="year-drop-btn">2024</option>
+            </select>
+          </div>
+          <span id="next-month" class="prevent-select 
+                            change-month 
+                            next-month 
+                            material-symbols-outlined">chevron_right</span>
+        </div>
+      </div>
+      <div class="bottom-calendar">
+        <div class="calendar-grid">
+          <div class="weekdays">Mon</div>
+          <div class="weekdays">Tue</div>
+          <div class="weekdays">Wed</div>
+          <div class="weekdays">Thu</div>
+          <div class="weekdays">Fri</div>
+          <div class="weekdays">Sat</div>
+          <div class="weekdays">Sun</div>
+        </div>
+        <div id="date-grid" class="calendar-grid">
+
+        </div>
+      </div>
+    </div>
+    <div class="event-section">
+      <form id="create-new-event" class="create-event">
+        <div class="form-inputs">
+          <label id="date-label" class="lrg-label date-label" for="event-date" title="  date is required.">
+            Date</label>
+          <input type="date" id="event-date" class="event-date" name="event-date" required>
+          <label id="title-label" class="lrg-label title-label" for="event-title" title="A title is required.">
+            Title</label>
+          <input id="event-title" class="event-title fill-width" name="event-title" required>
+          <label id="info-label" class="form-label" for="event-info">
+            Extra Information
+          </label>
+          <textarea id="event-info" class="event-info fill-width" name="event-info"></textarea>
+        </div>
+        <button id="create-event-btn" class="create-event-btn" onclick="createCalendarEvent()">Create event</button>
+      </form>
+      <div id="event-list" class="event-list">
+        <div class="event-entry">
+          <div class="event-entry-heading">
+            <h2>Event title</h2>
+            <p class="event-entry-date">12/34/56</p>
+          </div>
+          <h3>Creator</h3>
+          <p>Event information</p>
+          <button id="going" class="going-button">Going!</button>
+        </div>
+        <div class="event-entry">
+          <div class="event-entry-heading">
+            <h2>Event title</h2>
+            <p class="event-entry-date">12/34/56</p>
+          </div>
+          <h3>Creator</h3>
+          <p>Event information</p>
+          <button id="going" class="going-button">Going!</button>
+        </div>
+        <div class="event-entry">
+          <div class="event-entry-heading">
+            <h2>Event title</h2>
+            <p class="event-entry-date">12/34/56</p>
+          </div>
+          <h3>Creator</h3>
+          <p>Event information</p>
+          <button id="going" class="going-button">Going!</button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+  {% if signed_in != 1 %}
+    <div id="popup-background" class="popup-background">
+      <form id="new-user-form" class="new-user-form" method="post">
+        {% csrf_token %}
+        <h3>Enter a name to use in this group</h3>
+        <label for="calendarapp-username">Username</label>
+        <input name="calendarapp-username" id="username" class="username-input" required>
+        <button class="new-user-join">Join group</button>
+      </form>
+    </div>
+  {% endif %}
+  <script src="{% static 'calendarapp/calendar.js' %}"></script>
+</body>
+
+</html>
