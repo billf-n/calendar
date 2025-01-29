@@ -25,10 +25,9 @@
       <div class="top-section">
         <h2 id="date-display" title="Click here to reset the date."></h2>
         <div class="topbar">
-          <span id="last-month" class="prevent-select 
-                            change-month 
-                            last-month 
-                            material-symbols-outlined">chevron_left</span>
+          <span id="last-month" class="prevent-select change-month last-month material-symbols-outlined">
+            chevron_left
+          </span>
           <div id="month-year">
             <select id="month-drop" class="dropdown" onchange="changeDate()">
               <option class="month-drop-btn">January</option>
@@ -48,10 +47,9 @@
               <option class="year-drop-btn">2024</option>
             </select>
           </div>
-          <span id="next-month" class="prevent-select 
-                            change-month 
-                            next-month 
-                            material-symbols-outlined">chevron_right</span>
+          <span id="next-month" class="prevent-select change-month next-month material-symbols-outlined">
+            chevron_right
+          </span>
         </div>
       </div>
       <div class="bottom-calendar">
@@ -113,20 +111,19 @@
           <p>Event information</p>
           <button id="going" class="going-button">Going!</button>
         </div>
-
       </div>
     </div>
   </main>
   {% if signed_in != 1 %}
-    <div id="popup-background" class="popup-background">
-      <form id="new-user-form" class="new-user-form" method="post">
-        {% csrf_token %}
-        <h3>Enter a name to use in this group</h3>
-        <label for="calendarapp-username">Username</label>
-        <input name="calendarapp-username" id="username" class="username-input" required>
-        <button class="new-user-join">Join group</button>
-      </form>
-    </div>
+  <div id="popup-background" class="popup-background">
+    <form id="new-user-form" class="new-user-form" method="post">
+      {% csrf_token %}
+      <h3>Enter a name to use in this group</h3>
+      <label for="calendarapp-username">Username</label>
+      <input name="calendarapp-username" id="username" class="username-input" required>
+      <button class="new-user-join">Join group</button>
+    </form>
+  </div>
   {% endif %}
   <script src="{% static 'calendarapp/calendar.js' %}"></script>
 </body>

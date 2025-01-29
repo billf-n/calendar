@@ -22,8 +22,10 @@
         <!-- consider moving the title to be within the "box"/section -->
         <section id="joined-groups-sub" class="subsection">
           {% for group in groups %}
+          <script>console.log("{{group}}");</script>
           <div class="little-box-section joined-group">
-            <h3 class="subheading">{{ group.group_name }}</h3>
+            <h3 class="group-name subheading">{{ group.group_name }}</h3>
+            <p class="group-creator">{{ group.group_creator }}</p>
             <!-- TODO: decide to group member display? -->
             <p>{{ group.members }}</p>
             <a href="{% url 'calendarapp:calendar' group.id %}"><button class="small-button">View group</button></a>

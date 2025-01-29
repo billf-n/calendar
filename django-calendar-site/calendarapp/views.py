@@ -51,10 +51,8 @@ def calendar(request, group_id):
                     return JsonResponse(context)
 
             # user doesn't exist in this group, make one
-            new_user = User(username=new_username)
+            new_user = User(username=new_username, group=group)
             new_user.save()
-            group.members.add(new_user)
-            group.save()
             request.session["users"].append(new_user.id)
             request.session.save()
             context["signed_in"] = 1
@@ -66,16 +64,27 @@ def calendar(request, group_id):
 
 def groups(request):
 
-    request.session.save()
-
     try:
+        request.session["users"] = list(set(request.session["users"]))
         user_ids = request.session["users"]
     except KeyError:
         # this session isn't linked to any users yet
         request.session["users"] = []
+    
+    request.session.save()
+
+    groups = []
+    for user_id in request.session["users"]:
+        try:
+            user = User.objects.get(id=user_id)
+            groups.append(model_to_dict(user.group, 
+                                        fields=["id", "group_name", "group_creator"]))
+        except User.DoesNotExist:
+            request.session["users"].remove(user_id)
+            request.session.save()
 
     # groups = [model_to_dict(group) for group in Group.objects.filter(members="1")]
-    # print(groups)
+    print(groups)
 
     if request.method == "GET":
         context = {"groups": groups}
@@ -83,19 +92,20 @@ def groups(request):
     
     elif request.method == "POST":
         username = request.POST["username"]
-        user = User(username=username)
-        user.save()
+
 
         new_group_name = request.POST["group-name"]
-        new_group = Group(group_name=new_group_name, 
-                          group_creator=user)
+        new_group = Group(group_name=new_group_name)
         new_group.save()
-        new_group.members.add(user)
+
+        user = User(username=username, group=new_group)
+        user.save()
+        new_group.group_creator = user
         new_group.save()
         try:
             request.session["users"].append(user.id)
         except KeyError:
-            request.session["users"] = [user.id]
+            request.session["users"] = {user.id}
         request.session.save()
 
         return redirect(new_group)

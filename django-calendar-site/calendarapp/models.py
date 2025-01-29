@@ -4,7 +4,6 @@ from django.db import models
 class Group(models.Model):
     group_name = models.CharField(max_length=32)
     group_creator = models.ForeignKey("User", on_delete=models.SET_NULL, null=True, related_name="created_groups")
-    members = models.ManyToManyField("User", related_name="group_members")
 
     def __str__(self):
         return "Name: "+ self.group_name + \
@@ -16,9 +15,10 @@ class Group(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=32)
-
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name = "members")
     def __str__(self):
-        return self.username
+        return "id: " + str(self.id) + "; Username:" + self.username
+    
 
 
 class Event(models.Model):
@@ -30,4 +30,4 @@ class Event(models.Model):
     event_creator = models.ForeignKey("User", on_delete=models.SET_NULL, related_name="created_events",null=True)
 
     def __str__(self):
-        return "Name: " + self.event_name + ", Group: " + self.group
+        return "Name: " + self.event_name + "; Group: " + self.group
