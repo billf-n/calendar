@@ -6,27 +6,38 @@ const options = {
     month: "short",
     day: "numeric"
 };
+
 currentDate = new Date();
 calendarDate = new Date();
+
+let yearDropdownValues = [];
+for (let i = currentDate.getFullYear(); i < currentDate.getFullYear() + 10; i++) {
+    yearDropdownValues.push(i);
+}
+
 
 function loadDates() {
 
     // document.getElementById("month").innerHTML = months[calendarDate.getMonth()];
     // document.getElementById("year").innerHTML = calendarDate.getFullYear();
-    firstOfMonth = new Date();
-    firstOfMonth.setTime(calendarDate.getTime());
-    firstOfMonth.setDate((1));
-    firstWeekday = firstOfMonth.getDay();
-    lastOfMonth = new Date(calendarDate.getFullYear(), calendarDate.getMonth()+1, 0);
-    daysInMonth = lastOfMonth.getDate();
-    eachDate='';
+    let firstOfMonth = new Date();
+    firstOfMonth.setTime(calendarDate.getTime()); // sets the full date to calendardate
+    firstOfMonth.setDate(1);
+    let firstWeekday = firstOfMonth.getDay();
+    if (firstWeekday === 0) {
+        firstWeekday = 7;
+    }
 
-    // previous month's dates
-    var lastOfLastMonth = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 0);
-    let firstofLastMonth = lastOfLastMonth.getDate()-firstWeekday+2;
-    var totalDays = 0;
-    for (i=firstofLastMonth; i<=lastOfLastMonth.getDate(); i++) {
-        eachDate += `<button class="date-numbers last-month-numbers">${i}</div>`;
+    let lastOfMonth = new Date(calendarDate.getFullYear(), calendarDate.getMonth()+1, 0);
+    let daysInMonth = lastOfMonth.getDate();
+    let eachDate='';
+
+    // adding previous month's dates
+    let lastOfLastMonth = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 0);
+    let firstOfLastMonth = lastOfLastMonth.getDate()-firstWeekday+2;
+    let totalDays = 0;
+    for (i=firstOfLastMonth; i<=lastOfLastMonth.getDate(); i++) {
+        eachDate += `<button class="date-numbers last-month-numbers">${i}</button>`;
         totalDays++;
     }
 
@@ -51,6 +62,7 @@ function loadDates() {
         eachDate += `<button type="button" class="date-numbers next-month-numbers">${i}</button>`;
     }
 
+    // This should only happen when not changing using the dropdown!
     document.getElementById("month-drop").value = months[calendarDate.getMonth()];
     if (!yearDropdownValues.includes(calendarDate.getFullYear())) {
         yearDropdownValues.push(calendarDate.getFullYear());
@@ -74,7 +86,7 @@ function loadDates() {
     date_buttons = document.getElementsByClassName("next-month-numbers");
     for (i = 0; i < date_buttons.length; i++) {
         date_buttons[i].addEventListener("click", function(element){ 
-            changeDate(element.currentTarget.textContent, calendarDate.getMonth()+1);
+            changeDate(element.currentTarget.textContent, calendarDate.getMonth());
         }, false);
     }
 
@@ -88,10 +100,21 @@ const monthDropdown = document.querySelector("#month-drop");
 const yearDropdown = document.querySelector("#year-drop");
 const dateDisplay = document.getElementById("date-display")
 
-let yearDropdownValues = [];
-for (let i = currentDate.getFullYear(); i < currentDate.getFullYear() + 10; i++) {
-    yearDropdownValues.push(i);
-}
+monthDropdown.addEventListener("change", () => {
+    changeDate(
+        1,
+        monthDropdown.selectedIndex,
+        calendarDate.getFullYear()
+    );
+});
+
+yearDropdown.addEventListener("change", () => {
+    changeDate(
+        calendarDate.getDate(),
+        calendarDate.getMonth(),
+        parseInt(yearDropdown.selectedOptions[0].textContent)
+    );
+});
 
 function updateYearDropdown() {
     yearDropdown.replaceChildren(); // clear options
@@ -100,8 +123,9 @@ function updateYearDropdown() {
         let option = document.createElement("option");
         option.classList.add("year-drop-btn");
         option.innerText = e;
+        option.value = e;
         yearDropdown.appendChild(option);
-    })
+    });
 }
 
 dateDisplay.innerHTML = currentDate.toLocaleDateString("en-AU", options);
@@ -128,13 +152,14 @@ function changeDate(
     month = calendarDate.getMonth(),
     year = calendarDate.getFullYear()) 
 {
+    debugger;
     let monthChanged = false;
     if (month != calendarDate.getMonth()) {
         monthChanged = true;
     }
-    calendarDate.setFullYear(year);
-    calendarDate.setMonth(month);
     calendarDate.setDate(date);
+    calendarDate.setMonth(month);
+    calendarDate.setFullYear(year);
     
     loadDates();
     // loadEvents();
@@ -144,7 +169,7 @@ function loadEvents() {
     fetch(window.location.href, {
         method: "GET",
         headers: {
-            "Calendar-date": calendarDate.toISOString(),
+            "calendar-date": calendarDate.toISOString(),
         },
     })
 }

@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Calendar</title>
   {% load static %}
+  <link rel="stylesheet" href="{% static 'calendarapp/symbols.css' %}" />
   <link rel="stylesheet" href="{% static 'calendarapp/main.css' %}">
   <link rel="stylesheet" href="{% static 'calendarapp/calendar.css' %}">
   <script src="{% static 'calendarapp/formatDate.js' %}"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'calendarapp/symbols.css' %}" />
   <script>
     let signedIn = {{ signed_in }};
     let groupName = "{{ group_name }}";
@@ -25,11 +25,11 @@
       <div class="top-section">
         <h2 id="date-display" title="Click here to reset the date."></h2>
         <div class="topbar">
-          <span id="last-month" class="prevent-select change-month last-month material-symbols-outlined">
+          <button id="last-month" class="material-symbols-outlined prevent-select change-month last-month">
             chevron_left
-          </span>
+          </button>
           <div id="month-year">
-            <select id="month-drop" class="dropdown" onchange="changeDate()">
+            <select id="month-drop" class="dropdown">
               <option class="month-drop-btn">January</option>
               <option class="month-drop-btn">February</option>
               <option class="month-drop-btn">March</option>
@@ -43,13 +43,13 @@
               <option class="month-drop-btn">November</option>
               <option class="month-drop-btn">December</option>
             </select>
-            <select id="year-drop" class="dropdown" onchange="changeDate()">
+            <select id="year-drop" class="dropdown">
               <option class="year-drop-btn">2024</option>
             </select>
           </div>
-          <span id="next-month" class="prevent-select change-month next-month material-symbols-outlined">
+          <button id="next-month" class="material-symbols-outlined prevent-select change-month next-month">
             chevron_right
-          </span>
+          </button>
         </div>
       </div>
       <div class="bottom-calendar">
@@ -69,6 +69,7 @@
     </div>
     <div class="event-section">
       <form id="create-new-event" class="create-event">
+        {% csrf_token %}
         <div class="form-inputs">
           <label id="date-label" class="lrg-label date-label" for="event-date" title="  date is required.">
             Date</label>
@@ -84,24 +85,6 @@
         <button id="create-event-btn" class="create-event-btn" onclick="createCalendarEvent()">Create event</button>
       </form>
       <div id="event-list" class="event-list">
-        <div class="event-entry">
-          <div class="event-entry-heading">
-            <h2>Event title</h2>
-            <p class="event-entry-date">12/34/56</p>
-          </div>
-          <h3>Creator</h3>
-          <p>Event information</p>
-          <button id="going" class="going-button">Going!</button>
-        </div>
-        <div class="event-entry">
-          <div class="event-entry-heading">
-            <h2>Event title</h2>
-            <p class="event-entry-date">12/34/56</p>
-          </div>
-          <h3>Creator</h3>
-          <p>Event information</p>
-          <button id="going" class="going-button">Going!</button>
-        </div>
         <div class="event-entry">
           <div class="event-entry-heading">
             <h2>Event title</h2>

@@ -59,6 +59,24 @@ html {
     font-weight: 600;
 }
 
+.group-creator {
+    margin-block-start: 0;
+}
+
+.group-members {
+    display: flex;
+    gap: 8px;
+}
+
+.group-member {
+    margin-block-start: 0;
+}
+
+.group-member:not(:last-child)::after {
+    content: ",";
+}
+
+
 .small-button{
     transition-duration: 200ms;
     padding: 0.2rem 0.8rem;
@@ -117,49 +135,6 @@ html {
     align-items: center;
     background-color: var(--bggrey);
 }
-
-/*
-#create-group-form.hidden{
-
-    transition-property: top, height;
-    transition-duration: 500ms, 500ms;
-    top: -500px;
-    height: 1px;
-
-    transform: translateY(-101%);
-    transform-origin: top;
-    transition-property: transform, display;
-    transition-duration: 0.3s;
-    transition-timing-function: ease;
-}
-
-#create-group-form.expanded{
-
-    transition-property: top, height;
-    transition-duration: 500ms, 500ms;
-    top: 0;
-    padding: 1rem;
-    height: auto;
-
-    transform: translateY(0px);
-    transform-origin: top;
-    transition-property: transform, display;
-    transition-duration: 0.5s;
-    transition-timing-function: ease;
-}
-*/
-
-/* 
-@media (prefers-reduced-motion) {
-    .hidden{
-        transition-duration: 0ms;
-    }
-
-    .expanded{
-        transition-duration: 0ms;
-    }
-} 
-*/
 
 .group-name-div{
     width: 60%;

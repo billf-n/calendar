@@ -28,8 +28,7 @@ def calendar(request, group_id):
 
             for user in group.members.all():
                 if user in client_users:
-                    # having multiple accounts in the group would be weird
-                    print("user is signed in.")
+                    # TODO: having multiple accounts in the group would be weird
                     context["signed_in"] = 1
         except KeyError:
             # this session isn't linked to any users yet,
@@ -77,8 +76,11 @@ def groups(request):
     for user_id in request.session["users"]:
         try:
             user = User.objects.get(id=user_id)
-            groups.append(model_to_dict(user.group, 
-                                        fields=["id", "group_name", "group_creator"]))
+            group = user.group #get id, groupname, creator
+            groups.append({"id": group.id,
+                           "group_name": group.group_name,
+                           "group_creator": group.group_creator.username,
+                           "members": [user.username for user in group.members.all()]})
         except User.DoesNotExist:
             request.session["users"].remove(user_id)
             request.session.save()
