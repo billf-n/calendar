@@ -81,16 +81,17 @@ input {
 }
 
 .dropdown {
-  display: block;
+  transition: 200ms;
   background-color: transparent;
   border: 2px solid transparent;
   text-align: center;
-  font-size: 1rem;
-  height: 2rem;
+  font-size: 18px;
+  height: 44px;
   padding: 0px 5px;
 }
 
 .dropdown:hover {
+  transition: 200ms;
   border: 2px solid rgb(137, 166, 190);
   border-radius: 8px;
 }
@@ -101,11 +102,9 @@ input {
 }
 
 .change-month {
-  box-sizing: content-box;
-
-  font-size: 20px;
-  height: 20px;
-  width: 20px;
+  font-size: 28px;
+  height: 32px;
+  width: 32px;
   padding: 0;
   border-radius: 50%;
   transition: 200ms;
@@ -137,19 +136,14 @@ input {
 .date-numbers {
   position: relative;
   border: none;
-  width: 80%;
-  height: 0;
+  width: 44px;
+  height: 44px;
   border-radius: 8px;
   justify-self: center;
-  align-items: center;
-  padding-top: 20%;
-  /*these two control the height alignment of the text*/
-  padding-bottom: 60%;
   transition-duration: 200ms;
   background-color: rgb(150, 150, 150);
   color: rgb(56, 56, 56);
-  font-size: 1rem;
-  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
 }
 
 .date-numbers:hover {
@@ -191,7 +185,7 @@ input {
   min-width: 450px;
 }
 
-.create-event {
+.event-form {
   padding: 1em;
   display: grid;
   gap: 1em;
@@ -275,22 +269,40 @@ input {
   background-color: rgb(168, 187, 202);
 }
 
+.event-entry > * {
+  margin-block-start: 0;
+}
+
 .event-entry-heading {
   display: grid;
   width: 100%;
+  height: min-content;
   grid-template-columns: max-content 1fr;
+  margin-bottom: 1rem;
+}
+
+.event-entry-heading > * {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .event-entry-date {
   justify-self: right;
+  text-align: right;
+}
+
+.event-entry-creator {
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 .going-button {
   transition-duration: 200ms;
-  font-family: 'Nunito', sans-serif;
-  padding: 0.75rem;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 0.6rem;
   border: 0px solid transparent;
-  border-radius: 2rem;
+  border-radius: 1rem;
 }
 
 .going-button:hover {

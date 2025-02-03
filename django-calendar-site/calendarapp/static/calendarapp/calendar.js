@@ -37,29 +37,29 @@ function loadDates() {
     let firstOfLastMonth = lastOfLastMonth.getDate()-firstWeekday+2;
     let totalDays = 0;
     for (i=firstOfLastMonth; i<=lastOfLastMonth.getDate(); i++) {
-        eachDate += `<button class="date-numbers last-month-numbers">${i}</button>`;
+        eachDate += `<button class="date-numbers last-month-numbers" tabindex=-1>${i}</button>`;
         totalDays++;
     }
 
     // current month's dates
     for (i=1; i<=daysInMonth; i++) {
         if (calendarDate.getDate() == i) {
-            eachDate += `<button type="button" class="date-numbers current-month-numbers selected" id="selected">${i}</button>`;
+            eachDate += `<button type="button" class="date-numbers current-month-numbers selected" id="selected" tabindex=0>${i}</button>`;
         }
         else if ((calendarDate.getFullYear() == currentDate.getFullYear())
             && (calendarDate.getMonth() == currentDate.getMonth())
             && (i==currentDate.getDate())) {
-            eachDate += `<button type="button" class="date-numbers current-month-numbers today" id="today">${i}</button>`;
+            eachDate += `<button type="button" class="date-numbers current-month-numbers today" id="today" tabindex=-1>${i}</button>`;
         }
         else {
-            eachDate += `<button type="button" class="date-numbers current-month-numbers">${i}</button>`;
+            eachDate += `<button type="button" class="date-numbers current-month-numbers" tabindex=-1>${i}</button>`;
         }
         totalDays++;
     }
 
     // next month's dates
     for (i=1; i<=42-totalDays; i++) {
-        eachDate += `<button type="button" class="date-numbers next-month-numbers">${i}</button>`;
+        eachDate += `<button type="button" class="date-numbers next-month-numbers" tabindex=-1>${i}</button>`;
     }
 
     // This should only happen when not changing using the dropdown!
@@ -86,12 +86,45 @@ function loadDates() {
     date_buttons = document.getElementsByClassName("next-month-numbers");
     for (i = 0; i < date_buttons.length; i++) {
         date_buttons[i].addEventListener("click", function(element){ 
-            changeDate(element.currentTarget.textContent, calendarDate.getMonth());
+            changeDate(element.currentTarget.textContent, calendarDate.getMonth()+1);
         }, false);
     }
 
     document.getElementById("event-date").value = formatDate(calendarDate);
 
+}
+
+function updateYearDropdown() {
+    yearDropdown.replaceChildren(); // clear options
+    yearDropdownValues.sort();
+    yearDropdownValues.forEach((e) => {
+        let option = document.createElement("option");
+        option.classList.add("year-drop-btn");
+        option.innerText = e;
+        option.value = e;
+        yearDropdown.appendChild(option);
+    });
+}
+
+
+function changeDate(
+    // default to keeping it the same
+    date = calendarDate.getDate(),
+    monthIndex = calendarDate.getMonth(),
+    year = calendarDate.getFullYear()) 
+{
+    let daysInNewMonth = new Date(year, monthIndex+1, 0).getDate();
+    if (date > daysInNewMonth) {
+        date = daysInNewMonth;
+    }
+    let newDate = new Date(year, monthIndex, date);
+    calendarDate.setTime(newDate.getTime());
+    let monthChanged = false;
+    if (monthIndex != calendarDate.getMonth()) {
+        monthChanged = true;
+    }
+    
+    loadDates();
 }
 
 // to do on document load
@@ -116,18 +149,6 @@ yearDropdown.addEventListener("change", () => {
     );
 });
 
-function updateYearDropdown() {
-    yearDropdown.replaceChildren(); // clear options
-    yearDropdownValues.sort();
-    yearDropdownValues.forEach((e) => {
-        let option = document.createElement("option");
-        option.classList.add("year-drop-btn");
-        option.innerText = e;
-        option.value = e;
-        yearDropdown.appendChild(option);
-    });
-}
-
 dateDisplay.innerHTML = currentDate.toLocaleDateString("en-AU", options);
 dateDisplay.addEventListener("click", function(){
     changeDate(
@@ -146,61 +167,16 @@ document.getElementById("next-month").addEventListener("click", function(element
 })
 
 
-function changeDate(
-    // default to keeping it the same
-    date = calendarDate.getDate(),
-    month = calendarDate.getMonth(),
-    year = calendarDate.getFullYear()) 
-{
-    debugger;
-    let monthChanged = false;
-    if (month != calendarDate.getMonth()) {
-        monthChanged = true;
-    }
-    calendarDate.setDate(date);
-    calendarDate.setMonth(month);
-    calendarDate.setFullYear(year);
-    
-    loadDates();
-    // loadEvents();
-}
+let formTimezone = document.getElementById("form-timezone");
+formTimezone.value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+console.log(formTimezone.value);
 
-function loadEvents() {
-    fetch(window.location.href, {
-        method: "GET",
-        headers: {
-            "calendar-date": calendarDate.toISOString(),
-        },
-    })
-}
 
-function createCalendarEvent() {
-    form = document.getElementById("create-new-event");
-    fetch(form.action, {
-        method: "POST",
-        body: JSON.stringify(new FormData(form))
-    })
-}
 
-let form = document.getElementById("new-user-form") || null;
-if (form) {
-    function submitNewUser(event) {
-        event.preventDefault();
-        fetch(form.action, {
-            method: "post",
-            body: new FormData(form)
-        }).then((response) => {
-            let resjson = response.json();
-            if (resjson.signed_in) {
-                document.getElementById("popup-background").remove();
-            }
-        });
-    }
-    form.addEventListener("submit", submitNewUser);
+let newUserForm = document.getElementById("new-user-form") || null;
+if (newUserForm) {
+    newUserForm.action = window.location.origin + "/signup";
 }
 
 loadDates();
-if (signedIn) {
-    loadEvents();
-}
 updateYearDropdown();

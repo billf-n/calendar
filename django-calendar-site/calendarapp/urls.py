@@ -7,4 +7,5 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("groups", views.groups, name="groups"),
     path("calendar/<int:group_id>", views.calendar, name="calendar"),
+    path("signup", views.signup, name="signup")
 ]

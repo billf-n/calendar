@@ -23,9 +23,9 @@
         <section id="joined-groups-sub" class="subsection">
           {% for group in groups %}
           <script>console.log("{{group}}");</script>
-          <div class="little-box-section joined-group">
-            <h3 class="group-name subheading">{{ group.group_name }}</h3>
-            <p class="group-creator">Created by {{ group.group_creator }}</p>
+          <div class="joined-group">
+            <h3 class="group-name subheading">{{ group.name }}</h3>
+            <p class="group-creator">Created by {{ group.creator }}</p>
             <!-- TODO: decide to group member display? -->
             <div class="group-members">
               {% for username in group.members %}
