@@ -17,7 +17,6 @@
 
 input {
   border: none;
-  border-radius: 4px;
 }
 
 .prevent-select {
@@ -49,7 +48,7 @@ input {
   margin: 20px;
   padding: 20px;
   background-color: var(--bgblue-light);
-  border-radius: 10px;
+  border-radius: 8px;
   height: min-content;
 }
 
@@ -179,7 +178,7 @@ input {
   margin: 20px;
   padding: 20px;
   background-color: rgb(194, 200, 202);
-  border-radius: 10px;
+  border-radius: 8px;
   flex-grow: 1;
   max-width: 450px;
   min-width: 450px;
@@ -203,33 +202,26 @@ input {
 
 .event-date {
   float: right;
-  font-family: 'Nunito', sans-serif;
   line-height: 1.5rem;
-  padding: 5px 10px;
-  border-radius: 2rem;
+}
+
+.event-time {
+  line-height: 1.5rem;
 }
 
 .event-title {
-  font-family: 'Nunito', sans-serif;
   font-size: 1rem;
   line-height: 1.5rem;
-  float: right;
-  border-radius: 1.5rem;
-  padding: 5px 10px;
-  width: 180px;
 }
 
 .event-info {
-  font-family: 'Nunito', sans-serif;
   border: 0px solid transparent;
-  border-radius: 1rem;
   resize: vertical;
-  float: right;
-  padding: 5px 10px;
-  width: 180px;
 }
 
-.fill-width {
+.event-input {
+  border-radius: 4px;
+  padding: 5px 10px;
   width: 100%;
 }
 
@@ -243,7 +235,7 @@ input {
 
 .create-event-btn {
   border: 0px solid transparent;
-  border-radius: 1rem;
+  border-radius: 4px;
   height: 2rem;
   width: 100%;
   font-family: 'Nunito', sans-serif;
@@ -265,7 +257,7 @@ input {
 .event-entry {
   padding: 1em;
   margin-top: 1em;
-  border-radius: 1rem;
+  border-radius: 4px;
   background-color: rgb(168, 187, 202);
 }
 
@@ -277,7 +269,7 @@ input {
   display: grid;
   width: 100%;
   height: min-content;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 1fr max-content;
   margin-bottom: 1rem;
 }
 
@@ -286,7 +278,12 @@ input {
   margin-bottom: 0;
 }
 
+.event-entry-name {
+  word-break: break-all;
+}
+
 .event-entry-date {
+  min-width: 160px;
   justify-self: right;
   text-align: right;
 }
@@ -302,7 +299,7 @@ input {
   line-height: 12px;
   padding: 0.6rem;
   border: 0px solid transparent;
-  border-radius: 1rem;
+  border-radius: 4px;
 }
 
 .going-button:hover {

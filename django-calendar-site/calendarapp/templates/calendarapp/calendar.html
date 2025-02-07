@@ -72,16 +72,21 @@
         {% csrf_token %}
         <div class="form-inputs">
           <input type="hidden" name="timezone" id="form-timezone" value="">
+          <label id="title-label" class="lrg-label title-label" 
+            for="event-title" title="A title is required.">
+            Title</label>
+          <input id="event-title" class="event-title event-input" 
+            name="event-title" placeholder="Event Title" required>
           <label id="date-label" class="lrg-label date-label" for="event-date" title="A date is required.">
             Date</label>
-          <input type="date" id="event-date" class="event-date" name="event-date" required>
-          <label id="title-label" class="lrg-label title-label" for="event-title" title="A title is required.">
-            Title</label>
-          <input id="event-title" class="event-title fill-width" name="event-title" required>
+          <input type="date" id="event-date" class="event-date event-input" name="event-date" required>
+          <label id="time-label" class="form-label time-label" for="event-time">
+            Time</label>
+          <input type="time" id="event-time" class="event-time event-input" name="event-time">
           <label id="info-label" class="form-label" for="event-info">
             Extra Information
           </label>
-          <textarea id="event-info" class="event-info fill-width" name="event-info"></textarea>
+          <textarea id="event-info" class="event-info event-input" name="event-info"></textarea>
         </div>
         <button id="create-event-btn" class="create-event-btn">Create event</button>
       </form>

@@ -52,7 +52,7 @@ def calendar(request, group_id):
                 "info": event.info,
                 "group": event.group.id,
                 "creator": event.creator.username
-            } for event in group.events.all()]
+            } for event in group.events.all()] 
         return render(request, "calendarapp/calendar.html", context)
     
     if request.method == "POST":
@@ -60,14 +60,17 @@ def calendar(request, group_id):
         
         # fix timezone!! submit with a timezone.
         date = request.POST["event-date"] # in format yyyy-mm-dd
+        time = request.POST["event-time"]
         title = request.POST["event-title"]
         info = request.POST["event-info"]
         timezone = request.POST["timezone"]
 
-        date_with_tz = datetime.fromisoformat(date)
+        # set both date and time
+        date_with_tz = datetime.strptime((date+"-"+time), "%Y-%m-%d-%H:%M")
+        date_with_tz = date_with_tz.replace(tzinfo=ZoneInfo(timezone))
         print(date_with_tz)
         
-        event = Event(date=date, name=title, info=info, 
+        event = Event(date=date_with_tz, name=title, info=info, 
                       group=group, creator=creator)
         event.save()
         return redirect(group)

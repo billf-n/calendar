@@ -131,7 +131,7 @@ function changeDate(
 
 const monthDropdown = document.querySelector("#month-drop");
 const yearDropdown = document.querySelector("#year-drop");
-const dateDisplay = document.getElementById("date-display")
+const dateDisplay = document.getElementById("date-display");
 
 monthDropdown.addEventListener("change", () => {
     changeDate(
@@ -171,6 +171,9 @@ let formTimezone = document.getElementById("form-timezone");
 formTimezone.value = Intl.DateTimeFormat().resolvedOptions().timeZone;
 console.log(formTimezone.value);
 
+
+let timeInput = document.getElementById("event-time");
+timeInput.value = currentDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
 
 let newUserForm = document.getElementById("new-user-form") || null;
