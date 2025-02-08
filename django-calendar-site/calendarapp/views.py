@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.forms.models import model_to_dict
+from django.core.exceptions import FieldError
 from .models import *
 
 from zoneinfo import ZoneInfo
@@ -38,10 +39,10 @@ def calendar(request, group_id):
 
     creator = None
     for user in group.members.all():
-            if user in client_users:
-                # TODO: having multiple accounts in the group would be weird
-                context["signed_in"] = 1
-                creator = user # for group creation
+        if user in client_users:
+            # TODO: having multiple accounts in the group would be weird
+            context["signed_in"] = 1
+            creator = user # for group creation
 
     if request.method == "GET":
         if context["signed_in"] == 1:
@@ -51,7 +52,7 @@ def calendar(request, group_id):
                 "date": event.date,
                 "info": event.info,
                 "group": event.group.id,
-                "creator": event.creator.username
+                "creator": event.creator.username,
             } for event in group.events.all()] 
         return render(request, "calendarapp/calendar.html", context)
     
@@ -146,9 +147,24 @@ def signup(request):
             request.session.save()
         except KeyError:
             # post request does not contain the "calendarapp-username" field
-            print("signup request does not contain calendarapp-username field")
+            raise KeyError
 
         return redirect(group)
+
+
+def leave_group(request, group_id):
+    if request.method == "POST":
+        username = request.POST["username"]
+        user = User.objects.get(username=username)
+        # this line below is the authentication? 
+        # checking if the session actually has used that user.
+        if user.id in request.session["users"]:
+            user.delete()
+            request.session["users"].remove(user.id)
+            return HttpResponse()
+        else:
+            return HttpResponse(status=403)
+
 
 def get_group_dicts(users):
     # input: a list of user ids.
@@ -161,7 +177,8 @@ def get_group_dicts(users):
             groups.append({"id": group.id,
                            "name": group.name,
                            "creator": group.creator.username,
-                           "members": [user.username for user in group.members.all()]})
+                           "members": [user.username for user in group.members.all()],
+                           "user": user.username})
         except User.DoesNotExist:
             users.remove(user_id)
 

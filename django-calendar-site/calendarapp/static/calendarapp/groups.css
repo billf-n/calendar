@@ -1,25 +1,9 @@
-:root {
-    --bgblue: rgb(168, 187, 202);
-    --bgyellow: rgb(200, 207, 185);
-    --bggrey: rgb(190, 190, 190);
-    --buttonlinkblue: rgb(186, 217, 228);
-    --buttongreen: rgb(172, 218, 187);
-    --acceptgreen: rgb(150, 214, 187);
-    --rejectred: rgb(231, 175, 175);
-    --white: #ffffff;
-}
-
-* {
-    box-sizing: border-box;
-}
-
 html {
     scrollbar-gutter: stable;
 }
 
 .wrapper {
     display: flex;
-    flex: 1 1;
     flex-wrap: wrap;
     justify-content: space-around;
 }
@@ -32,7 +16,7 @@ html {
 }
 
 .column-half{
-    min-width: 300px;
+    min-width: min-content;
     width: 50%;
 }
 
@@ -40,34 +24,65 @@ html {
     text-align: center;
 }
 
-.subsection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.joined-group{
-    width: 80%;
-    max-width: 600px;
-    margin: 0 1em 1em 1em;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    background-color: var(--bgblue);
-}
-
 .subheading {
     font-weight: 600;
+}
+
+.subsection {
+    display: grid;
+    grid-template-columns: [groups-start] 1fr [groups-end] min-content [popup-end];
+    justify-items: center;
+}
+
+/* .joined-groups {
+    align-items: start;
+} */
+
+.joined-group {
+    grid-column-start: groups-start;
+    width: 80%;
+    max-width: minmax(80%,600px);
+    margin: 0 1em 1em 1em;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: var(--bgblue);
+    z-index: 1;
+}
+
+.group-wrap {
+    display: inline-flex;
+    align-items: end;
+}
+
+.inline-group {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5em;
+}
+
+.inline-group > * {
+    margin-block-start: 0;
+}
+
+.opposite-sides {
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .group-creator {
     margin-block-start: 0;
 }
 
-.group-members {
+.group-user {
+    font-size: 14px;
+}
+
+/* .group-members {
     display: flex;
     max-width: 100%;
     overflow: hidden;
-    /* text-overflow: ellipsis; */
+    text-overflow: ellipsis;
     gap: 8px;
 }
 
@@ -77,10 +92,20 @@ html {
 
 .group-member:not(:last-child)::after {
     content: ",";
+} */
+
+.group-member-list {
+    text-align: start;
+    line-height: 1.25em;
+    max-height: 1.25em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-block-start: 0;
 }
 
 
 .small-button{
+    min-width: max-content;
     transition-duration: 200ms;
     padding: 0.2rem 0.8rem;
     border: 1px solid black;
@@ -90,6 +115,22 @@ html {
 .small-button:hover{
     transition-duration: 200ms;
     background-color: var(--buttonlinkblue);
+}
+
+.leave-group:hover, .leave-group-confirm:hover{
+    transition-duration: 200ms;
+    background-color: var(--rejectred);
+}
+
+.leave-group-popup {
+    align-self: end;
+    background-color: var(--rejectred);
+    padding: 1.5em 1em;
+    border-radius: 4px;
+    height: min-content;
+    width: max-content;
+    margin-bottom: 1em;
+    z-index: 0;
 }
 
 .big-button{
@@ -133,37 +174,25 @@ html {
     width: 80%;
     max-width: 600px;
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 8px;
     flex-direction: column;
     align-items: center;
     background-color: var(--bggrey);
+    z-index: 2;
 }
 
 .group-name-div{
     width: 60%;
 }
 
-
 .group-form-input{
     font-size: 1rem;
     width: 100%;
-    height: 2.5rem;
+    height: 2rem;
     min-height: 1rem;
     border: 1px solid black;
-    border-radius: 1.25rem;
+    border-radius: 4px;
     margin-bottom: 1rem;
     padding: 0.25rem 1rem;
-}
-
-.group-invite{
-    background-color: var(--bgyellow);
-}
-
-.accept-invite:hover{
-    background-color: var(--acceptgreen);
-}
-
-.decline-invite:hover{
-    background-color: var(--rejectred);
 }
 

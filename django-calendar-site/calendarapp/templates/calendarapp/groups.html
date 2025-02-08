@@ -15,25 +15,38 @@
 
 <body>
   <h1 id="site-title" class="display-2">Calendarapp</h1>
-  <div class="wrapper">
+  <main class="wrapper">
     <div class="column-half">
       <section id="joined-groups">
         <h2 class="section-title">Joined Groups</h2>
-        <!-- consider moving the title to be within the "box"/section -->
-        <section id="joined-groups-sub" class="subsection">
+        <section id="joined-groups-sub" class="subsection joined-groups">
           {% for group in groups %}
-          <script>console.log("{{group}}");</script>
-          <div class="joined-group">
-            <h3 class="group-name subheading">{{ group.name }}</h3>
-            <p class="group-creator">Created by {{ group.creator }}</p>
-            <!-- TODO: decide to group member display? -->
-            <div class="group-members">
-              {% for username in group.members %}
-              <p class="group-member">{{username}}</p>
-              {% endfor %}
+            <div class="joined-group">
+              <div class="inline-group">
+                <h3 class="group-name subheading">{{ group.name }}</h3>
+                <p class="group-user"> as {{ group.user }}</p>
+              </div>
+              <p class="group-creator">Created by {{ group.creator }}</p>
+              <p class="group-member-list">
+                {% for username in group.members %}
+                  {{username}}{% if forloop.last == 0 %}, {% endif %}
+                {% endfor %}
+              </p>
+              <div class="inline-group opposite-sides">
+                <a href="{% url 'calendarapp:calendar' group.id %}">
+                  <button class="small-button">View group</button>
+                </a>
+                <button class="small-button leave-group" value='{
+                "id":{{ group.id }},
+                "user":"{{ group.user }}"
+              }'>Leave group</button>
+              </div>
             </div>
-            <a href="{% url 'calendarapp:calendar' group.id %}"><button class="small-button">View group</button></a>
-          </div>
+            <!-- LEAVE GROUP POPUP -->
+            <!-- <div class="leave-group-popup">
+              <h3>Are you sure?</h3>
+              <button class="small-button leave-group-confirm">Leave group</button>
+            </div> -->
           {% endfor %}
         </section>
       </section>
@@ -58,7 +71,7 @@
         </form>
       </section>
     </div>
-  </div>
+  </main>
   <script src="{% static 'calendarapp/groups.js' %}"></script>
 </body>
 
