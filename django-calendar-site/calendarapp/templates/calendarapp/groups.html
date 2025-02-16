@@ -5,11 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% load static %}
-  <!-- <link rel="stylesheet" href="{% static '/bootstrap-5.3.3-dist/css/bootstrap.min.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'calendarapp/symbols.css' %}" />
   <link rel="stylesheet" href="{% static 'calendarapp/main.css' %}">
   <link rel="stylesheet" href="{% static 'calendarapp/groups.css' %}">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap" rel="stylesheet">
-  <!-- <script src="../static/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap">
   <title>Groups - Events calendar</title>
 </head>
 
@@ -19,44 +18,37 @@
     <div class="column-half">
       <section id="joined-groups">
         <h2 class="section-title">Joined Groups</h2>
-        <section id="joined-groups-sub" class="subsection joined-groups">
-          {% for group in groups %}
-            <div class="joined-group">
-              <div class="inline-group">
-                <h3 class="group-name subheading">{{ group.name }}</h3>
-                <p class="group-user"> as {{ group.user }}</p>
-              </div>
-              <p class="group-creator">Created by {{ group.creator }}</p>
-              <p class="group-member-list">
-                {% for username in group.members %}
-                  {{username}}{% if forloop.last == 0 %}, {% endif %}
-                {% endfor %}
-              </p>
-              <div class="inline-group opposite-sides">
-                <a href="{% url 'calendarapp:calendar' group.id %}">
-                  <button class="small-button">View group</button>
-                </a>
-                <button class="small-button leave-group" value='{
+        {% for group in groups %}
+        <section id="section-{{ group.id }}-{{ group.user }}" class="joined-group-wrap">
+          <div class="joined-group" id="group-{{ group.id }}">
+            <div class="inline-group">
+              <h3 class="group-name subheading">{{ group.name }}</h3>
+              <p class="group-user"> as {{ group.user }}</p>
+            </div>
+            <p class="group-creator">Created by {{ group.creator }}</p>
+            <p class="group-member-list">
+              {% for username in group.members %}
+              {{username}}{% if forloop.last == 0 %}, {% endif %}
+              {% endfor %}
+            </p>
+            <div class="inline-group opposite-sides">
+              <a href="{% url 'calendarapp:calendar' group.id %}">
+                <button class="small-button">View group</button>
+              </a>
+              <button id="leavebtn1-{{ group.id }}-{{ group.user }}" 
+                class="small-button leave-group" value='{
                 "id":{{ group.id }},
                 "user":"{{ group.user }}"
               }'>Leave group</button>
-              </div>
             </div>
-            <!-- LEAVE GROUP POPUP -->
-            <!-- <div class="leave-group-popup">
-              <h3>Are you sure?</h3>
-              <button class="small-button leave-group-confirm">Leave group</button>
-            </div> -->
-          {% endfor %}
+          </div>
         </section>
+        {% endfor %}
       </section>
     </div>
     <div class="column-half">
       <section class="create-group" id="create-group">
         <h2 class="section-title">Want to create a group?</h2>
-        <!-- <button id="create-group-menu-button" class="btn big-button" data-bs-toggle="collapse"
-          data-bs-target="#create-group-form-wrap" aria-expanded="false" aria-controls="create-group-form-wrap">Create a
-          group</button> -->
         <form class="create-group-form" id="create-group-form" method="post">
           {% csrf_token %}
           <h3 class="subheading">Create a group</h3>
@@ -65,7 +57,6 @@
             <input type="input" name="group-name" class="group-form-input" id="group-name">
             <label for="username" class="group-form-label">Username</label>
             <input type="input" name="username" class="group-form-input" id="username">
-
           </div>
           <button id="create-group-button" class="small-button">Create group</button>
         </form>

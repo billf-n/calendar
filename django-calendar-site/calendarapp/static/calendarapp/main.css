@@ -5,8 +5,9 @@
     --buttonlinkblue: rgb(186, 217, 228);
     --buttongreen: rgb(172, 218, 187);
     --acceptgreen: rgb(150, 214, 187);
+    --cancel: #ecd3d1;
     --rejectred: rgb(231, 175, 175);
-    --white: #ffffff;
+    --solidred: #dd3636;
 }
 
 h1, h2, h3, h4, h5, h6 {

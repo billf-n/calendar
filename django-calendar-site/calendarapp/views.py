@@ -4,6 +4,7 @@ from django.forms.models import model_to_dict
 from django.core.exceptions import FieldError
 from .models import *
 
+import json
 from zoneinfo import ZoneInfo
 from datetime import datetime
 
@@ -154,13 +155,15 @@ def signup(request):
 
 def leave_group(request, group_id):
     if request.method == "POST":
-        username = request.POST["username"]
-        user = User.objects.get(username=username)
+        body = json.loads(request.body)
+        username = body["username"]
+        group = Group.objects.get(id=group_id)
+        user = User.objects.get(username=username, group=group)
         # this line below is the authentication? 
         # checking if the session actually has used that user.
         if user.id in request.session["users"]:
-            user.delete()
             request.session["users"].remove(user.id)
+            user.delete()
             return HttpResponse()
         else:
             return HttpResponse(status=403)

@@ -2,7 +2,16 @@ html {
     scrollbar-gutter: stable;
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
 .wrapper {
+    min-width: fit-content;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -28,30 +37,22 @@ html {
     font-weight: 600;
 }
 
-.subsection {
-    display: grid;
-    grid-template-columns: [groups-start] 1fr [groups-end] min-content [popup-end];
-    justify-items: center;
-}
-
-/* .joined-groups {
-    align-items: start;
-} */
-
 .joined-group {
+    box-sizing: border-box;
     grid-column-start: groups-start;
-    width: 80%;
-    max-width: minmax(80%,600px);
-    margin: 0 1em 1em 1em;
-    padding: 1.5rem;
+    min-width: 300px;
+    width: 100%;
+    padding: 1.5em;
     border-radius: 8px;
     background-color: var(--bgblue);
     z-index: 1;
 }
 
-.group-wrap {
-    display: inline-flex;
-    align-items: end;
+.joined-group-wrap {
+    display: grid;
+    grid-template-columns: [groups-start] 1fr [groups-end] min-content [popup-end];
+    margin: 0 2em 2em 2em;
+    justify-items: center;
 }
 
 .inline-group {
@@ -108,8 +109,10 @@ html {
     min-width: max-content;
     transition-duration: 200ms;
     padding: 0.2rem 0.8rem;
+    height: 26px;
+    font-size: 13px;
     border: 1px solid black;
-    border-radius: 1rem;
+    border-radius: 4px;
 }
 
 .small-button:hover{
@@ -117,20 +120,45 @@ html {
     background-color: var(--buttonlinkblue);
 }
 
-.leave-group:hover, .leave-group-confirm:hover{
+
+.leave-group:hover {
     transition-duration: 200ms;
     background-color: var(--rejectred);
 }
 
+.leave-group-confirm:hover {
+    transition-duration: 200ms;
+    background-color: var(--solidred);
+}
+
 .leave-group-popup {
+    grid-column-start: groups-end;
     align-self: end;
     background-color: var(--rejectred);
     padding: 1.5em 1em;
     border-radius: 4px;
     height: min-content;
     width: max-content;
-    margin-bottom: 1em;
+    margin-left: 1em;
     z-index: 0;
+}
+
+.gap-4 {
+    gap: 4px;
+}
+
+.leave-group-cancel {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+    border-radius: 13px;
+    border: 1px solid black;
+    padding: 0;
+    align-self: baseline;
+    &:hover {
+        transition-duration: 200ms;
+        background-color: var(--cancel);
+    }
 }
 
 .big-button{
@@ -140,7 +168,6 @@ html {
     border-radius: 1.5rem;
     border: 1px solid black;
     font-size: 1rem;
-
     transition-duration: 200ms;
 }
 
@@ -150,11 +177,13 @@ html {
     background-color: var(--buttongreen);
 }
 
-#create-group{
+.create-group{
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
+    padding: 0 2em;
 }
 
 #create-group-button{
@@ -171,9 +200,10 @@ html {
 
 .create-group-form{
     display: flex;
-    width: 80%;
+    min-width: 300px;
+    width: 100%;
     max-width: 600px;
-    padding: 1rem;
+    padding: 1em;
     border-radius: 8px;
     flex-direction: column;
     align-items: center;
