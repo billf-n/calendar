@@ -110,7 +110,7 @@
     <form id="new-user-form" class="new-user-form" method="post">
       {% csrf_token %}
       <input type="hidden" name="group-id" value="{{ group_id }}">
-      <h3>Enter a name to use in this group</h3>
+      <h3>Enter a name to use in {{ group_name }}</h3>
       <label for="calendarapp-username">Username</label>
       <input name="calendarapp-username" id="username" class="username-input" required>
       <button class="new-user-join">Join group</button>

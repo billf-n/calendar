@@ -1,13 +1,4 @@
 :root {
-  /* originally from groups.css */
-  --bgblue: rgb(168, 187, 202);
-  --bgyellow: rgb(200, 207, 185);
-  --bggrey: rgb(190, 190, 190);
-  --buttonlinkblue: rgb(186, 217, 228);
-  --buttongreen: rgb(172, 218, 187);
-  --acceptgreen: rgb(189, 223, 209);
-  --rejectred: rgb(231, 175, 175);
-
   --bgblue-light: rgb(204, 209, 217);
 }
 
@@ -325,6 +316,7 @@ input {
   transform: translate(-50%,-50%);
 
   border: 1px solid black;
+  border-radius: 8px;
   background-color: var(--bggrey);
 }
 
@@ -341,8 +333,17 @@ input {
 .username-input {
   line-height: 1.5rem;
   margin-bottom: 1rem;
+  border-radius: 4px;
 }
 
 .new-user-join {
   height: 2rem;
+  border: none;
+  box-shadow: 2px 2px 5px rgb(70, 70, 70);
+  border-radius: 4px;
+  transition-duration: 200ms;
+  &:hover {
+    background-color: var(--buttongreen);
+  }
 }
+
