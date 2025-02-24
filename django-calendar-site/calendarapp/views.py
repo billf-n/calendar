@@ -5,6 +5,7 @@ from django.core.exceptions import FieldError
 from .models import *
 
 import json
+import uuid
 from zoneinfo import ZoneInfo
 from datetime import datetime
 
@@ -101,11 +102,10 @@ def groups(request):
         username = request.POST["username"]
 
         new_group_name = request.POST["group-name"]
-        new_group = Group(name=new_group_name)
+        new_group = Group(id=str(uuid.uuid4()), name=new_group_name)
         new_group.save()
-        # TODO: change new group id to be random.
 
-        user = User(username=username, group=new_group)
+        user = User(id=str(uuid.uuid4()), username=username, group=new_group)
         user.save()
         new_group.creator = user
         new_group.save()
@@ -146,7 +146,7 @@ def signup(request):
                     return redirect(group)
 
             # user doesn't exist in this group, make one
-            new_user = User(username=new_username, group=group)
+            new_user = User(id=str(uuid.uuid4()), username=new_username, group=group)
             new_user.save()
             request.session["users"].append(new_user.id)
             request.session.save()

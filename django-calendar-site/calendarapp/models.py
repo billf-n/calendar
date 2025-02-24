@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Group(models.Model):
+    id = models.CharField(max_length=64, primary_key=True)
     name = models.CharField(max_length=32)
     creator = models.ForeignKey("User", on_delete=models.SET_NULL, null=True, related_name="created_groups")
 
@@ -15,6 +16,7 @@ class Group(models.Model):
 
 
 class User(models.Model):
+    id = models.CharField(max_length=64, primary_key=True)
     username = models.CharField(max_length=32)
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name = "members")
     
@@ -23,6 +25,7 @@ class User(models.Model):
 
 
 class Event(models.Model):
+    id = models.CharField(max_length=64, primary_key=True)
     name = models.CharField(max_length=64)
     info = models.CharField(max_length=500)
     date = models.DateTimeField()
