@@ -46,7 +46,7 @@ function leaveGroupPopup(id, username, button1) {
         <button id="confirm-${id}-${username}"value="{
                 "id":${id},
                 "user":"${username}"
-              }" class="small-button leave-group-confirm">Leave group
+              }" class="button-small leave-group-confirm">Leave group
         </button>
     </div>`
     popup.innerHTML = inner;

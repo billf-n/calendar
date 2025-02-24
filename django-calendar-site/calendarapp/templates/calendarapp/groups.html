@@ -13,13 +13,31 @@
 </head>
 
 <body>
-  <h1 id="site-title" class="display-2">Calendarapp</h1>
   <main class="wrapper">
     <div class="column-half">
-      <section id="joined-groups">
+      <div class="site-info">
+        <h1 class="site-title">Eventfull</h1>
+        <p>Do you need to organise an event?</p>
+        <p></p>
+      </div>
+      <section class="create-group" id="create-group">
+        <form class="create-group-form grey-bg light-shadow" id="create-group-form" method="post">
+          {% csrf_token %}
+          <h3 class="subheading">Want to create a group?</h3>
+          <div class="group-name-div after-1em width-100">
+            <input type="input" name="group-name" placeholder="Group Name" class="form-input width-100" id="group-name">
+            <input type="input" name="username" placeholder="Username" class="form-input width-100" id="username">
+          </div>
+          <button id="create-group-button" class="button-small">Create group</button>
+        </form>
+      </section>
+    </div>
+    <div class="column-half">
+      <section class="grey-bg border-r-8 overflow-x-clip light-shadow">
         <h2 class="section-title">Joined Groups</h2>
         {% for group in groups %}
-        <section id="section-{{ group.id }}-{{ group.user }}" class="joined-group-wrap">
+        <section id="section-{{ group.id }}-{{ group.user }}" 
+        class="joined-group-wrap event-entry grey-bg">
           <div class="joined-group" id="group-{{ group.id }}">
             <div class="inline-group">
               <h3 class="group-name subheading">{{ group.name }}</h3>
@@ -33,10 +51,10 @@
             </p>
             <div class="inline-group opposite-sides">
               <a href="{% url 'calendarapp:calendar' group.id %}">
-                <button class="small-button">View group</button>
+                <button class="button-small">View group</button>
               </a>
-              <button id="leavebtn1-{{ group.id }}-{{ group.user }}" 
-                class="small-button leave-group" value='{
+              <button id="leavebtn1-{{ group.id }}-{{ group.user }}" class="button-small leave-group transition-200"
+                value='{
                 "id":{{ group.id }},
                 "user":"{{ group.user }}"
               }'>Leave group</button>
@@ -46,22 +64,7 @@
         {% endfor %}
       </section>
     </div>
-    <div class="column-half">
-      <section class="create-group" id="create-group">
-        <h2 class="section-title">Want to create a group?</h2>
-        <form class="create-group-form" id="create-group-form" method="post">
-          {% csrf_token %}
-          <h3 class="subheading">Create a group</h3>
-          <div class="group-name-div">
-            <label for="group-name" class="group-form-label">Group name</label>
-            <input type="input" name="group-name" class="group-form-input" id="group-name">
-            <label for="username" class="group-form-label">Username</label>
-            <input type="input" name="username" class="group-form-input" id="username">
-          </div>
-          <button id="create-group-button" class="small-button">Create group</button>
-        </form>
-      </section>
-    </div>
+
   </main>
   <script src="{% static 'calendarapp/groups.js' %}"></script>
 </body>

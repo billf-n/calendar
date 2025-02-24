@@ -21,32 +21,55 @@
 
 <body>
   <main class="wrapper">
-    <div class="calendar">
+    <div class="event-section grey-bg">
+      <form id="event-form" class="event-form" method="post">
+        {% csrf_token %}
+        <h3>Create an event</h3>
+        <input type="hidden" name="timezone" id="form-timezone" value="">
+          <input id="event-title" class="event-title form-input" name="event-title" placeholder="Event Title" required>
+          <input type="date" id="event-date" class="event-date form-input" name="event-date" required>
+          <input type="time" id="event-time" class="event-time form-input" name="event-time">
+          <textarea id="event-info" class="form-input event-info after-1em" 
+            placeholder="Extra Information" name="event-info"></textarea>
+        <button id="create-event-btn" class="button-md width-100 white-bg">Create event</button>
+      </form>
+      <div id="event-list" class="event-list">
+        {% for event in events %}
+        <div class="event-entry grey-bg">
+          <div class="event-entry-heading">
+            <h3 class="event-entry-name">{{ event.name }}</h3>
+            <p class="event-entry-date">{{ event.date }}</p>
+          </div>
+          <h3 class="event-entry-creator">Created by: {{ event.creator }}</h3>
+          <p class="event-entry-info">{{ event.info }}</p>
+          <button id="going" class="button-md">Going!</button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="calendar grey-1-bg">
       <div class="top-section">
         <h2 id="date-display" title="Click here to reset the date."></h2>
         <div class="topbar">
           <button id="last-month" class="material-symbols-outlined prevent-select change-month last-month">
             chevron_left
           </button>
-          <div id="month-year">
-            <select id="month-drop" class="dropdown">
-              <option class="month-drop-btn">January</option>
-              <option class="month-drop-btn">February</option>
-              <option class="month-drop-btn">March</option>
-              <option class="month-drop-btn">April</option>
-              <option class="month-drop-btn">May</option>
-              <option class="month-drop-btn">June</option>
-              <option class="month-drop-btn">July</option>
-              <option class="month-drop-btn">August</option>
-              <option class="month-drop-btn">September</option>
-              <option class="month-drop-btn">October</option>
-              <option class="month-drop-btn">November</option>
-              <option class="month-drop-btn">December</option>
-            </select>
-            <select id="year-drop" class="dropdown">
-              <option class="year-drop-btn">2024</option>
-            </select>
-          </div>
+          <select id="month-drop" class="dropdown">
+            <option class="month-drop-btn">January</option>
+            <option class="month-drop-btn">February</option>
+            <option class="month-drop-btn">March</option>
+            <option class="month-drop-btn">April</option>
+            <option class="month-drop-btn">May</option>
+            <option class="month-drop-btn">June</option>
+            <option class="month-drop-btn">July</option>
+            <option class="month-drop-btn">August</option>
+            <option class="month-drop-btn">September</option>
+            <option class="month-drop-btn">October</option>
+            <option class="month-drop-btn">November</option>
+            <option class="month-drop-btn">December</option>
+          </select>
+          <select id="year-drop" class="dropdown">
+          </select>
           <button id="next-month" class="material-symbols-outlined prevent-select change-month next-month">
             chevron_right
           </button>
@@ -67,53 +90,16 @@
         </div>
       </div>
     </div>
-    <div class="event-section">
-      <form id="event-form" class="event-form" method="post">
-        {% csrf_token %}
-        <div class="form-inputs">
-          <input type="hidden" name="timezone" id="form-timezone" value="">
-          <label id="title-label" class="lrg-label title-label" 
-            for="event-title" title="A title is required.">
-            Title</label>
-          <input id="event-title" class="event-title event-input" 
-            name="event-title" placeholder="Event Title" required>
-          <label id="date-label" class="lrg-label date-label" for="event-date" title="A date is required.">
-            Date</label>
-          <input type="date" id="event-date" class="event-date event-input" name="event-date" required>
-          <label id="time-label" class="form-label time-label" for="event-time">
-            Time</label>
-          <input type="time" id="event-time" class="event-time event-input" name="event-time">
-          <label id="info-label" class="form-label" for="event-info">
-            Extra Information
-          </label>
-          <textarea id="event-info" class="event-info event-input" name="event-info"></textarea>
-        </div>
-        <button id="create-event-btn" class="create-event-btn">Create event</button>
-      </form>
-      <div id="event-list" class="event-list">
-        {% for event in events %}
-        <div class="event-entry">
-          <div class="event-entry-heading">
-            <h2 class="event-entry-name">{{ event.name }}</h2>
-            <p class="event-entry-date">{{ event.date }}</p>
-            <h3 class="event-entry-creator">Created by: {{ event.creator }}</h3>
-          </div>
-          <p class="event-entry-info">{{ event.info }}</p>
-          <button id="going" class="going-button">Going!</button>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
   </main>
   {% if signed_in != 1 %}
   <div id="popup-background" class="popup-background">
-    <form id="new-user-form" class="new-user-form" method="post">
+    <form id="new-user-form" class="new-user-form grey-bg" method="post">
       {% csrf_token %}
       <input type="hidden" name="group-id" value="{{ group_id }}">
-      <h3>Enter a name to use in {{ group_name }}</h3>
-      <label for="calendarapp-username">Username</label>
-      <input name="calendarapp-username" id="username" class="username-input" required>
-      <button class="new-user-join">Join group</button>
+      <h3 class="new-user-heading">Enter your username for <em>{{ group_name }}</em></h3>
+      <input name="calendarapp-username" id="username" placeholder="Username"
+        class="form-input after-1em" required>
+      <button class="button-md width-100">Join group</button>
     </form>
   </div>
   {% endif %}

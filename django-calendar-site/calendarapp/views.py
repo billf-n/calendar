@@ -8,6 +8,7 @@ import json
 from zoneinfo import ZoneInfo
 from datetime import datetime
 
+DELETED_USER_PLACEHOLDER = "Deleted User"
 
 # Create your views here.
 def index(request):
@@ -53,13 +54,16 @@ def calendar(request, group_id):
                 "date": event.date,
                 "info": event.info,
                 "group": event.group.id,
-                "creator": event.creator.username,
+                "creator": event.creator.username 
+                    if event.creator is not None else DELETED_USER_PLACEHOLDER,
             } for event in group.events.all()] 
         return render(request, "calendarapp/calendar.html", context)
     
     if request.method == "POST":
         # event submitted
-        
+        if creator is None:
+            return render(request, "calendarapp/calendar.html", context)
+
         # fix timezone!! submit with a timezone.
         date = request.POST["event-date"] # in format yyyy-mm-dd
         time = request.POST["event-time"]
@@ -179,7 +183,8 @@ def get_group_dicts(users):
             group = user.group # get id, groupname, creator
             groups.append({"id": group.id,
                            "name": group.name,
-                           "creator": group.creator.username,
+                           "creator": group.creator.username 
+                            if group.creator is not None else DELETED_USER_PLACEHOLDER,
                            "members": [user.username for user in group.members.all()],
                            "user": user.username})
         except User.DoesNotExist:

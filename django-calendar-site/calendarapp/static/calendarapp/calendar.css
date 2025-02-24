@@ -1,5 +1,10 @@
 :root {
-  --bgblue-light: rgb(204, 209, 217);
+  --bgblue-light: #dfe4e6;
+  --bgblue: rgb(168, 187, 202);
+  --bgyellow: rgb(200, 207, 185);
+  --buttonlinkblue: rgb(186, 217, 228);
+   --acceptgreen: rgb(139, 196, 160);
+  --calendar-top-red: hsl(0, 54%, 74%);
 }
 
 * {
@@ -28,26 +33,29 @@ input {
 }
 
 .wrapper {
+  margin-top: 10vh;
   justify-content: space-evenly;
   display: flex;
-  flex-wrap: wrap;
+  gap: 2em;
+  flex-wrap: wrap-reverse;
   min-width: fit-content;
 }
 
 .calendar {
-  width: 450px;
-  margin: 20px;
-  padding: 20px;
-  background-color: var(--bgblue-light);
+  align-self: start;
   border-radius: 8px;
   height: min-content;
+
+  box-shadow: 0px 0px 200px 0px hsla(44, 35%, 85%, 0.7);
 }
 
 .top-section {
-  margin-bottom: 5px;
   text-align: center;
   align-items: center;
-  justify-content: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 2em;
+  background-color: var(--calendar-top-red);
 }
 
 /* to display the month/year at the top */
@@ -63,7 +71,7 @@ input {
   cursor: pointer;
 }
 
-#month-year {
+.month-year {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -74,6 +82,7 @@ input {
   transition: 200ms;
   background-color: transparent;
   border: 2px solid transparent;
+  border-radius: 8px;
   text-align: center;
   font-size: 18px;
   height: 44px;
@@ -82,13 +91,11 @@ input {
 
 .dropdown:hover {
   transition: 200ms;
-  border: 2px solid rgb(137, 166, 190);
-  border-radius: 8px;
+  border: 2px solid var(--blue-highlight);
 }
 
 .dropdown:focus {
-  border: 2px solid rgb(137, 166, 190);
-  border-radius: 8px;
+  border: 2px solid var(--blue-highlight);
 }
 
 .change-month {
@@ -99,27 +106,29 @@ input {
   border-radius: 50%;
   transition: 200ms;
   text-align: center;
-  background-color: rgb(170, 170, 170);
+  background-color: var(--button-bg);
 }
 
 .change-month:hover {
   transition: 200ms;
-  background-color: rgb(150, 150, 150);
+  border-radius: 12px;
+  background-color: var(--bg-grey);
 }
 
 .bottom-calendar {
   display: grid;
   text-align: center;
+  padding: 1em 1.5em 1.5em 1.5em;
 }
 
 .calendar-grid {
   display: inline-grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-gap: 7px;
+  grid-gap: 10px 16px;
 }
 
 #date-grid {
-  margin-top: 5px;
+  margin-top: 8px;
   grid-template-rows: repeat(6, 1fr);
 }
 
@@ -131,19 +140,19 @@ input {
   border-radius: 8px;
   justify-self: center;
   transition-duration: 200ms;
-  background-color: rgb(150, 150, 150);
-  color: rgb(56, 56, 56);
+  background-color: var(--button-bg);
+  color: var(--grey-text);
   font-size: 18px;
 }
 
 .date-numbers:hover {
   transition-duration: 200ms;
-  background-color: rgb(177, 195, 211);
-  color: rgb(255, 255, 255);
+  background-color: var(--blue-highlight);
+  color: white;
 }
 
 .current-month-numbers {
-  background-color: rgb(180, 180, 180);
+  background-color: var(--button-grey);
   color: rgb(0, 0, 0);
 }
 
@@ -156,7 +165,7 @@ input {
 
 .today:hover {
   transition-duration: 200ms;
-  background-color: rgb(122, 186, 169);
+  background-color: var(--acceptgreen);
 }
 
 .selected {
@@ -165,63 +174,20 @@ input {
 }
 
 .event-section {
-  display: inline;
-  margin: 20px;
-  padding: 20px;
-  background-color: rgb(194, 200, 202);
   border-radius: 8px;
-  flex-grow: 1;
   max-width: 450px;
   min-width: 450px;
 }
 
 .event-form {
-  padding: 1em;
+  padding: 2em;
   display: grid;
   gap: 1em;
-}
-
-.form-inputs {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 1em;
-}
-
-.lrg-label {
-  font-size: 1.25rem;
-}
-
-.event-date {
-  float: right;
-  line-height: 1.5rem;
-}
-
-.event-time {
-  line-height: 1.5rem;
-}
-
-.event-title {
-  font-size: 1rem;
-  line-height: 1.5rem;
 }
 
 .event-info {
-  border: 0px solid transparent;
+  height: 6em;
   resize: vertical;
-}
-
-.event-input {
-  border-radius: 4px;
-  padding: 5px 10px;
-  width: 100%;
-}
-
-.title-label::after {
-  content: "*";
-}
-
-.date-label::after {
-  content: "*";
 }
 
 .create-event-btn {
@@ -238,30 +204,14 @@ input {
   background-color: rgb(128, 176, 190);
 }
 
-.event-list {
-  max-height: 60vh;
-  overflow-y: auto;
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-.event-entry {
-  padding: 1em;
-  margin-top: 1em;
-  border-radius: 4px;
-  background-color: rgb(168, 187, 202);
-}
-
-.event-entry > * {
-  margin-block-start: 0;
-}
-
 .event-entry-heading {
   display: grid;
   width: 100%;
   height: min-content;
   grid-template-columns: 1fr max-content;
-  margin-bottom: 1rem;
+  gap: 1em;
+  margin-bottom: 1em;
+  align-items: baseline;
 }
 
 .event-entry-heading > * {
@@ -282,68 +232,38 @@ input {
 .event-entry-creator {
   font-weight: 400;
   font-size: 1rem;
-}
-
-.going-button {
-  transition-duration: 200ms;
-  font-size: 12px;
-  line-height: 12px;
-  padding: 0.6rem;
-  border: 0px solid transparent;
-  border-radius: 4px;
-}
-
-.going-button:hover {
-  transition-duration: 200ms;
-  background-color: rgb(189, 223, 209);
+  margin-bottom: 2em;
 }
 
 .new-user-form {
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 
-  width: 350px;
-  height: 200px;
+  top: 30dvh;
+  /* align-self: center; */
 
-  padding: 1em;
-  top: 40vh;
-  left: 50vw;
-  -ms-transform: translate(-50%,-50%);
-  -moz-transform:translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-
-  border: 1px solid black;
+  padding: 2em;
+  border: 1px solid transparent;
   border-radius: 8px;
-  background-color: var(--bggrey);
+  box-shadow: 0px 0px 200px 1px var(--button-grey);
+}
+
+.new-user-heading{
+  font-weight: 400;
+  margin-bottom: 1.5em;
 }
 
 .popup-background {
+  display: flex;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   height: 100dvh;
-  width: 100dvw;
+  width: 100%;
   overflow: hidden;
-  background-color: rgba(187, 187, 187, 0.445);
+  background-color: rgb(0 0 0 / 35%);
 }
 
-.username-input {
-  line-height: 1.5rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-}
-
-.new-user-join {
-  height: 2rem;
-  border: none;
-  box-shadow: 2px 2px 5px rgb(70, 70, 70);
-  border-radius: 4px;
-  transition-duration: 200ms;
-  &:hover {
-    background-color: var(--buttongreen);
-  }
-}
 
