@@ -5,3 +5,4 @@ users.txt
 issues.txt
 calendar_site/
 flask-calendar-site/
+django-calendar-site/calendarapp/__pycache__/
