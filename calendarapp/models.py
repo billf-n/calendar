@@ -1,5 +1,6 @@
 from django.db import models
 
+import uuid
 
 class Group(models.Model):
     id = models.CharField(max_length=64, primary_key=True)
@@ -22,6 +23,12 @@ class User(models.Model):
     
     def __str__(self):
         return "id: " + str(self.id) + "; Username:" + self.username
+    
+    def create_user(username: str, group: Group):
+        new_id = str(uuid.uuid4())
+        new_user = User(id=new_id, username=username, group=group)
+        new_user.save()
+        return
 
 
 class Event(models.Model):

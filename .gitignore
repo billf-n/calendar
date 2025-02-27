@@ -3,6 +3,5 @@ small_plans.txt
 big_plans.txt
 users.txt
 issues.txt
-calendar_site/
-flask-calendar-site/
-django-calendar-site/calendarapp/__pycache__/
+calendarapp/__pycache__/
+Lib/
