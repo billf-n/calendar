@@ -93,7 +93,7 @@ def groups(request):
     request.session.save()
 
     groups = get_group_dicts(request.session["users"])
-
+    print(groups)
     if request.method == "GET":
         context = {"groups": groups}
         return render(request, "calendarapp/groups.html", context)

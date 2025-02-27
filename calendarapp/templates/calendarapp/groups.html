@@ -16,7 +16,7 @@
   <main class="wrapper">
     <div class="column-half">
       <div class="site-info">
-        <h1 class="site-title">Eventfull</h1>
+        <h1 class="site-title">calendarapp</h1>
         <p>Do you need to organise an event?</p>
         <p></p>
       </div>
@@ -62,6 +62,11 @@
           </div>
         </section>
         {% endfor %}
+        {% if groups.0 == None %}
+          <div class="event-entry grey-bg no-hover">
+            <h3 class="subheading">You aren't in any groups!</h3>
+          </div>
+        {% endif %}
       </section>
     </div>
 
