@@ -1,10 +1,8 @@
 :root {
   --bgblue-light: #dfe4e6;
   --bgblue: rgb(168, 187, 202);
-  --bgyellow: rgb(200, 207, 185);
   --buttonlinkblue: rgb(186, 217, 228);
-   --acceptgreen: rgb(139, 196, 160);
-  --calendar-top-red: hsl(0, 54%, 74%);
+  --today-date: rgb(121, 161, 119);
 }
 
 * {
@@ -46,7 +44,7 @@ input {
   border-radius: 8px;
   height: min-content;
 
-  box-shadow: 0px 0px 200px 0px hsla(44, 35%, 85%, 0.7);
+  box-shadow: 0px 0px 200px 0px var(--calendar-shadow);
 }
 
 .top-section {
@@ -140,10 +138,11 @@ input {
   border-radius: 8px;
   justify-self: center;
   transition-duration: 200ms;
-  background-color: var(--button-bg);
-  color: var(--grey-text);
+  background-color: var(--button-grey);
+  color: var(--text-grey);
   font-size: 18px;
 }
+/* hsl(227.65deg 8.48% 28.7%) bg for dark mode */
 
 .date-numbers:hover {
   transition-duration: 200ms;
@@ -152,14 +151,13 @@ input {
 }
 
 .current-month-numbers {
-  background-color: var(--button-grey);
-  color: rgb(0, 0, 0);
+  background-color: var(--button-bg-light);
 }
 
 /* to highlight the date in the calendar */
 .today {
   transition-duration: 200ms;
-  background-color: rgb(121, 161, 119);
+  background-color: var(--today-date);
   color: rgb(255, 255, 255);
 }
 

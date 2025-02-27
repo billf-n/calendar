@@ -3,9 +3,12 @@
     --bg-grey: hsl(218, 27%, 92%);
     --bg-grey-1: hsl(218 4.95% 81.9%);
     --button-bg: rgb(150, 150, 150);
-    --grey-text: rgb(56, 56, 56);
+    --button-bg-light: white;
+    --text-grey: rgb(56, 56, 56);
+    --text-main: black;
+    --shadow: hsl(0, 0%, 79%);
+    --calendar-shadow: hsla(44, 35%, 85%, 0.7);
     --blue-highlight: rgb(168, 187, 202);
-    --bgyellow: rgb(200, 207, 185);
     --button-grey: rgb(190, 190, 190);
     --buttonlinkblue: rgb(186, 217, 228);
     --new-green: hsl(95, 36%, 72%);
@@ -14,7 +17,22 @@
     --cancel: #ecd3d1;
     --rejectred: rgb(231, 175, 175);
     --solidred: #dd3636;
+
+    @media (prefers-color-scheme: dark) {
+        --site-bg: hsl(223, 25%, 10%);
+        --bg-grey: hsl(218, 19.55%, 20.37%);
+        --bg-grey-1: hsl(218 10.09% 34.38%);
+        --text-main: white;
+        --text-placeholder: hsl(0, 0%, 82%);
+        --text-grey: hsl(0, 0%, 80%);
+        --button-bg-light: hsl(214, 6%, 53%);
+        --shadow: hsl(240, 1%, 19%);
+        --button-grey: hsl(227.65, 8.48%, 28.7%);
+        --calendar-top-red: hsl(249, 22%, 31%);
+        --calendar-shadow: hsla(276, 48%, 17%, 0.7);
+    }
 }
+
 
 h1,
 h2,
@@ -27,31 +45,33 @@ h6 {
     margin-inline-start: 0;
 }
 
-h3{
+h3 {
     font-weight: 500;
     font-size: 1.5em;
 }
 
-body{
+body {
     background-color: var(--site-bg);
 }
 
 * {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     box-sizing: border-box;
+    color: var(--text-main);
 }
 
-.button-small{
+.button-small {
     min-width: max-content;
     transition-duration: 200ms;
     padding: 0.5rem 1rem;
     font-size: 13px;
     border: 0;
     border-radius: 4px;
-    background-color: white;
+    color: var(--text-main);
+    background-color: var(--button-bg-light);
 }
 
-.button-small:hover{
+.button-small:hover {
     transition-duration: 200ms;
     background-color: var(--buttonlinkblue);
 }
@@ -67,7 +87,8 @@ body{
     border: 0px solid transparent;
     border-radius: 4px;
     text-align: center;
-    background-color: white;
+    color: var(--text-main);
+    background-color: var(--button-bg-light);
 }
 
 .button-md:hover {
@@ -75,59 +96,67 @@ body{
     background-color: var(--new-green);
 }
 
-.form-input{
+.form-input {
     font-size: 1rem;
     padding: 0.5em 1em;
     height: 3em;
+    color: var(--text-main);
+    background-color: var(--button-bg-light);
     line-height: 1.5em;
     min-height: 1rem;
     border: 2px solid transparent;
     border-radius: 4px;
-    &:hover, &:focus {
+
+    &::placeholder {
+        color: var(--text-placeholder);
+    }
+    
+    &:hover,
+    &:focus {
         outline: 0;
         transition: 200ms;
         border-color: var(--blue-highlight);
     }
 }
 
-.width-100{
+.width-100 {
     width: 100%;
 }
 
-.after-1em{
+.after-1em {
     margin-bottom: 1em;
 }
 
-.after-2em{
+.after-2em {
     margin-bottom: 2em;
 }
 
-.grey-bg{
+.grey-bg {
     background-color: var(--bg-grey);
 }
 
-.grey-1-bg{
+.grey-1-bg {
     background-color: var(--bg-grey-1);
 }
 
-.white-bg{
+.white-bg {
     background-color: white;
 }
 
-.light-shadow{
+.light-shadow {
     margin: 20px;
-    box-shadow: 0px 0px 20px 0px rgb(201, 201, 201);
+    box-shadow: 0px 0px 20px 0px var(--shadow);
 }
 
-.transition-200{
+.transition-200 {
     transition-duration: 200ms;
 }
 
-.border-r-8{
+.border-r-8 {
     border-radius: 8px;
 }
 
-.border-r-4{
+.border-r-4 {
     border-radius: 4px;
 }
 
@@ -144,7 +173,7 @@ body{
     padding: 2em;
 }
 
-.event-entry:hover{
+.event-entry:hover {
     transition-duration: 200ms;
     background-color: var(--bg-grey-1);
 }
@@ -153,11 +182,15 @@ body{
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
-  
-.event-entry > * {
+
+.event-entry>* {
     margin-block-start: 0;
 }
 
-.overflow-x-clip{
+.overflow-x-clip {
     overflow-x: clip;
+}
+
+.no-hover:hover {
+    background-color: revert;
 }
