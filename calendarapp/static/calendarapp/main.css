@@ -2,21 +2,21 @@
     --site-bg: hsl(59 100% 95.52%);
     --bg-grey: hsl(218, 27%, 92%);
     --bg-grey-1: hsl(218 4.95% 81.9%);
-    --button-bg: rgb(150, 150, 150);
+    --button-bg: hsl(0, 0%, 59%);
     --button-bg-light: white;
-    --text-grey: rgb(56, 56, 56);
+    --text-grey: hsl(0, 0%, 22%);
     --text-main: black;
     --shadow: hsl(0, 0%, 79%);
     --calendar-shadow: hsla(44, 35%, 85%, 0.7);
-    --blue-highlight: rgb(168, 187, 202);
-    --button-grey: rgb(190, 190, 190);
-    --buttonlinkblue: rgb(186, 217, 228);
+    --blue-highlight: hsl(206, 24%, 73%);
+    --button-grey: hsl(0, 0%, 75%);
+    --buttonlinkblue: hsl(196, 44%, 81%);
     --new-green: hsl(95, 36%, 72%);
-    --buttongreen: rgb(172, 218, 187);
-    --acceptgreen: rgb(139, 196, 160);
-    --cancel: #ecd3d1;
-    --rejectred: rgb(231, 175, 175);
-    --solidred: #dd3636;
+    --buttongreen: hsl(140, 38%, 76%);
+    --acceptgreen: hsl(142, 33%, 66%);
+    --cancel: hsl(4, 42%, 87%);
+    --rejectred: hsl(0, 54%, 80%);
+    --solidred: hsl(0, 71%, 54%);
 
     @media (prefers-color-scheme: dark) {
         --site-bg: hsl(223, 25%, 10%);
@@ -27,6 +27,7 @@
         --text-grey: hsl(0, 0%, 80%);
         --button-bg-light: hsl(214, 6%, 53%);
         --shadow: hsl(240, 1%, 19%);
+        --form-input-bg: hsl(214 21.97% 28.11%);
         --button-grey: hsl(227.65, 8.48%, 28.7%);
         --calendar-top-red: hsl(249, 22%, 31%);
         --calendar-shadow: hsla(276, 48%, 17%, 0.7);
@@ -99,10 +100,10 @@ body {
 
 .form-input {
     font-size: 1rem;
-    padding: 0.5em 1em;
+    padding: 0.5em;
     height: 3em;
     color: var(--text-main);
-    background-color: var(--button-bg-light);
+    background-color: var(--form-input-bg);
     line-height: 1.5em;
     min-height: 1rem;
     border: 2px solid transparent;

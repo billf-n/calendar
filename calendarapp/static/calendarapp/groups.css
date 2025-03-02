@@ -180,7 +180,8 @@ html {
 .create-group-form{
     display: flex;
     min-width: 300px;
-    width: 100%;
+    max-width: min(100%, 600px);
+    margin: 2em;
     padding: 1.5em;
     border-radius: 8px;
     flex-direction: column;

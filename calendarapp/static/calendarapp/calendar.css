@@ -109,8 +109,7 @@ input {
 
 .change-month:hover {
   transition: 200ms;
-  border-radius: 12px;
-  background-color: var(--bg-grey);
+  background-color: var(--blue-highlight);
 }
 
 .bottom-calendar {
@@ -181,6 +180,10 @@ input {
   padding: 2em;
   display: grid;
   gap: 1em;
+}
+
+.event-time{
+  margin-bottom: 1em;
 }
 
 .event-info {

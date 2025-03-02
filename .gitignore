@@ -3,5 +3,6 @@ small_plans.txt
 big_plans.txt
 users.txt
 issues.txt
-calendarapp/__pycache__/
+*.pyc
 Lib/
+*.env
