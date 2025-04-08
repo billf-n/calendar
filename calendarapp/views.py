@@ -11,6 +11,9 @@ from datetime import datetime
 
 DELETED_USER_PLACEHOLDER = "Deleted User"
 
+def create_id():
+    return str(uuid.uuid4())
+
 # Create your views here.
 def index(request):
     return redirect("/groups")
@@ -77,10 +80,38 @@ def calendar(request, group_id):
         date_with_tz = date_with_tz.replace(tzinfo=ZoneInfo(timezone))
         print(date_with_tz)
         
-        event = Event(date=date_with_tz, name=title, info=info, 
+        event = Event(id=create_id(), date=date_with_tz, name=title, info=info, 
                       group=group, creator=creator)
         event.save()
         return redirect(group)
+
+
+def event(request, group_id):
+    group = Group.objects.get(id=group_id)
+    context = {
+        "group_id": group_id,
+        "group_name": group.name,
+        "signed_in": 0,
+        "events": None
+    }
+
+    try:
+        user_ids = request.session["users"]
+    except KeyError:
+        # this session isn't linked to any users yet,
+        # they will have to make a new user.
+        request.session["users"] = []
+        return render(request, "calendarapp/calendar.html", context)
+    
+
+    if request.method == "POST":
+        event = Event.objects.get(id=request.POST["event_id"])
+        for user_id in user_ids:
+            user = User.objects.get(user_id)
+            if user.group == group:
+                event.attendees.add(user)
+                break
+        return HttpResponse(status=200)
 
 
 def groups(request):
@@ -102,10 +133,10 @@ def groups(request):
         username = request.POST["username"]
 
         new_group_name = request.POST["group-name"]
-        new_group = Group(id=str(uuid.uuid4()), name=new_group_name)
+        new_group = Group(id=create_id(), name=new_group_name)
         new_group.save()
 
-        user = User(id=str(uuid.uuid4()), username=username, group=new_group)
+        user = User(id=create_id(), username=username, group=new_group)
         user.save()
         new_group.creator = user
         new_group.save()
@@ -146,7 +177,7 @@ def signup(request):
                     return redirect(group)
 
             # user doesn't exist in this group, make one
-            new_user = User(id=str(uuid.uuid4()), username=new_username, group=group)
+            new_user = User(id=create_id(), username=new_username, group=group)
             new_user.save()
             request.session["users"].append(new_user.id)
             request.session.save()

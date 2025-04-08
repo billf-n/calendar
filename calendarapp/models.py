@@ -37,7 +37,8 @@ class Event(models.Model):
     info = models.CharField(max_length=500)
     date = models.DateTimeField()
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="events")
-    creator = models.ForeignKey("User", on_delete=models.SET_NULL, related_name="created_events",null=True)
+    creator = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="created_events",null=True)
+    attendees = models.ManyToManyField(User, related_name="events_going")
 
     def __str__(self):
         return "Name: " + self.name + "; Group: " + str(self.group.id)

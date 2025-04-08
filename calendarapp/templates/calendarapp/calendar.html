@@ -42,7 +42,7 @@
           </div>
           <h3 class="event-entry-creator">Created by: {{ event.creator }}</h3>
           <p class="event-entry-info">{{ event.info }}</p>
-          <button id="going" class="button-md">Going!</button>
+          <button id="going:{{ event.id }}" class="button-md">Going!</button>
         </div>
         {% endfor %}
       </div>
