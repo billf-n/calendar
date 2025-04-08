@@ -176,7 +176,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_URL = "static/"
 
 STORAGES = {
     # Enable WhiteNoise's GZip and Brotli compression of static assets:
@@ -194,3 +195,42 @@ WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Customise the default logging config, since by default full Django logs are only emitted when
+# `DEBUG=True` (which otherwise makes diagnosing errors much harder in production):
+# https://docs.djangoproject.com/en/5.2/ref/logging/#default-logging-configuration
+# For more advanced logging you may want to try: https://django-structlog.readthedocs.io
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "format": "[{levelname}] {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+    },
+    # Fallback for anything not configured via `loggers`.
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            # Prevent double logging due to the root logger.
+            "propagate": False,
+        },
+        "django.request": {
+            # Suppress the WARNINGS from any HTTP 4xx responses (in particular for 404s caused by
+            # web crawlers), but still show any ERRORs from HTTP 5xx responses/exceptions.
+            "level": "ERROR",
+        },
+    },
+}
