@@ -11,3 +11,6 @@ Lib/
 README.Docker.md
 cloudmigrate.yaml
 compose.yaml
+.dockerignore
+Dockerfile
+Scripts

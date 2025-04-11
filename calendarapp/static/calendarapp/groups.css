@@ -20,12 +20,15 @@ html {
 
 .site-info{
     padding: 0 2em;
+    align-items: end;
+    display: flex;
+    flex-direction: column;
 }
 
 .site-title{
     font-weight: 500;
     font-size: 3em;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .column-half{
@@ -42,6 +45,7 @@ html {
 
 .subheading {
     font-weight: 600;
+    margin-bottom: 2em;
 }
 
 .joined-group {
@@ -168,21 +172,23 @@ html {
 #create-group-button{
     transition-duration: 200ms;
     background-size: 200% 100%;
-    background-image: linear-gradient(to right, transparent 50%, rgb(186, 217, 228) 50%);
+    background-image: linear-gradient(to right, transparent 50%, var(--button-dark-cyan) 50%);
 }
 
 #create-group-button:hover{
     background-position: -100% 0;
     transition-duration: 400ms;
-    background-color: var(--buttonlinkblue);
+    background-color: var(--button-dark-cyan);
 }
 
 .create-group-form{
+    transition-duration: 200ms;
     display: flex;
     min-width: 300px;
     max-width: min(100%, 600px);
     margin: 2em;
     padding: 1.5em;
+    padding-top: 0;
     border-radius: 8px;
     flex-direction: column;
     align-items: center;
