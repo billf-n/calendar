@@ -20,7 +20,7 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env(DEBUG=(bool, False))
+env = environ.Env(DEBUG=True)
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("ENVIRONMENT") == "development"
+DEBUG = True # os.environ.get("ENVIRONMENT") == "development"
 
 IS_HEROKU_APP = "DYNO" in os.environ and "CI" not in os.environ
 
