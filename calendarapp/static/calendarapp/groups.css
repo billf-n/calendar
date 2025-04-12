@@ -48,16 +48,20 @@ html {
     margin-bottom: 2em;
 }
 
+.joined-groups{
+    min-width: 300px;
+}
+
 .joined-group {
     box-sizing: border-box;
     grid-column-start: groups-start;
-    min-width: 300px;
     width: 100%;
     padding: 1.5em;
     z-index: 1;
 }
 
 .joined-group-wrap {
+    min-width: 300px;
     display: grid;
     grid-template-columns: [groups-start] 1fr [groups-end] min-content [popup-end];
     justify-items: center;
@@ -98,7 +102,6 @@ html {
     margin-block-start: 0;
 }
 
-
 .leave-group{
     transition-duration: 0s;
 }
@@ -121,7 +124,6 @@ html {
     border-radius: 4px;
     height: min-content;
     width: max-content;
-    margin-left: 1em;
     z-index: 0;
 }
 
@@ -182,11 +184,12 @@ html {
 }
 
 .create-group-form{
+    justify-self: end;
     transition-duration: 200ms;
     display: flex;
     min-width: 300px;
-    max-width: min(100%, 600px);
-    margin: 2em;
+    width: 80%;
+    max-width: min(80%, 600px);
     padding: 1.5em;
     padding-top: 0;
     border-radius: 8px;

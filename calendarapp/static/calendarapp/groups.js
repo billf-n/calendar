@@ -40,7 +40,7 @@ function leaveGroupPopup(id, username, button1) {
     popup.id = `popup-${id}-${username}`;
 
     let inner = `
-    <h3>Are you sure?</h3>
+    <h3 style="margin-bottom: 1em;">Are you sure?</h3>
     <div class="opposite-sides gap-4">
         <button id="cancel-${id}-${username}" class="material-symbols-outlined leave-group-cancel">close</button>
         <button id="confirm-${id}-${username}"value="{
@@ -72,6 +72,7 @@ function removeLeavePopup(id, username) {
     let btn1 = document.getElementById(`leavebtn1-${id}-${username}`);
     let popup = document.getElementById(`popup-${id}-${username}`);
     popup.remove();
+    btn1.classList.remove("display-none");
     groupsWithPopup[btn1.value] = 0;
     return;
 }
@@ -99,14 +100,13 @@ let leaveGroups = document.getElementsByClassName("leave-group");
 for (let i=0; i < leaveGroups.length; i++) {
     groupsWithPopup[leaveGroups[i].value] = 0;
     addEvent(leaveGroups[i], "click", (event) => {
-        
         let btn = event.target;
         let groupInfo = JSON.parse(btn.value);
         if (groupsWithPopup[leaveGroups[i].value] === 1) {
             removeLeavePopup(groupInfo["id"], groupInfo["user"]);
             return;
         }
-        
+        btn.classList.add("display-none");
         leaveGroupPopup(groupInfo["id"], groupInfo["user"], btn);
     })
 }
