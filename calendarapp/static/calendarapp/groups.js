@@ -79,7 +79,7 @@ function removeLeavePopup(id, username) {
 
 
 function leaveGroup(id, username) {
-      let url = window.location.origin + `/leavegroup/${id}`;
+    let url = window.location.origin + `/leavegroup/${id}`;
     fetch(url, {
         method: "POST",
         headers: {"X-CSRFToken": csrftoken},

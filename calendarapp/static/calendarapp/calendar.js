@@ -7,6 +7,24 @@ const options = {
     day: "numeric"
 };
 
+// from https://docs.djangoproject.com/en/5.1/howto/csrf/#using-csrf
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
 currentDate = new Date();
 calendarDate = new Date();
 
@@ -157,7 +175,6 @@ dateDisplay.addEventListener("click", function(){
         currentDate.getFullYear());
 });
 
-
 document.getElementById("last-month").addEventListener("click", function(element){
     changeDate(calendarDate.getDate(), calendarDate.getMonth()-1);
 });
@@ -174,6 +191,24 @@ console.log(formTimezone.value);
 
 let timeInput = document.getElementById("event-time");
 timeInput.value = currentDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+let goingButtons = document.getElementsByClassName("going-button");
+
+for (const btn of goingButtons) {
+    btn.addEventListener("click", (event) => {
+        let eventId = btn.value;
+        let url = window.location.origin + `/going/${groupId}&${eventId}`;
+        fetch(url, {
+            method: "POST",
+            headers: {"X-CSRFToken": csrftoken},
+        }).then((response) => {
+            if (response.ok) {
+                let attendeesList = document.getElementById(`${eventId}-attendees`);
+                attendeesList.textContent += `, ${username}`;
+            }
+        });
+    });
+}
 
 
 let newUserForm = document.getElementById("new-user-form") || null;

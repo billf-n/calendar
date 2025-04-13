@@ -35,7 +35,7 @@ def calendar(request, group_id):
         # they will have to make a new user.
         request.session["users"] = []
         return render(request, "calendarapp/calendar.html", context)
-    
+
     client_users = []
     for user_id in user_ids:
         try:
@@ -48,7 +48,8 @@ def calendar(request, group_id):
         if user in client_users:
             # TODO: having multiple accounts in the group would be weird
             context["signed_in"] = 1
-            creator = user # for group creation
+            context["username"] = user.username
+            creator = user  # for group creation (POST)
 
     if request.method == "GET":
         if context["signed_in"] == 1:
@@ -58,6 +59,7 @@ def calendar(request, group_id):
                 "date": event.date,
                 "info": event.info,
                 "group": event.group.id,
+                "attendees": [attendee.username for attendee in event.attendees.all()],
                 "creator": event.creator.username 
                     if event.creator is not None else DELETED_USER_PLACEHOLDER,
             } for event in group.events.all()] 
@@ -102,7 +104,6 @@ def event(request, group_id):
         # they will have to make a new user.
         request.session["users"] = []
         return render(request, "calendarapp/calendar.html", context)
-    
 
     if request.method == "POST":
         event = Event.objects.get(id=request.POST["event_id"])
@@ -112,6 +113,36 @@ def event(request, group_id):
                 event.attendees.add(user)
                 break
         return HttpResponse(status=200)
+
+
+def going(request, group_id, event_id):
+    try:
+        request.session["users"] = list(set(request.session["users"]))
+        user_ids = request.session["users"]
+    except KeyError:
+        # this session isn't linked to any users yet
+        request.session["users"] = []
+    
+    client_users = []
+    for user_id in user_ids:
+        try:
+            client_users.append(User.objects.get(id=user_id))
+        except User.DoesNotExist:
+            request.session["users"].remove(user_id)
+
+    event = Event.objects.get(id=event_id)
+    group = Group.objects.get(id=group_id)
+    current_user = None
+    for user in group.members.all():
+        if user in client_users:
+            # TODO: having multiple accounts in the group would be weird
+            current_user = user
+    if current_user is None:
+        return HttpResponse(400)
+    event.attendees.add(current_user)
+    event.save()
+    return HttpResponse(headers={"username": current_user.username})
+
 
 
 def groups(request):
