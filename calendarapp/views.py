@@ -14,6 +14,36 @@ DELETED_USER_PLACEHOLDER = "Deleted User"
 def create_id():
     return str(uuid.uuid4())
 
+
+# Return the first user in request.sessions that is in 
+# the group `group_id`.
+# Returns a User object if user is in the group, or None otherwise.
+def get_user_in_group(request, group_id):
+    try:
+        request.session["users"] = list(set(request.session["users"]))
+        user_ids = request.session["users"]
+    except KeyError:
+        # this session isn't linked to any users yet
+        request.session["users"] = []
+        return None
+    
+    client_users = []
+    for user_id in user_ids:
+        try:
+            client_users.append(User.objects.get(id=user_id))
+        except User.DoesNotExist:
+            request.session["users"].remove(user_id)
+
+    group = Group.objects.get(id=group_id)
+    current_user = None
+    for user in client_users:
+        if user in group.members.all():
+            # TODO: having multiple accounts in the group would be weird
+            current_user = user
+            continue
+    return current_user
+
+
 # Create your views here.
 def index(request):
     return redirect("/groups")
@@ -28,28 +58,14 @@ def calendar(request, group_id):
         "events": None
     }
 
-    try:
-        user_ids = request.session["users"]
-    except KeyError:
-        # this session isn't linked to any users yet,
-        # they will have to make a new user.
+    user = get_user_in_group(request, group_id)
+
+    if user is None:
         request.session["users"] = []
         return render(request, "calendarapp/calendar.html", context)
-
-    client_users = []
-    for user_id in user_ids:
-        try:
-            client_users.append(User.objects.get(id=user_id))
-        except User.DoesNotExist:
-            request.session["users"].remove(user_id)
-
-    creator = None
-    for user in group.members.all():
-        if user in client_users:
-            # TODO: having multiple accounts in the group would be weird
-            context["signed_in"] = 1
-            context["username"] = user.username
-            creator = user  # for group creation (POST)
+    else:
+        context["signed_in"] = 1
+        context["username"] = user.username
 
     if request.method == "GET":
         if context["signed_in"] == 1:
@@ -64,13 +80,12 @@ def calendar(request, group_id):
                     if event.creator is not None else DELETED_USER_PLACEHOLDER,
             } for event in group.events.all()] 
         return render(request, "calendarapp/calendar.html", context)
-    
+
     if request.method == "POST":
         # event submitted
-        if creator is None:
+        if user is None:
             return render(request, "calendarapp/calendar.html", context)
 
-        # fix timezone!! submit with a timezone.
         date = request.POST["event-date"] # in format yyyy-mm-dd
         time = request.POST["event-time"]
         title = request.POST["event-title"]
@@ -81,9 +96,11 @@ def calendar(request, group_id):
         date_with_tz = datetime.strptime((date+"-"+time), "%Y-%m-%d-%H:%M")
         date_with_tz = date_with_tz.replace(tzinfo=ZoneInfo(timezone))
         print(date_with_tz)
-        
-        event = Event(id=create_id(), date=date_with_tz, name=title, info=info, 
-                      group=group, creator=creator)
+
+        event = Event(id=create_id(), date=date_with_tz, name=title, 
+                      info=info, group=group, creator=user)
+        event.save()
+        event.attendees.add(user)
         event.save()
         return redirect(group)
 
@@ -110,39 +127,41 @@ def event(request, group_id):
         for user_id in user_ids:
             user = User.objects.get(user_id)
             if user.group == group:
+                print("user in group")
                 event.attendees.add(user)
                 break
         return HttpResponse(status=200)
 
 
-def going(request, group_id, event_id):
-    try:
-        request.session["users"] = list(set(request.session["users"]))
-        user_ids = request.session["users"]
-    except KeyError:
-        # this session isn't linked to any users yet
-        request.session["users"] = []
-    
-    client_users = []
-    for user_id in user_ids:
-        try:
-            client_users.append(User.objects.get(id=user_id))
-        except User.DoesNotExist:
-            request.session["users"].remove(user_id)
-
+def delete_event(request, group_id, event_id):
     event = Event.objects.get(id=event_id)
-    group = Group.objects.get(id=group_id)
-    current_user = None
-    for user in group.members.all():
-        if user in client_users:
-            # TODO: having multiple accounts in the group would be weird
-            current_user = user
-    if current_user is None:
-        return HttpResponse(400)
-    event.attendees.add(current_user)
-    event.save()
-    return HttpResponse(headers={"username": current_user.username})
+    user = get_user_in_group(request, group_id)
+    if user is not None and user == event.creator:
+        event.delete()
+        return HttpResponse(status=200)
+    return HttpResponse(status=403)
 
+
+def change_event_attendance(request, group_id, event_id):
+    user = get_user_in_group(request, group_id)
+    try:
+        event = Event.objects.get(id=event_id)
+    except Event.DoesNotExist:
+        return HttpResponse(404)
+
+    if user is None:
+        return HttpResponse(400)
+    if user not in event.attendees.all():
+        event.attendees.add(user)
+    else:
+        event.attendees.remove(user)
+    event.save()
+    attendees = "Attendees: "
+    for user in event.attendees.all():
+        attendees += (user.username + ", ")
+    if len(event.attendees.all()) != 0:
+        attendees = attendees[:-2]
+    return HttpResponse(attendees, content_type="text/plain")
 
 
 def groups(request):

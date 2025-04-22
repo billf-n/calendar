@@ -83,8 +83,8 @@ body {
 }
 
 .button-md {
-    align-self: end;
-    width: min-content;
+    min-width: min-content;
+    width: 120px;
     transition-duration: 200ms;
     font-size: 1em;
     font-weight: 500;

@@ -201,15 +201,36 @@ for (const btn of goingButtons) {
         fetch(url, {
             method: "POST",
             headers: {"X-CSRFToken": csrftoken},
-        }).then((response) => {
-            if (response.ok) {
-                let attendeesList = document.getElementById(`${eventId}-attendees`);
-                attendeesList.textContent += `, ${username}`;
+        }).then((response) => response.text())
+        .then((text) => {
+            let attendeesList = document.getElementById(`${eventId}-attendees`);
+            attendeesList.textContent = text;
+            if (text.includes(username)) {
+                btn.classList.add("going-selected");
+            }
+            else {
+                btn.classList.remove("going-selected");
             }
         });
     });
 }
 
+let deleteEventBtns = document.getElementsByClassName("delete-button");
+for (let i=0; i < deleteEventBtns.length; i++) {
+    let btn = deleteEventBtns[i];
+    btn.addEventListener("click", (event) => {
+        let eventId = btn.value;
+        let url = window.location.origin + `/delete_event/${groupId}&${eventId}`;
+        fetch(url, {
+            method: "POST",
+            headers: {"X-CSRFToken": csrftoken},
+        }).then((response) => {
+            if (response.ok) {
+                btn.parentElement.parentElement.remove();
+            }
+        });
+    })
+}
 
 let newUserForm = document.getElementById("new-user-form") || null;
 if (newUserForm) {

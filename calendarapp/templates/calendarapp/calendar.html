@@ -45,8 +45,21 @@
           <h3 class="event-entry-creator">Created by: {{ event.creator }}</h3>
           <p id="{{ event.id }}-attendees" class="event-entry-attendees">Attendees: {% for username in event.attendees %}{{username}}{% if forloop.last == 0 %}, {% endif %}{% endfor %}</p>
           <p class="event-entry-info">{{ event.info }}</p>
-          <button id="going:{{ event.id }}" value="{{ event.id }}" 
-          class="going-button button-md">Going!</button>
+          <div class="event-options-div">
+            {% if event.creator == username %}
+            <button id="delete:{{ event.id }}" value="{{ event.id }}" 
+            class="delete-button button-md">
+              Delete
+            </button>
+            {% endif %}
+            <button id="going:{{ event.id }}" value="{{ event.id }}" 
+            class="going-button button-md 
+            {% if username in event.attendees %} 
+              going-selected
+            {% endif %}">
+              Going!
+            </button>
+          </div>
         </div>
         {% endfor %}
       </div>

@@ -34,6 +34,7 @@ html {
 .column-half{
     min-width: min-content;
     width: 50%;
+    padding: 1em;
 }
 
 .section-title{
@@ -120,7 +121,7 @@ html {
     grid-column-start: groups-end;
     align-self: end;
     background-color: var(--rejectred);
-    padding: 1.5em 1em;
+    padding: 1.5em;
     border-radius: 4px;
     height: min-content;
     width: max-content;
