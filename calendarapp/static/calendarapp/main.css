@@ -6,11 +6,13 @@
     --button-bg-light: white;
     --text-grey: hsl(0, 0%, 22%);
     --text-main: black;
+    --form-input-bg: hsl(0, 0%, 100%);
     --shadow: hsl(0, 0%, 79%);
     --calendar-shadow: hsla(44, 35%, 85%, 0.7);
     --blue-highlight: hsl(206, 24%, 73%);
     --button-grey: hsl(0, 0%, 75%);
     --buttonlinkblue: hsl(196, 44%, 81%);
+    --button-dark-cyan: hsl(197 14.52% 39.43%);
     --new-green: hsl(95, 36%, 72%);
     --buttongreen: hsl(140, 38%, 76%);
     --acceptgreen: hsl(142, 33%, 66%);
@@ -45,6 +47,8 @@ h6 {
     margin-top: 0;
     margin-block-start: 0;
     margin-inline-start: 0;
+    margin-block-end: 0;
+    margin-inline-end: 0;
 }
 
 h3 {
@@ -79,8 +83,8 @@ body {
 }
 
 .button-md {
-    align-self: end;
-    width: min-content;
+    min-width: min-content;
+    width: 120px;
     transition-duration: 200ms;
     font-size: 1em;
     font-weight: 500;
@@ -96,6 +100,10 @@ body {
 .button-md:hover {
     transition-duration: 200ms;
     background-color: var(--new-green);
+}
+
+.display-none {
+    display: none;
 }
 
 .form-input {
@@ -146,8 +154,21 @@ body {
 }
 
 .light-shadow {
+    transition-duration: 300ms;
     margin: 20px;
     box-shadow: 0px 0px 20px 0px var(--shadow);
+}
+
+.light-shadow:hover {
+    transition-duration: 300ms;
+    box-shadow: 0px 0px 40px 0px var(--shadow);
+}
+
+@media (prefers-reduced-motion){
+    .light-shadow:hover {
+        /* This is the same rule as in light-shadow (not hover) */
+        box-shadow: 0px 0px 20px 0px var(--shadow);
+    }
 }
 
 .transition-200 {

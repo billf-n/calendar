@@ -3,6 +3,14 @@ small_plans.txt
 big_plans.txt
 users.txt
 issues.txt
+db.sqlite3
+calendarapp.db
 *.pyc
 Lib/
 *.env
+README.Docker.md
+cloudmigrate.yaml
+compose.yaml
+.dockerignore
+Dockerfile
+Scripts
