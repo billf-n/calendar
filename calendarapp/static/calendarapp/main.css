@@ -210,6 +210,11 @@ body {
     background-color: var(--bg-grey-alt);
 }
 
+.event-entry:hover {
+    transition-duration: 200ms;
+    background-color: var(--calendar-bg-grey);
+  }
+
 .event-entry {
     transition-duration: 200ms;
     display: flex;

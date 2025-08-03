@@ -212,18 +212,6 @@ input {
   background-color: rgb(128, 176, 190);
 }
 
-/* .event-entry:nth-child(even) {
-  background-color: var(--bg-grey);
-}
-
-.event-entry:nth-child(odd) {
-  background-color: var(--bg-grey-alt);
-} */
-
-.event-entry:hover {
-  transition-duration: 200ms;
-  background-color: var(--calendar-bg-grey);
-}
 
 .event-entry-heading {
   display: grid;
