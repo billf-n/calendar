@@ -59,6 +59,9 @@ def calendar(request, group_id):
     }
 
     user = get_user_in_group(request, group_id)
+    print(request.session)
+    print(user)
+    print(groups)
 
     if user is None:
         request.session["users"] = []
@@ -174,6 +177,7 @@ def groups(request):
     request.session.save()
 
     groups = get_group_dicts(request.session["users"])
+    print(request.session)
     print(groups)
     if request.method == "GET":
         context = {"groups": groups}
