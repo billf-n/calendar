@@ -1,7 +1,7 @@
 :root {
-    --site-bg: hsl(59 100% 95.52%);
+    --site-bg: hsl(59deg 100% 98.61%);
     --bg-grey: hsl(218, 27%, 92%);
-    --bg-grey-alt: hsl(218, 27%, 92%);
+    --bg-grey-alt: hsl(218deg 25.55% 88.25%);
     --calendar-bg-grey: hsl(218 4.95% 81.9%);
     --button-bg: hsl(0, 0%, 59%);
     --button-bg-light: white;
@@ -91,8 +91,9 @@ body {
     text-align: center;
 }
 
-.dark-mode-button {
-    
+.dark-mode-button:hover {
+    transition-duration: 200ms;
+    font-variation-settings: "FILL" 1;
 }
 
 .button-md {
