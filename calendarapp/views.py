@@ -20,11 +20,14 @@ def create_id():
 # Returns a User object if user is in the group, or None otherwise.
 def get_user_in_group(request, group_id):
     try:
-        request.session["users"] = list(set(request.session["users"]))
-        user_ids = request.session["users"]
+        request.session["users"] = list(set(request.session["users"])) # remove duplicates
+        user_ids = request.session.get("users")
     except KeyError:
         # this session isn't linked to any users yet
-        request.session["users"] = []
+        # request.session["users"] = []
+        return None
+    
+    if user_ids is None:
         return None
     
     client_users = []
@@ -118,7 +121,7 @@ def event(request, group_id):
     }
 
     try:
-        user_ids = request.session["users"]
+        user_ids = request.session.get("users")
     except KeyError:
         # this session isn't linked to any users yet,
         # they will have to make a new user.
