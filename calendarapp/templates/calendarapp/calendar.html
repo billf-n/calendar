@@ -32,11 +32,11 @@
         {% csrf_token %}
         <h3 class="event-form-title">Create an event</h3>
         <input type="hidden" name="timezone" id="form-timezone" value="">
-          <input id="event-title" class="event-title form-input" name="event-title" placeholder="Event Title*" required>
+          <input id="event-title" class="event-title form-input" name="event-title" placeholder="Event Title*" maxlength="64" required>
           <input type="date" id="event-date" class="event-date form-input" name="event-date" required>
           <input type="time" id="event-time" class="event-time form-input" name="event-time">
           <textarea id="event-info" class="form-input event-info after-1em" 
-            placeholder="Extra Information" name="event-info"></textarea>
+            placeholder="Extra Information" maxlength="500" name="event-info"></textarea>
         <button id="create-event-btn" class="button-md width-100">Create event</button>
       </form>
       <div id="event-list" class="event-list">
@@ -119,7 +119,7 @@
       <input type="hidden" name="group-id" value="{{ group_id }}">
       <h3 class="new-user-heading">Enter your username for <em>{{ group_name }}</em></h3>
       <input name="calendarapp-username" id="username" placeholder="Username"
-        class="form-input after-1em" required>
+        class="form-input after-1em" maxlength="32" required>
       <button class="button-md width-100">Join group</button>
     </form>
   </div>

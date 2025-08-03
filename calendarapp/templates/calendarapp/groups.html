@@ -28,9 +28,9 @@
         {% csrf_token %}
         <h2 class="section-title">Want to create a group?</h3>
           <div class="group-name-div after-1em width-100">
-            <input type="input" name="group-name" placeholder="Group Name" class="form-input width-100" id="group-name"
+            <input type="input" name="group-name" placeholder="Group Name" class="form-input width-100" id="group-name" maxlength="32"
               required>
-            <input type="input" name="username" placeholder="Username" class="form-input width-100" id="username"
+            <input type="input" name="username" placeholder="Username" class="form-input width-100" id="username" maxlength="32"
               required>
           </div>
           <button id="create-group-button" class="button-small">Create group</button>
