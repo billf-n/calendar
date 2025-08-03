@@ -19,7 +19,7 @@ html {
 }
 
 .site-info {
-    padding: 0 2em;
+    padding: 0 1em;
     align-items: start;
     display: flex;
     flex-direction: column;
@@ -47,12 +47,12 @@ html {
 
 .subheading {
     font-weight: 600;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 .joined-groups {
     min-width: 300px;
-    max-width: 500px;
+    max-width: min(80%, 600px);
 }
 
 .joined-group {
@@ -190,13 +190,12 @@ html {
 }
 
 .create-group-form {
-    /* justify-self: end; */
     transition-duration: 200ms;
     display: flex;
     min-width: 300px;
     width: 80%;
     max-width: min(80%, 600px);
-    padding: 1.5em;
+    padding: 2em;
     padding-top: 0;
     border-radius: 8px;
     flex-direction: column;

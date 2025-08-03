@@ -22,12 +22,15 @@ input {
   /* Standard syntax */
 }
 
-.material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
+.back-button {
+  padding: 0;
+  margin: 1em;
+  height: 36px;
+  width: 36px;
+  border-radius: 8px;
+  font-size: 1em;
+  min-width: 0;
+  background-color: var(--button-bg);
 }
 
 .wrapper {
@@ -131,8 +134,10 @@ input {
 .date-numbers {
   position: relative;
   border: none;
-  width: 44px;
-  height: 44px;
+  width: min(44px, 10vw);
+  height: min(44px, 10vw);
+  min-width: 36px;
+  min-height: 36px;
   border-radius: 8px;
   justify-self: center;
   transition-duration: 200ms;
@@ -140,6 +145,7 @@ input {
   color: var(--text-grey);
   font-size: 18px;
 }
+
 /* hsl(227.65deg 8.48% 28.7%) bg for dark mode */
 
 .date-numbers:hover {
@@ -171,8 +177,8 @@ input {
 
 .event-section {
   border-radius: 8px;
+  width: max(396px, 111vw);
   max-width: 450px;
-  min-width: 450px;
 }
 
 .event-form {
@@ -181,11 +187,13 @@ input {
   gap: 1em;
 }
 
-.event-time{
-  margin-bottom: 1em;
+.event-form-title {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
 }
 
 .event-info {
+  margin-top: 0.5em;
   height: 6em;
   resize: vertical;
 }
@@ -204,6 +212,19 @@ input {
   background-color: rgb(128, 176, 190);
 }
 
+/* .event-entry:nth-child(even) {
+  background-color: var(--bg-grey);
+}
+
+.event-entry:nth-child(odd) {
+  background-color: var(--bg-grey-alt);
+} */
+
+.event-entry:hover {
+  transition-duration: 200ms;
+  background-color: var(--calendar-bg-grey);
+}
+
 .event-entry-heading {
   display: grid;
   width: 100%;
@@ -214,7 +235,7 @@ input {
   align-items: baseline;
 }
 
-.event-entry-heading > * {
+.event-entry-heading>* {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -232,7 +253,7 @@ input {
 .event-entry-creator {
   font-weight: 400;
   font-size: 1rem;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
 .event-options-div {
@@ -250,7 +271,8 @@ input {
   grid-column: going-start;
 }
 
-.going-selected, .going-selected:hover {
+.going-selected,
+.going-selected:hover {
   background-color: var(--going-selected);
 }
 
@@ -268,7 +290,7 @@ input {
   box-shadow: 0px 0px 200px 1px var(--button-grey);
 }
 
-.new-user-heading{
+.new-user-heading {
   font-weight: 400;
   margin-bottom: 1.5em;
 }
@@ -284,5 +306,3 @@ input {
   overflow: hidden;
   background-color: rgb(0 0 0 / 35%);
 }
-
-
