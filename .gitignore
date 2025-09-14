@@ -14,3 +14,5 @@ compose.yaml
 .dockerignore
 Dockerfile
 Scripts
+.pg_service.conf
+.my_pgpass

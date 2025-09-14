@@ -186,7 +186,6 @@ document.getElementById("next-month").addEventListener("click", function(element
 
 let formTimezone = document.getElementById("form-timezone");
 formTimezone.value = Intl.DateTimeFormat().resolvedOptions().timeZone;
-console.log(formTimezone.value);
 
 
 let timeInput = document.getElementById("event-time");

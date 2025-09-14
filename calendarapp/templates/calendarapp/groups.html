@@ -5,7 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% load static %}
-  <link rel="stylesheet" href="{% static 'calendarapp/symbols.css' %}" />
+  <link rel="stylesheet" href="{% static 'calendarapp/bootstrap-5.3.7-dist/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'calendarapp/symbols.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&
+  icon_names=dark_mode" />
   <link rel="stylesheet" href="{% static 'calendarapp/main.css' %}">
   <link rel="stylesheet" href="{% static 'calendarapp/groups.css' %}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap">
@@ -13,62 +16,67 @@
 </head>
 
 <body>
+  <!-- <button class="material-symbols-outlined button-small dark-mode-button">dark_mode</button> -->
   <main class="wrapper">
     <div class="column-half">
       <div class="site-info">
         <h1 class="site-title">calendarapp</h1>
         <p>Do you need to organise an event?</p>
-        <p></p>
+        <p>Make a group and invite others to get started!</p>
       </div>
       <form class="create-group-form grey-bg light-shadow" id="create-group-form" method="post">
         {% csrf_token %}
         <h2 class="section-title">Want to create a group?</h3>
-        <div class="group-name-div after-1em width-100">
-          <input type="input" name="group-name" placeholder="Group Name" class="form-input width-100" id="group-name" required>
-          <input type="input" name="username" placeholder="Username" class="form-input width-100" id="username" required>
-        </div>
-        <button id="create-group-button" class="button-small">Create group</button>
+          <div class="group-name-div after-1em width-100">
+            <input type="input" name="group-name" placeholder="Group Name" class="form-input width-100" id="group-name" maxlength="32"
+              required>
+            <input type="input" name="username" placeholder="Username" class="form-input width-100" id="username" maxlength="32"
+              required>
+          </div>
+          <button id="create-group-button" class="button-small">Create group</button>
       </form>
       <section class="create-group" id="create-group">
-        
+
       </section>
     </div>
     <div class="column-half">
       <section class="joined-groups grey-bg border-r-8 overflow-x-clip light-shadow">
         <h2 class="section-title">Joined Groups</h2>
-        {% for group in groups %}
-        <section id="section-{{ group.id }}-{{ group.user }}" 
-        class="joined-group-wrap event-entry grey-bg">
-          <div class="joined-group" id="group-{{ group.id }}">
-            <div class="inline-group">
-              <h3 class="group-name subheading">{{ group.name }}</h3>
-              <p class="group-user"> as {{ group.user }}</p>
-            </div>
-            <p class="group-creator">Created by {{ group.creator }}</p>
-            <p class="group-member-list">
-              {% for username in group.members %}
-              {{username}}{% if forloop.last == 0 %}, {% endif %}
-              {% endfor %}
-            </p>
-            <div class="inline-group opposite-sides">
-              <a href="{% url 'calendarapp:calendar' group.id %}">
-                <button class="button-small">View group</button>
-              </a>
-              <button id="leavebtn1-{{ group.id }}-{{ group.user }}" class="button-small leave-group transition-200"
-                value='{
+        <div class="group-list">
+          {% for group in groups %}
+          <section id="section-{{ group.id }}-{{ group.user }}" class="joined-group-wrap event-entry alternating-bg">
+            <div class="joined-group" id="group-{{ group.id }}">
+              <div class="inline-group">
+                <h3 class="group-name subheading">{{ group.name }}</h3>
+                <p class="group-user"> as {{ group.user }}</p>
+              </div>
+              <p class="group-creator">Created by {{ group.creator }}</p>
+              <p class="group-member-list">
+                {% for username in group.members %}
+                {{username}}{% if forloop.last == 0 %}, {% endif %}
+                {% endfor %}
+              </p>
+              <div class="inline-group opposite-sides">
+                <a href="{% url 'calendarapp:calendar' group.id %}">
+                  <button class="button-small">View group</button>
+                </a>
+                <button id="leavebtn1-{{ group.id }}-{{ group.user }}" class="button-small leave-group transition-200"
+                  value='{
                 "id":"{{ group.id }}",
                 "user":"{{ group.user }}"
               }'>Leave group</button>
+              </div>
             </div>
-          </div>
-        </section>
-        {% endfor %}
-        {% if groups.0 == None %}
-          <div class="event-entry grey-bg no-hover">
-            <h3 class="subheading">You aren't in any groups!</h3>
-            <p>Create your own, or join a group via an invite link.</p>
-          </div>
-        {% endif %}
+          </section>
+          {% endfor %}
+          <div>
+
+            {% if groups.0 == None %}
+            <div class="event-entry grey-bg">
+              <h3 class="subheading">You aren't in any groups!</h3>
+              <p>Create your own, or join a group via an invite link.</p>
+            </div>
+            {% endif %}
       </section>
     </div>
 

@@ -1,7 +1,8 @@
 :root {
-    --site-bg: hsl(59 100% 95.52%);
+    --site-bg: hsl(59deg 100% 98.61%);
     --bg-grey: hsl(218, 27%, 92%);
-    --bg-grey-1: hsl(218 4.95% 81.9%);
+    --bg-grey-alt: hsl(218deg 25.55% 88.25%);
+    --calendar-bg-grey: hsl(218 4.95% 81.9%);
     --button-bg: hsl(0, 0%, 59%);
     --button-bg-light: white;
     --text-grey: hsl(0, 0%, 22%);
@@ -22,14 +23,15 @@
 
     @media (prefers-color-scheme: dark) {
         --site-bg: hsl(223, 25%, 10%);
-        --bg-grey: hsl(218, 19.55%, 20.37%);
-        --bg-grey-1: hsl(218 10.09% 34.38%);
+        --bg-grey: hsl(218deg 16.58% 16.98%);
+        --bg-grey-alt: hsl(218deg 15.15% 23.69%);
+        --calendar-bg-grey: hsl(218 10.09% 34.38%);
         --text-main: white;
         --text-placeholder: hsl(0, 0%, 82%);
         --text-grey: hsl(0, 0%, 80%);
         --button-bg-light: hsl(214, 6%, 53%);
         --shadow: hsl(240, 1%, 19%);
-        --form-input-bg: hsl(214 21.97% 28.11%);
+        --form-input-bg: hsl(214.62deg 18.44% 24.29%);
         --button-grey: hsl(227.65, 8.48%, 28.7%);
         --calendar-top-red: hsl(249, 22%, 31%);
         --calendar-shadow: hsla(276, 48%, 17%, 0.7);
@@ -82,6 +84,18 @@ body {
     background-color: var(--buttonlinkblue);
 }
 
+.dark-mode-button {
+    min-width: 0;
+    height: 36px;
+    width: 36px;
+    text-align: center;
+}
+
+.dark-mode-button:hover {
+    transition-duration: 200ms;
+    font-variation-settings: "FILL" 1;
+}
+
 .button-md {
     min-width: min-content;
     width: 120px;
@@ -120,7 +134,7 @@ body {
     &::placeholder {
         color: var(--text-placeholder);
     }
-    
+
     &:hover,
     &:focus {
         outline: 0;
@@ -146,7 +160,7 @@ body {
 }
 
 .grey-1-bg {
-    background-color: var(--bg-grey-1);
+    background-color: var(--calendar-bg-grey);
 }
 
 .white-bg {
@@ -164,7 +178,7 @@ body {
     box-shadow: 0px 0px 40px 0px var(--shadow);
 }
 
-@media (prefers-reduced-motion){
+@media (prefers-reduced-motion) {
     .light-shadow:hover {
         /* This is the same rule as in light-shadow (not hover) */
         box-shadow: 0px 0px 20px 0px var(--shadow);
@@ -188,17 +202,24 @@ body {
     overflow-y: auto;
 }
 
-.event-entry {
-    transition-duration: 200ms;
-    border-top: 1px solid rgb(201, 201, 201);
-    display: flex;
-    flex-direction: column;
-    padding: 2em;
+.alternating-bg:nth-child(even) {
+    background-color: var(--bg-grey);
+}
+
+.alternating-bg:nth-child(odd) {
+    background-color: var(--bg-grey-alt);
 }
 
 .event-entry:hover {
     transition-duration: 200ms;
-    background-color: var(--bg-grey-1);
+    background-color: var(--calendar-bg-grey);
+  }
+
+.event-entry {
+    transition-duration: 200ms;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
 }
 
 .event-entry:last-of-type {

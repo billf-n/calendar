@@ -1,0 +1,210 @@
+html {
+    scrollbar-gutter: stable;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.wrapper {
+    margin-top: 15vh;
+    min-width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.site-info{
+    padding: 0 2em;
+    align-items: end;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-title{
+    font-weight: 500;
+    font-size: 3em;
+    margin-bottom: 1rem;
+}
+
+.column-half{
+    min-width: min-content;
+    width: 40%;
+    padding: 1em;
+}
+
+.section-title{
+    text-align: center;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    margin-bottom: 0;
+}
+
+.subheading {
+    font-weight: 600;
+    margin-bottom: 2em;
+}
+
+.joined-groups{
+    min-width: 300px;
+}
+
+.joined-group {
+    box-sizing: border-box;
+    grid-column-start: groups-start;
+    width: 100%;
+    padding: 1.5em;
+    z-index: 1;
+}
+
+.joined-group-wrap {
+    min-width: 300px;
+    display: grid;
+    grid-template-columns: [groups-start] 1fr [groups-end] min-content [popup-end];
+    justify-items: center;
+    padding: 0;
+    margin-top: 0;
+}
+
+.inline-group {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5em;
+}
+
+.inline-group > * {
+    margin-block-start: 0;
+}
+
+.opposite-sides {
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.group-creator {
+    margin-block-start: 0;
+}
+
+.group-user {
+    font-size: 14px;
+}
+
+.group-member-list {
+    text-align: start;
+    line-height: 1.25em;
+    max-height: 1.25em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-block-start: 0;
+}
+
+.leave-group{
+    transition-duration: 0s;
+}
+
+.leave-group:hover {
+    transition-duration: 200ms;
+    background-color: var(--rejectred);
+}
+
+.leave-group-confirm:hover {
+    transition-duration: 200ms;
+    background-color: var(--solidred);
+}
+
+.leave-group-popup {
+    grid-column-start: groups-end;
+    align-self: end;
+    background-color: var(--rejectred);
+    padding: 1.5em;
+    border-radius: 4px;
+    height: min-content;
+    width: max-content;
+    z-index: 0;
+}
+
+.gap-4 {
+    gap: 4px;
+}
+
+.leave-group-cancel {
+    width: 33px;
+    height: 33px;
+    font-size: 13px;
+    border-radius: 50%;
+    background-color: var(--button-bg-light);
+    border: 1px solid transparent;
+    padding: 0;
+    align-self: baseline;
+    &:hover {
+        transition-duration: 200ms;
+        background-color: var(--cancel);
+    }
+}
+
+.big-button{
+    width: 80%;
+    max-width: 600px;
+    padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
+    border: 1px solid black;
+    font-size: 1rem;
+    transition-duration: 200ms;
+}
+
+.big-button:hover{
+    transition-duration: 200ms;
+    border: 1px solid black;
+    background-color: var(--buttongreen);
+}
+
+.create-group{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2em;
+    padding: 0 2em;
+}
+
+#create-group-button{
+    width: fit-content;
+    align-self: center;
+    transition-duration: 200ms;
+    background-size: 200% 100%;
+    background-image: linear-gradient(to right, transparent 50%, var(--button-dark-cyan) 50%);
+}
+
+#create-group-button:hover{
+    background-position: -100% 0;
+    transition-duration: 400ms;
+    background-color: var(--button-dark-cyan);
+}
+
+.create-group-form{
+    justify-self: end;
+    transition-duration: 200ms;
+    display: flex;
+    min-width: 300px;
+    width: 80%;
+    max-width: min(80%, 600px);
+    padding: 1.5em;
+    padding-top: 0;
+    border-radius: 8px;
+    flex-direction: column;
+    align-items: start;
+    z-index: 2;
+}
+
+.group-name-div{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    justify-content: center;
+}
+

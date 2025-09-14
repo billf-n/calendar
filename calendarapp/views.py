@@ -20,11 +20,14 @@ def create_id():
 # Returns a User object if user is in the group, or None otherwise.
 def get_user_in_group(request, group_id):
     try:
-        request.session["users"] = list(set(request.session["users"]))
-        user_ids = request.session["users"]
+        request.session["users"] = list(set(request.session["users"])) # remove duplicates
+        user_ids = request.session.get("users")
     except KeyError:
         # this session isn't linked to any users yet
-        request.session["users"] = []
+        # request.session["users"] = []
+        return None
+    
+    if user_ids is None:
         return None
     
     client_users = []
@@ -59,6 +62,9 @@ def calendar(request, group_id):
     }
 
     user = get_user_in_group(request, group_id)
+    print(request.session.values())
+    print(user)
+    print(group)
 
     if user is None:
         request.session["users"] = []
@@ -115,7 +121,7 @@ def event(request, group_id):
     }
 
     try:
-        user_ids = request.session["users"]
+        user_ids = request.session.get("users")
     except KeyError:
         # this session isn't linked to any users yet,
         # they will have to make a new user.
@@ -174,6 +180,7 @@ def groups(request):
     request.session.save()
 
     groups = get_group_dicts(request.session["users"])
+    print(request.session.values())
     print(groups)
     if request.method == "GET":
         context = {"groups": groups}
