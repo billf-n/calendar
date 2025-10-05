@@ -528,7 +528,7 @@ span.clearable-file-input label {
     margin: 0;
     padding: 4px 0;
     font-size: 0.75rem;
-    background: var(--close-button-bg);
+    background: var(--close-grey-600);
     border-top: 1px solid var(--border-color);
     color: var(--button-fg);
 }

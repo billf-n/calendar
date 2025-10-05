@@ -34,10 +34,11 @@ for (let i = currentDate.getFullYear(); i < currentDate.getFullYear() + 10; i++)
 }
 
 
-function loadDates() {
+function loadDates(date = calendarDate.getDate(), monthIndex = calendarDate.getMonth(), year = calendarDate.getFullYear()) {
 
     // document.getElementById("month").innerHTML = months[calendarDate.getMonth()];
     // document.getElementById("year").innerHTML = calendarDate.getFullYear();
+    calendarDate = new Date(year, monthIndex, date);
     let firstOfMonth = new Date();
     firstOfMonth.setTime(calendarDate.getTime()); // sets the full date to calendardate
     firstOfMonth.setDate(1);
@@ -142,7 +143,7 @@ function changeDate(
         monthChanged = true;
     }
     
-    loadDates();
+    loadDates(date, monthIndex, year);
 }
 
 // to do on document load

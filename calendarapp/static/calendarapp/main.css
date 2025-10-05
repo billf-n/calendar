@@ -3,25 +3,25 @@
     --bg-grey: hsl(218, 27%, 92%);
     --bg-grey-alt: hsl(218deg 25.55% 88.25%);
     --calendar-bg-grey: hsl(218 4.95% 81.9%);
-    --button-bg: hsl(0, 0%, 59%);
-    --button-bg-light: white;
+    --grey-600: hsl(0, 0%, 62%);
+    --grey-750: hsl(0, 0%, 75%);
+    --grey-850: hsl(0, 0%, 85%);
     --text-grey: hsl(0, 0%, 22%);
     --text-main: black;
+    --text-placeholder: hsl(0, 0%, 48%);
     --form-input-bg: hsl(0, 0%, 100%);
     --shadow: hsl(0, 0%, 79%);
-    --calendar-shadow: hsla(44, 35%, 85%, 0.7);
     --blue-highlight: hsl(206, 24%, 73%);
-    --button-grey: hsl(0, 0%, 75%);
     --buttonlinkblue: hsl(196, 44%, 81%);
-    --button-dark-cyan: hsl(197 14.52% 39.43%);
+    --button-cyan: hsl(197, 47%, 63%);
     --new-green: hsl(95, 36%, 72%);
     --buttongreen: hsl(140, 38%, 76%);
     --acceptgreen: hsl(142, 33%, 66%);
     --cancel: hsl(4, 42%, 87%);
-    --rejectred: hsl(0, 54%, 80%);
+    --reject-red: hsl(0 61.22% 69.78%);
     --solidred: hsl(0, 71%, 54%);
 
-    @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
         --site-bg: hsl(223, 25%, 10%);
         --bg-grey: hsl(218deg 16.58% 16.98%);
         --bg-grey-alt: hsl(218deg 15.15% 23.69%);
@@ -29,14 +29,14 @@
         --text-main: white;
         --text-placeholder: hsl(0, 0%, 82%);
         --text-grey: hsl(0, 0%, 80%);
-        --button-bg-light: hsl(214, 6%, 53%);
+        --grey-850: hsl(214, 6%, 53%);
         --shadow: hsl(240, 1%, 19%);
         --form-input-bg: hsl(214.62deg 18.44% 24.29%);
-        --button-grey: hsl(227.65, 8.48%, 28.7%);
+        --grey-750: hsl(227.65, 8.48%, 28.7%);
         --calendar-top-red: hsl(249, 22%, 31%);
         --calendar-shadow: hsla(276, 48%, 17%, 0.7);
-        --rejectred: hsl(0, 47%, 38%);
-    }
+        --reject-red: hsl(0, 47%, 38%);
+    } */
 }
 
 
@@ -76,7 +76,7 @@ body {
     border: 0;
     border-radius: 4px;
     color: var(--text-main);
-    background-color: var(--button-bg-light);
+    background-color: var(--grey-750);
 }
 
 .button-small:hover {
@@ -108,7 +108,7 @@ body {
     border-radius: 4px;
     text-align: center;
     color: var(--text-main);
-    background-color: var(--button-bg-light);
+    background-color: var(--grey-850);
 }
 
 .button-md:hover {

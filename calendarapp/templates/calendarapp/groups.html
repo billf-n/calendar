@@ -19,10 +19,10 @@
   <!-- <button class="material-symbols-outlined button-small dark-mode-button">dark_mode</button> -->
   <main class="wrapper">
     <div class="column-half">
-      <div class="site-info">
+      <div class="site-info after-1em">
         <h1 class="site-title">calendarapp</h1>
-        <p>Do you need to organise an event?</p>
-        <p>Make a group and invite others to get started!</p>
+        <p class="after-1em">Do you need to organise an event? <br>
+        Make a group and invite others to get started!</p>
       </div>
       <form class="create-group-form grey-bg light-shadow" id="create-group-form" method="post">
         {% csrf_token %}
@@ -52,13 +52,14 @@
               </div>
               <p class="group-creator">Created by {{ group.creator }}</p>
               <p class="group-member-list">
+                Members:
                 {% for username in group.members %}
                 {{username}}{% if forloop.last == 0 %}, {% endif %}
                 {% endfor %}
               </p>
               <div class="inline-group opposite-sides">
                 <a href="{% url 'calendarapp:calendar' group.id %}">
-                  <button class="button-small">View group</button>
+                  <button class="button-small view-group-button">View group</button>
                 </a>
                 <button id="leavebtn1-{{ group.id }}-{{ group.user }}" class="button-small leave-group transition-200"
                   value='{

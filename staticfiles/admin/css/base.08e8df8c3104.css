@@ -43,17 +43,17 @@ html[data-theme="light"],
     --selected-row: #ffc;
 
     --button-fg: #fff;
-    --button-bg: var(--secondary);
+    --grey-600: var(--secondary);
     --button-hover-bg: #205067;
-    --default-button-bg: #205067;
+    --default-grey-600: #205067;
     --default-button-hover-bg: var(--secondary);
-    --close-button-bg: #747474;
+    --close-grey-600: #747474;
     --close-button-hover-bg: #333;
-    --delete-button-bg: #ba2121;
+    --delete-grey-600: #ba2121;
     --delete-button-hover-bg: #a41515;
 
     --object-tools-fg: var(--button-fg);
-    --object-tools-bg: var(--close-button-bg);
+    --object-tools-bg: var(--close-grey-600);
     --object-tools-hover-bg: var(--close-button-hover-bg);
 
     --font-family-primary:
@@ -527,7 +527,7 @@ select[multiple] {
 /* FORM BUTTONS */
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
-    background: var(--button-bg);
+    background: var(--grey-600);
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -553,7 +553,7 @@ a.button {
 .button.default, input[type=submit].default, .submit-row input.default {
     border: none;
     font-weight: 400;
-    background: var(--default-button-bg);
+    background: var(--default-grey-600);
 }
 
 .button.default:active, input[type=submit].default:active,
@@ -1065,7 +1065,7 @@ a.deletelink:focus, a.deletelink:hover {
 }
 
 .delete-confirmation form input[type="submit"] {
-    background: var(--delete-button-bg);
+    background: var(--delete-grey-600);
     border-radius: 4px;
     padding: 10px 15px;
     color: var(--button-fg);
@@ -1085,7 +1085,7 @@ a.deletelink:focus, a.deletelink:hover {
     border-radius: 4px;
     padding: 10px 15px;
     color: var(--button-fg);
-    background: var(--close-button-bg);
+    background: var(--close-grey-600);
     margin: 0 0 0 10px;
 }
 
@@ -1125,7 +1125,7 @@ a.deletelink:focus, a.deletelink:hover {
 
 .paginator a:link, .paginator a:visited {
     padding: 2px 6px;
-    background: var(--button-bg);
+    background: var(--grey-600);
     text-decoration: none;
     color: var(--button-fg);
 }

@@ -109,7 +109,7 @@ html {
 
 .leave-group:hover {
     transition-duration: 200ms;
-    background-color: var(--rejectred);
+    background-color: var(--reject-red);
 }
 
 .leave-group-confirm:hover {
@@ -120,7 +120,7 @@ html {
 .leave-group-popup {
     grid-column-start: groups-end;
     align-self: end;
-    background-color: var(--rejectred);
+    background-color: var(--reject-red);
     padding: 1.5em;
     border-radius: 4px;
     height: min-content;
@@ -137,7 +137,7 @@ html {
     height: 33px;
     font-size: 13px;
     border-radius: 50%;
-    background-color: var(--button-bg-light);
+    background-color: var(--grey-850);
     border: 1px solid transparent;
     padding: 0;
     align-self: baseline;
@@ -177,13 +177,13 @@ html {
     align-self: center;
     transition-duration: 200ms;
     background-size: 200% 100%;
-    background-image: linear-gradient(to right, transparent 50%, var(--button-dark-cyan) 50%);
+    background-image: linear-gradient(to right, transparent 50%, var(--button-cyan) 50%);
 }
 
 #create-group-button:hover{
     background-position: -100% 0;
     transition-duration: 400ms;
-    background-color: var(--button-dark-cyan);
+    background-color: var(--button-cyan);
 }
 
 .create-group-form{

@@ -103,7 +103,7 @@ input {
   border-radius: 50%;
   transition: 200ms;
   text-align: center;
-  background-color: var(--button-bg);
+  background-color: var(--grey-600);
 }
 
 .change-month:hover {
@@ -136,7 +136,7 @@ input {
   border-radius: 8px;
   justify-self: center;
   transition-duration: 200ms;
-  background-color: var(--button-grey);
+  background-color: var(--grey-750);
   color: var(--text-grey);
   font-size: 18px;
 }
@@ -149,7 +149,7 @@ input {
 }
 
 .current-month-numbers {
-  background-color: var(--button-bg-light);
+  background-color: var(--grey-850);
 }
 
 /* to highlight the date in the calendar */
@@ -265,7 +265,7 @@ input {
   padding: 2em;
   border: 1px solid transparent;
   border-radius: 8px;
-  box-shadow: 0px 0px 200px 1px var(--button-grey);
+  box-shadow: 0px 0px 200px 1px var(--grey-750);
 }
 
 .new-user-heading{
