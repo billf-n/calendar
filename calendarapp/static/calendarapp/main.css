@@ -1,240 +1,263 @@
 :root {
-    --site-bg: hsl(59deg 100% 98.61%);
-    --bg-grey: hsl(218, 27%, 92%);
-    --bg-grey-alt: hsl(218deg 25.55% 88.25%);
-    --calendar-bg-grey: hsl(218 4.95% 81.9%);
-    --grey-600: hsl(0, 0%, 62%);
-    --grey-750: hsl(0, 0%, 75%);
-    --grey-850: hsl(0, 0%, 85%);
-    --text-grey: hsl(0, 0%, 22%);
-    --text-main: black;
-    --text-placeholder: hsl(0, 0%, 48%);
-    --form-input-bg: hsl(0, 0%, 100%);
-    --shadow: hsl(0, 0%, 79%);
-    --blue-highlight: hsl(206, 24%, 73%);
-    --buttonlinkblue: hsl(196, 44%, 81%);
-    --button-cyan: hsl(197, 47%, 63%);
-    --new-green: hsl(95, 36%, 72%);
-    --buttongreen: hsl(140, 38%, 76%);
-    --acceptgreen: hsl(142, 33%, 66%);
-    --cancel: hsl(4, 42%, 87%);
-    --reject-red: hsl(0 61.22% 69.78%);
-    --solidred: hsl(0, 71%, 54%);
-
-    /* @media (prefers-color-scheme: dark) {
-        --site-bg: hsl(223, 25%, 10%);
-        --bg-grey: hsl(218deg 16.58% 16.98%);
-        --bg-grey-alt: hsl(218deg 15.15% 23.69%);
-        --calendar-bg-grey: hsl(218 10.09% 34.38%);
-        --text-main: white;
-        --text-placeholder: hsl(0, 0%, 82%);
-        --text-grey: hsl(0, 0%, 80%);
-        --grey-850: hsl(214, 6%, 53%);
-        --shadow: hsl(240, 1%, 19%);
-        --form-input-bg: hsl(214.62deg 18.44% 24.29%);
-        --grey-750: hsl(227.65, 8.48%, 28.7%);
-        --calendar-top-red: hsl(249, 22%, 31%);
-        --calendar-shadow: hsla(276, 48%, 17%, 0.7);
-        --reject-red: hsl(0, 47%, 38%);
-    } */
+    --primary: #2563eb;
+    /* blue */
+    --primary-600: #1e40af;
+    --accent: #16a34a;
+    /* green */
+    --danger: #ef4444;
+    --muted: #6b7280;
+    --bg: #f8fbff;
+    --card: #ffffff;
+    --surface: #eef3fb;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --form-input-bg: #ffffff;
+    --shadow-color: rgba(15, 23, 42, 0.09);
+    --focus-ring: 0 6px 28px rgba(37, 99, 235, 0.14);
+    /* compatibility aliases used elsewhere */
+    --bg-grey: var(--card);
+    --calendar-bg-grey: #e9f0fb;
+    --grey-750: #d1d5db;
+    --grey-850: #e5e7eb;
+    --text-placeholder: #94a3b8;
+    --buttonlinkblue: var(--primary-600);
+    --button-cyan: var(--primary);
 }
 
-
+/* Reset headings */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    margin-top: 0;
-    margin-block-start: 0;
-    margin-inline-start: 0;
-    margin-block-end: 0;
-    margin-inline-end: 0;
-}
-
-h3 {
-    font-weight: 500;
-    font-size: 1.5em;
+    margin: 0
 }
 
 body {
-    background-color: var(--site-bg);
+    background-color: var(--bg);
+    color: var(--text-main)
 }
 
 * {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    box-sizing: border-box;
-    color: var(--text-main);
+    box-sizing: border-box
 }
 
+/* Layout */
+.wrapper {
+    padding: 6vh 1.25rem 4rem;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width:900px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+        padding-top: 4vh
+    }
+}
+
+/* Buttons */
 .button-small {
     min-width: max-content;
-    transition-duration: 200ms;
-    padding: 0.5rem 1rem;
-    font-size: 13px;
+    transition: all 200ms;
+    padding: .5rem .9rem;
+    font-size: .92rem;
     border: 0;
-    border-radius: 4px;
-    color: var(--text-main);
-    background-color: var(--grey-750);
+    border-radius: 8px;
+    color: var(--card);
+    background-color: var(--primary-600);
+    box-shadow: 0 6px 18px var(--shadow-color)
 }
 
 .button-small:hover {
-    transition-duration: 200ms;
-    background-color: var(--buttonlinkblue);
+    background-color: var(--primary)
+}
+
+.button-md {
+    min-width: min-content;
+    width: 120px;
+    transition: all 200ms;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: .8rem 1.25rem;
+    border: 0;
+    border-radius: 10px;
+    text-align: center;
+    color: var(--card);
+    background-color: var(--primary)
+}
+
+.button-md:hover {
+    background-color: var(--primary-600);
+    transform: translateY(-2px)
 }
 
 .dark-mode-button {
     min-width: 0;
     height: 36px;
     width: 36px;
-    text-align: center;
-}
-
-.dark-mode-button:hover {
-    transition-duration: 200ms;
-    font-variation-settings: "FILL" 1;
-}
-
-.button-md {
-    min-width: min-content;
-    width: 120px;
-    transition-duration: 200ms;
-    font-size: 1em;
-    font-weight: 500;
-    line-height: 12px;
-    padding: 1em 2em;
-    border: 0px solid transparent;
-    border-radius: 4px;
-    text-align: center;
-    color: var(--text-main);
-    background-color: var(--grey-850);
-}
-
-.button-md:hover {
-    transition-duration: 200ms;
-    background-color: var(--new-green);
+    text-align: center
 }
 
 .display-none {
-    display: none;
+    display: none
 }
 
+/* Inputs */
 .form-input {
     font-size: 1rem;
-    padding: 0.5em;
-    height: 3em;
+    padding: .75em 1em;
+    min-height: 44px;
     color: var(--text-main);
     background-color: var(--form-input-bg);
-    line-height: 1.5em;
-    min-height: 1rem;
-    border: 2px solid transparent;
-    border-radius: 4px;
+    line-height: 1.4;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: box-shadow .18s ease, border-color .18s ease, transform .12s ease
+}
 
-    &::placeholder {
-        color: var(--text-placeholder);
-    }
+.form-input::placeholder {
+    color: var(--text-placeholder)
+}
 
-    &:hover,
-    &:focus {
-        outline: 0;
-        transition: 200ms;
-        border-color: var(--blue-highlight);
-    }
+.form-input:hover {
+    border-color: var(--primary-600)
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: var(--focus-ring);
+    transform: translateY(-1px)
 }
 
 .width-100 {
-    width: 100%;
+    width: 100%
 }
 
 .after-1em {
-    margin-bottom: 1em;
+    margin-bottom: 1em
 }
 
 .after-2em {
-    margin-bottom: 2em;
+    margin-bottom: 2em
 }
 
 .grey-bg {
-    background-color: var(--bg-grey);
+    background-color: var(--card)
 }
 
 .grey-1-bg {
-    background-color: var(--calendar-bg-grey);
+    background-color: var(--calendar-bg-grey)
 }
 
 .white-bg {
-    background-color: white;
+    background-color: #fff
 }
 
 .light-shadow {
-    transition-duration: 300ms;
-    margin: 20px;
-    box-shadow: 0px 0px 20px 0px var(--shadow);
+    transition: box-shadow .3s;
+    margin: 16px 0;
+    box-shadow: 0 8px 28px var(--shadow-color)
 }
 
 .light-shadow:hover {
-    transition-duration: 300ms;
-    box-shadow: 0px 0px 40px 0px var(--shadow);
-}
-
-@media (prefers-reduced-motion) {
-    .light-shadow:hover {
-        /* This is the same rule as in light-shadow (not hover) */
-        box-shadow: 0px 0px 20px 0px var(--shadow);
-    }
+    box-shadow: 0 12px 40px var(--shadow-color)
 }
 
 .transition-200 {
-    transition-duration: 200ms;
+    transition-duration: 200ms
 }
 
 .border-r-8 {
-    border-radius: 8px;
+    border-radius: 8px
 }
 
 .border-r-4 {
-    border-radius: 4px;
+    border-radius: 4px
 }
 
 .event-list {
     max-height: 60vh;
-    overflow-y: auto;
+    overflow-y: auto
+}
+
+/* Form containers and headings */
+.event-form {
+    padding: 1.5rem;
+    display: grid;
+    gap: 1rem;
+    background-color: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px var(--shadow-color)
+}
+
+/* Bootstrap-like button mapping to use in templates */
+.btn {
+    display: inline-block;
+    padding: .5rem .75rem;
+    border-radius: .5rem;
+    border: 0;
+    font-weight: 600;
+    text-align: center
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--card);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08)
+}
+
+.btn-primary:hover {
+    background: var(--primary-600);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: var(--card)
+}
+
+.event-form-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700
 }
 
 .alternating-bg:nth-child(even) {
-    background-color: var(--bg-grey);
+    background-color: var(--bg)
 }
 
 .alternating-bg:nth-child(odd) {
-    background-color: var(--bg-grey-alt);
+    background-color: var(--surface)
+}
+
+.event-entry {
+    transition: background .2s;
+    padding: 1.25rem;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0, 0.02);
+    box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+    margin: 0 0 1rem;
 }
 
 .event-entry:hover {
-    transition-duration: 200ms;
-    background-color: var(--calendar-bg-grey);
-  }
-
-.event-entry {
-    transition-duration: 200ms;
-    display: flex;
-    flex-direction: column;
-    padding: 2em;
-}
-
-.event-entry:last-of-type {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    background-color: var(--calendar-bg-grey)
 }
 
 .event-entry>* {
-    margin-block-start: 0;
+    margin: 0
 }
 
 .overflow-x-clip {
-    overflow-x: clip;
+    overflow-x: clip
 }
 
 .no-hover:hover {
-    background-color: revert;
+    background-color: revert
 }

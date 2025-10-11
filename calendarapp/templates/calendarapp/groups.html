@@ -21,8 +21,8 @@
     <div class="column-half">
       <div class="site-info after-1em">
         <h1 class="site-title">calendarapp</h1>
-        <p class="after-1em">Do you need to organise an event? <br>
-        Make a group and invite others to get started!</p>
+        <p class="after-1em">Create groups for sharing events and coordinating plans. <br> 
+          Invite participants with a link, set event times, and see group activities in a shared calendar.</p>
       </div>
       <form class="create-group-form grey-bg light-shadow" id="create-group-form" method="post">
         {% csrf_token %}
@@ -33,7 +33,7 @@
             <input type="input" name="username" placeholder="Username" class="form-input width-100" id="username" maxlength="32"
               required>
           </div>
-          <button id="create-group-button" class="button-small">Create group</button>
+          <button id="create-group-button" class="btn btn-primary" type="submit">Create group</button>
       </form>
       <section class="create-group" id="create-group">
 
@@ -59,9 +59,9 @@
               </p>
               <div class="inline-group opposite-sides">
                 <a href="{% url 'calendarapp:calendar' group.id %}">
-                  <button class="button-small view-group-button">View group</button>
+                  <button class="btn btn-primary view-group-button" type="button">View group</button>
                 </a>
-                <button id="leavebtn1-{{ group.id }}-{{ group.user }}" class="button-small leave-group transition-200"
+                <button id="leavebtn1-{{ group.id }}-{{ group.user }}" class="btn btn-danger leave-group transition-200" type="button"
                   value='{
                 "id":"{{ group.id }}",
                 "user":"{{ group.user }}"

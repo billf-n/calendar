@@ -1,10 +1,6 @@
-:root {
-  --bgblue-light: #dfe4e6;
-  --bgblue: rgb(168, 187, 202);
-  --today-date: rgb(121, 161, 119);
-  --going-selected: hsl(115, 33%, 65%);
-  --calendar-shadow: hsla(44, 35%, 85%, 0.7);
-  --calendar-top-red: hsl(0, 59%, 47%);
+:root{
+  --today-date: #16a34a;
+  --going-selected: hsl(115,33%,65%);
 }
 
 * {
@@ -13,6 +9,10 @@
 
 input {
   border: none;
+  font-size: 1rem;
+  padding: 0.6rem 0.75rem;
+  min-height: 44px;
+  border-radius: 8px;
 }
 
 .prevent-select {
@@ -24,41 +24,13 @@ input {
   /* Standard syntax */
 }
 
-.back-button {
-  padding: 0;
-  margin: 1em;
-  height: 36px;
-  width: 36px;
-  border-radius: 8px;
-  font-size: 1em;
-  min-width: 0;
-  background-color: var(--grey-850);
-}
+.back-button{padding:0;margin:1em;height:36px;width:36px;border-radius:8px;font-size:1em;min-width:0;background-color:var(--primary-600);color:var(--card);box-shadow:0 6px 18px var(--shadow-color)}
 
-.wrapper {
-  margin-top: 10vh;
-  justify-content: space-evenly;
-  display: flex;
-  gap: 2em;
-  flex-wrap: wrap-reverse;
-  min-width: fit-content;
-}
+.wrapper{margin-top:4vh;display:flex;gap:1.25rem;flex-wrap:wrap-reverse;justify-content:center}
 
-.calendar {
-  align-self: start;
-  border-radius: 8px;
-  height: min-content;
-  box-shadow: 0px 0px 200px 0px var(--calendar-shadow);
-}
+.calendar{align-self:start;border-radius:12px;height:min-content;background:var(--card);box-shadow:0 10px 30px var(--shadow-color)}
 
-.top-section {
-  text-align: center;
-  align-items: center;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  padding: 2em;
-  background-color: var(--calendar-top-red);
-}
+.top-section{padding:1.25rem 1rem;text-align:center;border-top-left-radius:12px;border-top-right-radius:12px;background:linear-gradient(90deg,var(--primary),var(--primary-600));color:var(--card)}
 
 /* to display the month/year at the top */
 .topbar {
@@ -91,30 +63,11 @@ input {
   padding: 0px 5px;
 }
 
-.dropdown:hover {
-  transition: 200ms;
-  border: 2px solid var(--blue-highlight);
-}
+.dropdown:hover{border:2px solid rgba(37,99,235,0.18)}
+.dropdown:focus{border:2px solid rgba(37,99,235,0.28)}
 
-.dropdown:focus {
-  border: 2px solid var(--blue-highlight);
-}
-
-.change-month {
-  font-size: 28px;
-  height: 32px;
-  width: 32px;
-  padding: 0;
-  border-radius: 50%;
-  transition: 200ms;
-  text-align: center;
-  background-color: var(--grey-600);
-}
-
-.change-month:hover {
-  transition: 200ms;
-  background-color: var(--blue-highlight);
-}
+.change-month{font-size:20px;height:36px;width:36px;padding:0;border-radius:50%;transition:200ms;text-align:center;background:var(--surface);color:var(--text-main)}
+.change-month:hover{background:var(--primary)}
 
 .bottom-calendar {
   display: grid;
@@ -133,61 +86,26 @@ input {
   grid-template-rows: repeat(6, 1fr);
 }
 
-.date-numbers {
-  position: relative;
-  border: none;
-  width: min(44px, 10vw);
-  height: min(44px, 10vw);
-  min-width: 36px;
-  min-height: 36px;
-  border-radius: 8px;
-  justify-self: center;
-  transition-duration: 200ms;
-  background-color: var(--grey-750);
-  color: var(--text-grey);
-  font-size: 18px;
-}
+.date-numbers{position:relative;border:none;width:min(48px,10vw);height:min(48px,10vw);min-width:36px;min-height:36px;border-radius:10px;justify-self:center;transition:200ms;background:var(--surface);color:var(--text-muted);font-size:16px}
 
 /* hsl(227.65deg 8.48% 28.7%) bg for dark mode */
 
-.date-numbers:hover {
-  transition-duration: 200ms;
-  background-color: var(--blue-highlight);
-  color: white;
-}
+.date-numbers:hover{background:var(--primary);color:var(--card)}
 
-.current-month-numbers {
-  background-color: hsl(0 0% 88%);
-}
+.current-month-numbers{background:var(--card);box-shadow:inset 0 -2px 0 rgba(0,0,0,0.03)}
 
 /* to highlight the date in the calendar */
-.today {
-  transition-duration: 200ms;
-  background-color: var(--today-date);
-  color: rgb(255, 255, 255);
-}
-
-.today:hover {
-  transition-duration: 200ms;
-  background-color: var(--acceptgreen);
-}
+.today{background:var(--today-date);color:var(--card)}
+.today:hover{background:var(--accent)}
 
 .selected {
   background-color: rgb(137, 166, 190);
   color: rgb(255, 255, 255);
 }
 
-.event-section {
-  border-radius: 8px;
-  width: max(396px, 111vw);
-  max-width: 450px;
-}
+.event-section{border-radius:12px;width:max(396px,111vw);max-width:520px}
 
-.event-form {
-  padding: 2em;
-  display: grid;
-  gap: 1em;
-}
+.event-form{padding:1.25rem;display:grid;gap:0.9rem;background:var(--card);border-radius:12px;box-shadow:0 8px 24px var(--shadow-color)}
 
 .event-form-title {
   margin-top: 1em;
@@ -200,19 +118,8 @@ input {
   resize: vertical;
 }
 
-.create-event-btn {
-  border: 0px solid transparent;
-  border-radius: 4px;
-  height: 2rem;
-  width: 100%;
-  font-family: 'Nunito', sans-serif;
-  background-color: rgb(137, 166, 190);
-}
-
-.create-event-btn:hover {
-  transition-duration: 300ms;
-  background-color: rgb(128, 176, 190);
-}
+.create-event-btn{border:0;border-radius:10px;height:44px;width:100%;font-family:'Nunito',sans-serif;font-weight:600;background:var(--primary);color:var(--card);transition:transform .18s ease,box-shadow .18s ease}
+.create-event-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,99,235,0.12);background:var(--primary-600)}
 
 
 .event-entry-heading {
@@ -252,33 +159,35 @@ input {
   width: 100%;
 }
 
-.delete-button:hover {
-  background-color: var(--solidred)
+.event-entry-info {
+  margin-bottom: 0.5em;
 }
 
 .going-button {
   justify-self: end;
   grid-column: going-start;
+  border: 1px solid var(--going-selected);
 }
 
-.going-selected,
+.going-button:hover {
+  border: 1px solid var(--accent);
+}
+
+.going-selected {
+  background-color: var(--going-selected);
+}
+
 .going-selected:hover {
   background-color: var(--going-selected);
 }
 
-.new-user-form {
-  position: absolute;
+.popup-background {
   display: flex;
-  flex-direction: column;
-
-  top: 30dvh;
-  /* align-self: center; */
-
-  padding: 2em;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  box-shadow: 0px 0px 200px 1px var(--grey-750);
+  justify-content: center;
+  align-items: center;
 }
+
+.new-user-form{position:relative;display:flex;flex-direction:column;max-width:420px;width:min(90%,420px);padding:1.25rem;border:1px solid transparent;border-radius:12px;box-shadow:0 10px 40px rgba(2,6,23,0.08);background:var(--card)}
 
 .new-user-heading {
   font-weight: 400;

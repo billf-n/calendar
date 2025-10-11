@@ -1,5 +1,5 @@
 html {
-    scrollbar-gutter: stable;
+    scrollbar-gutter: stable
 }
 
 .material-symbols-outlined {
@@ -11,44 +11,50 @@ html {
 }
 
 .wrapper {
-    padding-top: 15vh;
+    padding: 6vh 1.25rem 4rem;
     min-height: 100vh;
-    min-width: fit-content;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 50%));
-    width: 100vw;
+    grid-template-columns: 1fr 420px;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto
+}
+
+@media (max-width:900px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+        padding-top: 4vh
+    }
 }
 
 .site-info {
     align-items: start;
     display: flex;
     flex-direction: column;
-    width: 80%;
-    max-width: min(80%, 600px);
-
+    width: 100%;
+    max-width: 680px
 }
 
 .site-title {
-    font-weight: 500;
-    font-size: 3em;
-    margin-bottom: 2rem;
+    font-weight: 700;
+    font-size: 2.25rem;
+    margin-bottom: .75rem;
+    color: var(--primary)
 }
 
 .column-half {
-    min-width: min-content;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 1em;
+    gap: 1rem;
+    padding: 1rem
 }
 
 .section-title {
     text-align: center;
     align-self: center;
-    font-size: 2em;
-    padding-top: 1.5em;
-    padding-bottom: 1em;
-    margin-bottom: 0;
+    font-size: 1.5rem;
+    padding: .5rem 0;
+    margin: 0
 }
 
 .subheading {
@@ -57,33 +63,29 @@ html {
 }
 
 .joined-groups {
-    min-width: 300px;
-    width: 80%;
-    max-width: min(80%, 600px);
+    width: 100%;
+    max-width: 760px
 }
 
 .joined-group {
     box-sizing: border-box;
-    grid-column-start: groups-start;
     width: 100%;
-    padding: 1.5em;
-    z-index: 1;
+    padding: 1.25rem;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--card) 0%, #fbfdff 60%);
 }
 
 .joined-group-wrap {
-    min-width: 300px;
-    /* display: grid;
-    grid-template-columns: [groups-start] 1fr [groups-end] min-content [popup-end]; */
-    justify-items: center;
+    min-width: 260px;
     padding: 0;
-    margin-top: 0;
+    margin-top: 0
 }
 
 .inline-group {
-    display: inline-flex;
-    align-items: baseline;
-    column-gap: 0.5em;
-    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap
 }
 
 .inline-group>* {
@@ -91,39 +93,62 @@ html {
 }
 
 .opposite-sides {
-    display: inline-flex;
+    display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center
 }
 
 .group-creator {
     margin-block-start: 0;
 }
 
+.joined-groups .section-title {
+    margin-bottom: 1rem
+}
+
 .group-user {
-    font-size: 14px;
+    font-size: .95rem;
+    color: var(--text-muted)
 }
 
 .group-member-list {
     text-align: start;
-    line-height: 1.25em;
-    max-height: 1.25em;
+    line-height: 1.35em;
+    max-height: 2.2em;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-block-start: 0;
+    margin: 0;
+    margin-bottom: .5em;
+    color: var(--text-muted)
+}
+
+.view-group-button {
+    background: var(--primary);
+    color: var(--card);
+    border-radius: 8px;
+    padding: .5rem .75rem
 }
 
 .view-group-button:hover {
-    background-color: var(--button-cyan);
+    background: var(--primary-600);
 }
 
 .leave-group {
     transition-duration: 0s;
 }
 
-.leave-group:hover {
+.leave-group {
     transition-duration: 200ms;
-    background-color: var(--reject-red);
+    background: transparent;
+    border-radius: 8px;
+    padding: .4rem .6rem;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.leave-group:hover {
+    background: var(--danger);
 }
 
 .leave-group-confirm:hover {
@@ -132,16 +157,13 @@ html {
 }
 
 .leave-group-popup {
-    grid-column-start: groups-end;
     align-self: end;
-    background-color: var(--reject-red);
-    padding: 1.5em;
-    border-radius: 4px;
-    height: min-content;
-    width: max-content;
-    z-index: 1;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    position: absolute;
+    background: var(--danger);
+    padding: 1rem;
+    border-radius: 8px;
+    color: var(--card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    position: absolute
 }
 
 .gap-4 {
@@ -153,31 +175,32 @@ html {
     height: 33px;
     font-size: 13px;
     border-radius: 50%;
-    background-color: var(--grey-850);
+    background: var(--surface);
     border: 1px solid transparent;
     padding: 0;
-    align-self: baseline;
+    align-self: baseline
+}
 
-    &:hover {
-        transition-duration: 200ms;
-        background-color: var(--cancel);
-    }
+.leave-group-cancel:hover {
+    background: var(--primary-600);
+    color: var(--card)
 }
 
 .big-button {
     width: 80%;
     max-width: 600px;
-    padding: 0.5rem 1rem;
-    border-radius: 1.5rem;
-    border: 1px solid black;
+    padding: .75rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid rgba(2, 6, 23, 0.06);
     font-size: 1rem;
-    transition-duration: 200ms;
+    font-weight: 600;
+    transition: transform .16s ease, box-shadow .2s ease
 }
 
 .big-button:hover {
-    transition-duration: 200ms;
-    border: 1px solid black;
-    background-color: var(--buttongreen);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+    background: var(--primary)
 }
 
 .create-group {
@@ -190,42 +213,53 @@ html {
 }
 
 #create-group-button {
-    background-color: var(--grey-750);
+    background: var(--primary);
+    color: var(--card);
     width: 100%;
     align-self: center;
-    transition-duration: 200ms;
-    background-size: 200% 100%;
-    background-image: linear-gradient(to right, transparent 50%, var(--button-cyan) 50%);
+    padding: .9rem;
+    border-radius: 10px;
+    border: 0
 }
 
 #create-group-button:hover {
-    background-position: -100% 0;
-    transition-duration: 400ms;
-    background-color: var(--button-cyan);
+    background: var(--primary-600)
 }
 
 .create-group-form {
-    transition-duration: 200ms;
+    transition: all .18s;
     display: flex;
-    min-width: 300px;
-    width: 80%;
-    max-width: min(80%, 600px);
-    padding: 0 2.5em 3em 2.5em;
-    border-radius: 8px;
+    min-width: 260px;
+    width: 100%;
+    max-width: 600px;
+    padding: 1rem;
+    border-radius: 12px;
     flex-direction: column;
     align-items: center;
     z-index: 2;
+    background: linear-gradient(180deg, var(--card), #fbfdff);
+    box-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
+    border: 1px solid rgba(15, 23, 42, 0.04)
 }
 
 .group-name-div {
     display: flex;
     flex-direction: column;
-    gap: 0.75em;
+    gap: .6em;
     justify-content: center;
+    width: 100%
+}
+
+/* Make spacing between major sections clearer */
+.create-group {
+    padding: 0 1rem 1rem 1rem
+}
+
+.joined-groups {
+    padding: 1rem
 }
 
 .group-name {
     word-wrap: break-word;
     word-break: break-word;
 }
-
