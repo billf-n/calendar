@@ -25,7 +25,7 @@
 </head>
 
 <body>
-  <a href="/groups"><button class="material-symbols-outlined button-small back-button">home</button></a>
+  <a href="/groups"><button class="material-symbols-outlined btn btn-primary back-button" type="button">home</button></a>
   <main class="wrapper">
     <div class="event-section grey-bg">
       <form id="event-form" class="event-form" method="post">
@@ -37,7 +37,7 @@
           <input type="time" id="event-time" class="event-time form-input" name="event-time">
           <textarea id="event-info" class="form-input event-info after-1em" 
             placeholder="Extra Information" maxlength="500" name="event-info"></textarea>
-        <button id="create-event-btn" class="button-md width-100">Create event</button>
+  <button id="create-event-btn" class="btn btn-primary width-100" type="submit">Create event</button>
       </form>
       <div id="event-list" class="event-list">
         {% for event in events %}
@@ -51,18 +51,9 @@
           <p class="event-entry-info">{{ event.info }}</p>
           <div class="event-options-div">
             {% if event.creator == username %}
-            <button id="delete:{{ event.id }}" value="{{ event.id }}" 
-            class="delete-button button-md">
-              Delete
-            </button>
+            <button id="delete:{{ event.id }}" value="{{ event.id }}" class="btn btn-danger delete-button" type="button">Delete</button>
             {% endif %}
-            <button id="going:{{ event.id }}" value="{{ event.id }}" 
-            class="going-button button-md 
-            {% if username in event.attendees %} 
-              going-selected
-            {% endif %}">
-              Going!
-            </button>
+            <button id="going:{{ event.id }}" value="{{ event.id }}" class="btn going-button {% if username in event.attendees %} going-selected{% endif %}" type="button">Going!</button>
           </div>
         </div>
         {% endfor %}
